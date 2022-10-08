@@ -48,7 +48,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
-            android:layout_marginTop="3dp"
             android:text="12121"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/ivCrypto"
@@ -86,7 +85,6 @@
             android:background="@null"
             android:src="@drawable/ic_star_svg"
             android:foreground="?android:attr/selectableItemBackground"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvCryptoPrice"
