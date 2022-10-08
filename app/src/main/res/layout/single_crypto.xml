@@ -80,8 +80,8 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/ibCryptoFav"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="55dp"
             android:background="@null"
             android:src="@drawable/ic_star_svg"

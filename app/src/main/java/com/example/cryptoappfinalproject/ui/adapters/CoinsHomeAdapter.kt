@@ -14,7 +14,9 @@ import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
 
 class CoinsHomeAdapter(
     private val context: Context,
-    var onClickListener: ((CryptoCoinsModel.CryptoCoinsModelItem) -> Unit)? = null
+    var onClickListener: ((CryptoCoinsModel.CryptoCoinsModelItem) -> Unit)? = null,
+    var onFavListener: ((CryptoCoinsModel.CryptoCoinsModelItem) -> Unit)? = null
+
 ) : PagingDataAdapter<CryptoCoinsModel.CryptoCoinsModelItem, CoinsHomeAdapter.ItemViewHolder>(
     DiffUtilCallback()
 ) {
@@ -44,6 +46,13 @@ class CoinsHomeAdapter(
                 cvItem.setOnClickListener {
                     getItem(position = bindingAdapterPosition)?.let { it1 ->
                         onClickListener?.invoke(
+                            it1
+                        )
+                    }
+                }
+                ibCryptoFav.setOnClickListener {
+                    getItem(position = bindingAdapterPosition)?.let { it1 ->
+                        onFavListener?.invoke(
                             it1
                         )
                     }

@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject.ui
+package com.example.cryptoappfinalproject.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,6 +1,9 @@
 package com.example.cryptoappfinalproject.di
 
+import android.app.Application
+import androidx.room.Room
 import com.example.cryptoappfinalproject.common.ApiEndPoints
+import com.example.cryptoappfinalproject.data.local.CryptoLocalDatabase
 import com.example.cryptoappfinalproject.data.remote.FetchedCrypto
 import dagger.Module
 import dagger.Provides
@@ -17,18 +20,35 @@ import javax.inject.Singleton
 object AppModule {
 
 
+    @Module
+    @InstallIn(SingletonComponent::class)
+    object AppDBModule {
 
-    @Singleton
-    @Provides
-    fun providesOkHttpClient(): OkHttpClient =
-        OkHttpClient
-            .Builder()
-            .build()
+        @Provides
+        @Singleton
+        fun provideRoomDB(app: Application) =
+            Room.databaseBuilder(
+                app,
+                CryptoLocalDatabase::class.java, "crypto-final"
+            ).fallbackToDestructiveMigration().build()
 
-    @Singleton
-    @Provides
-    fun apiService(): FetchedCrypto =
-        Retrofit.Builder().baseUrl(ApiEndPoints.BASE_URL).client(providesOkHttpClient())
-            .addConverterFactory(GsonConverterFactory.create()).build()
-            .create(FetchedCrypto::class.java)
+        @Provides
+        @Singleton
+        fun provideUserDao(db: CryptoLocalDatabase) = db.CryptoDao()
+
+
+        @Singleton
+        @Provides
+        fun providesOkHttpClient(): OkHttpClient =
+            OkHttpClient
+                .Builder()
+                .build()
+
+        @Singleton
+        @Provides
+        fun apiService(): FetchedCrypto =
+            Retrofit.Builder().baseUrl(ApiEndPoints.BASE_URL).client(providesOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create()).build()
+                .create(FetchedCrypto::class.java)
+    }
 }
