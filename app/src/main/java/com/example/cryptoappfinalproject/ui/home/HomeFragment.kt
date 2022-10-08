@@ -96,6 +96,10 @@ class HomeFragment : Fragment() {
             override fun onSwipeRight() {
                 startDrawer()
             }
+
+            override fun onSwipeLeft() {
+                endDrawer()
+            }
         }
         )
     }
@@ -104,6 +108,12 @@ class HomeFragment : Fragment() {
     private fun startDrawer() {
         binding?.drawer?.openDrawer(
             GravityCompat.START, true
+        )
+    }
+
+    private fun endDrawer() {
+        binding?.drawer?.closeDrawer(
+            GravityCompat.END, true
         )
     }
 
