@@ -1,13 +1,18 @@
 package com.example.cryptoappfinalproject.ui.home
 
+import android.app.AlertDialog
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -20,6 +25,7 @@ import com.example.cryptoappfinalproject.Swipe
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
 import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
+import com.example.cryptoappfinalproject.favList
 import com.example.cryptoappfinalproject.ui.adapters.CoinsHomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -46,8 +52,16 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getAllCoinsPager()
         drawerListener()
-    }
+        lifecycleScope.launch {
+            viewModelFav.readAllData().collect {
+                it.forEach {
+                    favList.add(it)
+                }
+                Log.d("roommovie", favList.size.toString())
 
+            }
+        }
+    }
 
     private fun getAllCoinsPager() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -70,24 +84,27 @@ class HomeFragment : Fragment() {
 
     private fun favoritesListener() {
         adapter.onFavListener = {
-            val byId = layoutInflater.inflate(R.layout.single_crypto, null)
-            val name = byId.findViewById<TextView>(R.id.tvCryptoName)
-            var image: ImageView = byId.findViewById(R.id.ivCrypto)
             val crypto = Crypto(
                 uid = 0,
                 image = it.image!!,
                 originalTitle = it.name!!
             )
-            name.text = it.name
-            Glide.with(requireContext())
-                .load(it.image)
-                .into(image)
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewModelFav.insertCrypto(crypto)
-                Toast.makeText(requireContext()," ${crypto.originalTitle}, Has Been Added To Favorites", Toast.LENGTH_SHORT).show()
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setPositiveButton("Yes") { _, _ ->
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModelFav.insertCrypto(crypto)
+                    favList.add(crypto)
+                    Toast.makeText(requireContext()," ${crypto.originalTitle}, Has Been Added To Favorites", Toast.LENGTH_SHORT).show()
+
+                }
             }
+            builder.setNegativeButton("No") { _, _ -> }
+            builder.setTitle("Add ${crypto.originalTitle}?")
+            builder.setMessage("Are You Sure You Want To Add ${crypto.originalTitle} To Favorite Movies?")
+            builder.create().show()
 
         }
+
     }
 
 
