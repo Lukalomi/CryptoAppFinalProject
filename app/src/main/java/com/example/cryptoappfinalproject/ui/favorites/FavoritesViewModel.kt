@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject
+package com.example.cryptoappfinalproject.ui.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

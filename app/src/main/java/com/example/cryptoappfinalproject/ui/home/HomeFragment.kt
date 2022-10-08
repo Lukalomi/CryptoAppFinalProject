@@ -1,49 +1,37 @@
 package com.example.cryptoappfinalproject.ui.home
 
 import android.app.AlertDialog
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
+
+
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.NavigationUI
+
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.example.cryptoappfinalproject.FavoritesViewModel
-import com.example.cryptoappfinalproject.R
-import com.example.cryptoappfinalproject.Swipe
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
-import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
-import com.example.cryptoappfinalproject.favList
 import com.example.cryptoappfinalproject.ui.adapters.CoinsHomeAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.example.cryptoappfinalproject.*
+import com.example.cryptoappfinalproject.ui.favorites.FavoritesViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
     private lateinit var adapter: CoinsHomeAdapter
-    private lateinit var navController: NavController
 
     private val viewModel: HomeViewModel by viewModels()
     private val viewModelFav: FavoritesViewModel by activityViewModels()
@@ -60,11 +48,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getAllCoinsPager()
-
-        bottomNavigation()
-
-
+        setUpBottomNavigation()
         drawerListener()
+
+
         lifecycleScope.launch {
             viewModelFav.readAllData().collect {
                 it.forEach {
@@ -123,7 +110,12 @@ class HomeFragment : Fragment() {
         }
 
     }
-
+private fun setUpBottomNavigation() {
+    val navHostFragment = activity!!.supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+    val navController = navHostFragment.navController
+    val bottomNavigationView:BottomNavigationView = activity!!.findViewById(R.id.bottomNavigation)
+    NavigationUI.setupWithNavController(bottomNavigationView,navController)
+}
 
 
     private fun drawerListener() {
@@ -157,17 +149,8 @@ class HomeFragment : Fragment() {
 
 
     
-    private fun bottomNavigation() {
 
-        val navHostFragment = activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment)
-                as NavHostFragment
 
-        navController = navHostFragment.navController
-        val bottomNavigationView = binding?.bottomNavigation
-        if (bottomNavigationView != null) {
-            setupWithNavController(bottomNavigationView, navController)
-        }
-    }
 
 
     override fun onDestroyView() {

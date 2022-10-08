@@ -4,6 +4,4 @@
     android:animationOrder="normal"
     android:animation="@anim/slide_in">
 
-
-
 </layoutAnimation>
