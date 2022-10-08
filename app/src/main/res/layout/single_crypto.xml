@@ -12,12 +12,14 @@
     app:cardBackgroundColor="#4C4A53"
     app:cardCornerRadius="8dp"
     app:cardElevation="10dp"
+    android:layoutAnimation="@anim/layout_animation"
+
     >
-<!--    android:layoutAnimation="@anim/layout_animation"-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
 
         <androidx.appcompat.widget.AppCompatImageView

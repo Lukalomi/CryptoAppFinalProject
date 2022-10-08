@@ -4,19 +4,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="Home"
-        android:id="@+id/Home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home" />
 
     <item android:title="News"
-        android:id="@+id/News"
+        android:id="@+id/newsFragment"
         android:icon="@drawable/ic_news" />
 
     <item android:title="Favorites"
-        android:id="@+id/Favorites"
+        android:id="@+id/favoritesFragment"
         android:icon="@drawable/ic_favorite" />
 
     <item android:title="Learn Crypto"
-        android:id="@+id/LearnCrypto"
+        android:id="@+id/educationalFragment"
         android:icon="@drawable/ic_video" />
 
 </menu>
