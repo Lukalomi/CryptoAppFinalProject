@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
         getAllCoinsPager()
 
         bottomNavigation()
-    }
+
 
         drawerListener()
         lifecycleScope.launch {
