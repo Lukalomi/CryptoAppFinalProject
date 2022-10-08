@@ -12,6 +12,12 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.FavoritesViewModel
@@ -21,14 +27,17 @@ import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
 import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
 import com.example.cryptoappfinalproject.ui.adapters.CoinsHomeAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
     private lateinit var adapter: CoinsHomeAdapter
+    private lateinit var navController: NavController
 
     private val viewModel: HomeViewModel by viewModels()
     private val viewModelFav: FavoritesViewModel by activityViewModels()
@@ -45,6 +54,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getAllCoinsPager()
+        bottomNavigation()
     }
 
 
@@ -66,6 +76,9 @@ class HomeFragment : Fragment() {
         binding!!.pbHome.visibility = View.GONE
 
     }
+
+
+
 
     private fun favoritesListener() {
         adapter.onFavListener = {
@@ -106,6 +119,19 @@ class HomeFragment : Fragment() {
         )
     }
 
+
+    
+    private fun bottomNavigation() {
+
+        val navHostFragment = activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment)
+                as NavHostFragment
+
+        navController = navHostFragment.navController
+        val bottomNavigationView = binding?.bottomNavigation
+        if (bottomNavigationView != null) {
+            setupWithNavController(bottomNavigationView, navController)
+        }
+    }
 
 
     override fun onDestroyView() {

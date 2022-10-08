@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home"
+        android:id="@+id/Home"
+        android:icon="@drawable/ic_home" />
+
+    <item android:title="News"
+        android:id="@+id/News"
+        android:icon="@drawable/ic_news" />
+
+    <item android:title="Favorites"
+        android:id="@+id/Favorites"
+        android:icon="@drawable/ic_favorite" />
+
+    <item android:title="Learn Crypto"
+        android:id="@+id/LearnCrypto"
+        android:icon="@drawable/ic_video" />
+
+</menu>
+
