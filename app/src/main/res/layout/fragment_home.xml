@@ -97,6 +97,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         tools:listitem="@layout/single_crypto" />
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
@@ -123,15 +124,18 @@
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
-        android:layout_width="300dp"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_marginStart="4dp"
+        android:layout_gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@drawable/drawer_background">
@@ -224,6 +228,5 @@
 
 
     </androidx.drawerlayout.widget.DrawerLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

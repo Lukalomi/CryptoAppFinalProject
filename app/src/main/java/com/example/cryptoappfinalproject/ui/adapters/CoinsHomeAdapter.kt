@@ -3,6 +3,7 @@ package com.example.cryptoappfinalproject.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.paging.DifferCallback
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -32,10 +33,12 @@ class CoinsHomeAdapter(
                 tvCryptoRank.text = model?.marketCapRank.toString()
                 if(model?.priceChangePercentage24h.toString().contains("-")) {
                     tvCryptoVolume.text =String.format("%.2f",model?.priceChangePercentage24h) + " %"
+                    tvCryptoVolume.setTextColor(ContextCompat.getColor(context, R.color.red))
 
                 }
-                if(!model?.priceChangePercentage24h.toString().contains("-")) {
+                else {
                     tvCryptoVolume.text ="+"+String.format("%.2f",model?.priceChangePercentage24h) + " %"
+                    tvCryptoVolume.setTextColor(ContextCompat.getColor(context, R.color.green))
 
                 }
                 tvCryptoPrice.text = "$"+String.format("%.2f",model?.currentPrice)
