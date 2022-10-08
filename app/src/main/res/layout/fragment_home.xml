@@ -4,16 +4,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    android:background="@drawable/home_screen_background"
+    tools:context=".ui.HomeFragment">
 
     <SearchView
         android:id="@+id/svHome"
         android:layout_width="230dp"
         android:layout_height="50dp"
+        android:layout_marginStart="104dp"
         android:iconifiedByDefault="false"
+        android:background="@drawable/searchview_background"
+        android:searchIcon="@drawable/search_icon"
         android:queryBackground="@android:color/transparent"
         android:queryHint="Search a coin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnAuth"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnAuth"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_profile_svg"
+        android:foreground="?android:attr/selectableItemBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svHome">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tvCryptoAssets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:background="@null"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingStart="30dp"
+            android:textAllCaps="false"
+            android:paddingEnd="30dp"
+            android:text="CryptoAssets"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tvExchanges"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:textAllCaps="false"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:text="Exchanges"
+            android:textColor="#989696"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSort"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="5dp"
+        android:background="@null"
+        android:drawableEnd="@drawable/arrow_down"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:padding="5dp"
+        android:text="Sort By Rank"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHomeCryptoAssets"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSort"
+        tools:listitem="@layout/single_crypto"/>
+
+    <ProgressBar
+        android:id="@+id/pbHome"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:indeterminateTint="#F3E90B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rvHomeCryptoAssets" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
