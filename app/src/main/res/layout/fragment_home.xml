@@ -120,6 +120,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="280dp"
             android:layout_height="match_parent"
+            android:layout_gravity="start"
             android:background="@drawable/drawer_background">
 
 
