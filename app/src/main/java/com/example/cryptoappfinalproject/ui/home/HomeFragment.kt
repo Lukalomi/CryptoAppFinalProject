@@ -91,8 +91,10 @@ class HomeFragment : Fragment() {
     }
 
 
+
     private fun drawerListener() {
         binding?.drawer?.setOnTouchListener(object: Swipe(requireContext()) {
+
             override fun onSwipeRight() {
                 startDrawer()
             }
@@ -109,12 +111,14 @@ class HomeFragment : Fragment() {
         binding?.drawer?.openDrawer(
             GravityCompat.START, true
         )
+
     }
 
     private fun endDrawer() {
         binding?.drawer?.closeDrawer(
             GravityCompat.END, true
         )
+
     }
 
 

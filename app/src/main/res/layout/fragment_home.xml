@@ -96,7 +96,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSort"
-        tools:listitem="@layout/single_crypto" />
+        tools:listitem="@layout/single_crypto"
+
+        />
 
     <ProgressBar
         android:id="@+id/pbHome"
@@ -115,13 +117,17 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="start"
+
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="280dp"
             android:layout_height="match_parent"
+            android:background="@drawable/drawer_background"
             android:layout_gravity="start"
-            android:background="@drawable/drawer_background">
+            >
 
 
             <ImageView
