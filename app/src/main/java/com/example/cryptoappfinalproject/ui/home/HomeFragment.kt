@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.FavoritesViewModel
 import com.example.cryptoappfinalproject.R
+import com.example.cryptoappfinalproject.Swipe
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
 import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
@@ -85,6 +87,23 @@ class HomeFragment : Fragment() {
             }
 
         }
+    }
+
+
+    private fun drawerListener() {
+        binding?.drawer?.setOnTouchListener(object: Swipe(requireContext()) {
+            override fun onSwipeRight() {
+                startDrawer()
+            }
+        }
+        )
+    }
+
+
+    private fun startDrawer() {
+        binding?.drawer?.openDrawer(
+            GravityCompat.START, true
+        )
     }
 
 

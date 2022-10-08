@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CryptoAppFinalProject</string>
+    <string name="log_in_register">Log In/Register</string>
+    <string name="converter">Converter</string>
+    <string name="settings">Settings</string>
+    <string name="user_info">User Info</string>
 </resources>

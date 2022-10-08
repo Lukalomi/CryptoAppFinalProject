@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/home_screen_background"
     tools:context=".ui.home.HomeFragment">
 
@@ -12,15 +12,14 @@
         android:layout_width="230dp"
         android:layout_height="50dp"
         android:layout_marginStart="104dp"
-        android:iconifiedByDefault="false"
         android:background="@drawable/searchview_background"
-        android:searchIcon="@drawable/search_icon"
+        android:iconifiedByDefault="false"
         android:queryBackground="@android:color/transparent"
         android:queryHint="Search a coin"
+        android:searchIcon="@drawable/search_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnAuth"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnAuth"
@@ -52,9 +51,9 @@
             android:background="@null"
             android:foreground="?android:attr/selectableItemBackground"
             android:paddingStart="30dp"
-            android:textAllCaps="false"
             android:paddingEnd="30dp"
             android:text="CryptoAssets"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
@@ -64,10 +63,10 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:foreground="?android:attr/selectableItemBackground"
-            android:textAllCaps="false"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
             android:text="Exchanges"
+            android:textAllCaps="false"
             android:textColor="#989696"
             android:textSize="18sp" />
 
@@ -77,8 +76,6 @@
         android:id="@+id/btnSort"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginStart="5dp"
         android:background="@null"
         android:drawableEnd="@drawable/arrow_down"
         android:foreground="?android:attr/selectableItemBackground"
@@ -86,7 +83,7 @@
         android:text="Sort By Rank"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -99,7 +96,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSort"
-        tools:listitem="@layout/single_crypto"/>
+        tools:listitem="@layout/single_crypto" />
 
     <ProgressBar
         android:id="@+id/pbHome"
@@ -110,5 +107,110 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rvHomeCryptoAssets" />
+
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/drawer_background">
+
+
+            <ImageView
+                android:id="@+id/ivUserImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="12dp"
+                android:background="@null"
+                android:drawablePadding="5dp"
+                android:text="@string/log_in_register"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivUserImage" />
+
+            <TextView
+                android:id="@+id/tvUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="32dp"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="5dp"
+                android:text="@string/user_info"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+            <TextView
+                android:id="@+id/tvConverter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="32dp"
+                android:drawableStart="@drawable/ic_calculator"
+                android:drawablePadding="5dp"
+                android:text="@string/converter"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvUser" />
+
+
+            <TextView
+                android:id="@+id/tvSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="32dp"
+                android:drawableStart="@drawable/ic_settings"
+                android:drawablePadding="5dp"
+                android:text="@string/settings"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvConverter" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="84dp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_log_out"
+                android:drawablePadding="5dp"
+                android:text="Log Out"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSettings" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
