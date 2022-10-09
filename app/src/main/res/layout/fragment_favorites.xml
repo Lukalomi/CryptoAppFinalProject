@@ -8,10 +8,8 @@
     tools:context=".ui.favorites.FavoritesFragment">
 
 
-
-
         <SearchView
-            android:id="@+id/svHome"
+            android:id="@+id/svFavorites"
             android:layout_width="230dp"
             android:layout_height="50dp"
             android:layout_marginStart="104dp"
@@ -50,13 +48,12 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/svHome" />
+            app:layout_constraintTop_toBottomOf="@+id/svFavorites" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvHomeCryptoAssets"
+            android:id="@+id/rvFavCryptoAssets"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,9 +69,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/rvHomeCryptoAssets" />
-
-
-
+            app:layout_constraintTop_toTopOf="@+id/rvFavCryptoAssets" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
