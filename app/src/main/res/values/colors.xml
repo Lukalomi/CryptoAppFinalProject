@@ -10,5 +10,8 @@
     <color name="yellow">#FFDAC50F</color>
     <color name ="red">#EA1A1A</color>
     <color name ="green">#10EC1B</color>
-    
+    <color name ="login">#BF10333E</color>
+    <color name ="text_color">#BFA7ABAE</color>
+    <color name ="blue">#BF1253AA</color>
+
 </resources>

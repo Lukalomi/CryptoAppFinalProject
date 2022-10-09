@@ -30,6 +30,7 @@ import com.example.cryptoappfinalproject.*
 import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
 import com.example.cryptoappfinalproject.ui.favorites.FavoritesViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -44,7 +45,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         return binding!!.root
@@ -197,6 +198,11 @@ class HomeFragment : Fragment() {
 
 
     private fun drawerNavigation() {
+
+        binding?.btnLogin?.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+        }
+
         binding?.btnConverter?.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToConverterFragment())
         }
@@ -209,6 +215,9 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUserInfoFragment())
         }
 
+        binding?.btnLogOut?.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+        }
 
     }
 

@@ -4,4 +4,13 @@
     <string name="converter">Converter</string>
     <string name="settings">Settings</string>
     <string name="user_info">User Info</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_your_email_address">Enter your email address...</string>
+    <string name="name">Name</string>
+    <string name="log_in">log in</string>
+    <string name="surname">Surname</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="repeat_your_password">Repeat your password...</string>
+    <string name="register">Register</string>
 </resources>
