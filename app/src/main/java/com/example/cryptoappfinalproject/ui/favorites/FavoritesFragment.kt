@@ -15,6 +15,7 @@ import com.example.cryptoappfinalproject.favList
 import com.example.cryptoappfinalproject.ui.adapters.CoinsHomeAdapter
 import com.example.cryptoappfinalproject.ui.adapters.FavoritesAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -38,6 +39,10 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getAllFavCoins()
+    }
+
+    private fun getAllFavCoins() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModelFav.readAllData().collect {
                 setFavAdapter()
