@@ -60,6 +60,7 @@ class HomeFragment : Fragment() {
         addCoinsToFavList()
 
     }
+
     private fun addCoinsToFavList() {
         lifecycleScope.launch {
             viewModelFav.readAllData().collect {
@@ -90,7 +91,7 @@ class HomeFragment : Fragment() {
         favoritesListener()
 
         adapter.onFavListener = {
-            favoritesListener(it)
+            favoritesListener()
         }
 
         binding!!.pbHome.visibility = View.GONE
@@ -108,86 +109,63 @@ class HomeFragment : Fragment() {
                 currentPrice = it.currentPrice!!,
                 priceChangePercentage24h = it.priceChangePercentage24h!!
             )
+
             val builder = AlertDialog.Builder(requireContext())
 
-    private fun favoritesListener(it: CryptoCoinsModel.CryptoCoinsModelItem) {
-        val crypto = Crypto(
-            uid = 0,
-            image = it.image!!,
-            originalTitle = it.name!!,
-            marketCapRank = it.marketCapRank!!,
-            currentPrice = it.currentPrice!!,
-            priceChangePercentage24h = it.priceChangePercentage24h!!
-        )
+            if (favList.size == 0) {
+                builder.setPositiveButton("Yes") { _, _ ->
 
-        val builder = AlertDialog.Builder(requireContext())
+                    viewLifecycleOwner.lifecycleScope.launch {
 
-        if(favList.size == 0 ) {
-            builder.setPositiveButton("Yes") { _, _ ->
-
-                viewLifecycleOwner.lifecycleScope.launch {
-
-                    viewModelFav.insertCrypto(crypto)
-                    favList.add(crypto)
-                    Toast.makeText(
-                        requireContext(),
-                        " ${crypto.originalTitle}, Has Been Added To Favorites",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-
+                        viewModelFav.insertCrypto(crypto)
+                        favList.add(crypto)
+                        Toast.makeText(
+                            requireContext(),
+                            " ${crypto.originalTitle}, Has Been Added To Favorites",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
-        }
-        if (favList.toString().contains(crypto.originalTitle)) {
+            if (favList.toString().contains(crypto.originalTitle)) {
 
-            builder.setPositiveButton("Yes") { _, _ ->
+                builder.setPositiveButton("Yes") { _, _ ->
 
-                viewLifecycleOwner.lifecycleScope.launch {
-                    Toast.makeText(
-                        requireContext(),
-                        " ${crypto.originalTitle}, Is Already Added To Favorites",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        Toast.makeText(
+                            requireContext(),
+                            " ${crypto.originalTitle}, Is Already Added To Favorites",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
+                    }
+                }
+            }
+            if (!favList.toString().contains(crypto.originalTitle)) {
+
+                builder.setPositiveButton("Yes") { _, _ ->
+                    viewLifecycleOwner.lifecycleScope.launch {
+
+                        viewModelFav.insertCrypto(crypto)
+                        favList.add(crypto)
+                        Toast.makeText(
+                            requireContext(),
+                            " ${crypto.originalTitle}, Has Been Added To Favorites",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
 
+            builder.setNegativeButton("No") { _, _ -> }
+            builder.setTitle("Add ${crypto.originalTitle}?")
+            builder.setMessage("Are You Sure You Want To Add ${crypto.originalTitle} To Favorite Cryptos?")
+            builder.create().show()
+
+
         }
-        if (!favList.toString().contains(crypto.originalTitle)) {
-
-            builder.setPositiveButton("Yes") { _, _ ->
-                viewLifecycleOwner.lifecycleScope.launch {
-
-                    viewModelFav.insertCrypto(crypto)
-                    favList.add(crypto)
-                    Toast.makeText(
-                        requireContext(),
-                        " ${crypto.originalTitle}, Has Been Added To Favorites",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-
-                }
-            }
-        }
-
-        builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Add ${crypto.originalTitle}?")
-        builder.setMessage("Are You Sure You Want To Add ${crypto.originalTitle} To Favorite Cryptos?")
-        builder.create().show()
-
-
     }
 
-    private fun setUpBottomNavigation() {
-        val navHostFragment =
-            activity!!.supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        val bottomNavigationView: BottomNavigationView =
-            activity!!.findViewById(R.id.bottomNavigation)
-        NavigationUI.setupWithNavController(bottomNavigationView, navController)
-    }
 
     private fun setUpBottomNavigation() {
         val navHostFragment =
@@ -216,7 +194,7 @@ class HomeFragment : Fragment() {
         }
         )
     }
-    
+
 
     private fun drawerNavigation() {
         binding?.btnConverter?.setOnClickListener {
@@ -244,3 +222,7 @@ class HomeFragment : Fragment() {
     }
 
 }
+
+
+
+
