@@ -15,6 +15,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
+
     private lateinit var adapter: CoinsHomeAdapter
 
     private val viewModel: HomeViewModel by viewModels()
@@ -50,6 +52,7 @@ class HomeFragment : Fragment() {
         getAllCoinsPager()
         setUpBottomNavigation()
         drawerListener()
+        drawerNavigation()
 
 
         lifecycleScope.launch {
@@ -78,12 +81,10 @@ class HomeFragment : Fragment() {
         adapter = CoinsHomeAdapter(requireContext())
         binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(activity)
         binding!!.rvHomeCryptoAssets.adapter = adapter
-       favoritesListener()
+        favoritesListener()
         binding!!.pbHome.visibility = View.GONE
 
     }
-
-
 
 
     private fun favoritesListener() {
@@ -101,7 +102,11 @@ class HomeFragment : Fragment() {
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewModelFav.insertCrypto(crypto)
                     favList.add(crypto)
-                    Toast.makeText(requireContext()," ${crypto.originalTitle}, Has Been Added To Favorites", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        " ${crypto.originalTitle}, Has Been Added To Favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
                 }
             }
@@ -113,47 +118,51 @@ class HomeFragment : Fragment() {
         }
 
     }
-private fun setUpBottomNavigation() {
-    val navHostFragment = activity!!.supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-    val navController = navHostFragment.navController
-    val bottomNavigationView:BottomNavigationView = activity!!.findViewById(R.id.bottomNavigation)
-    NavigationUI.setupWithNavController(bottomNavigationView,navController)
-}
+
+    private fun setUpBottomNavigation() {
+        val navHostFragment =
+            activity!!.supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        val bottomNavigationView: BottomNavigationView =
+            activity!!.findViewById(R.id.bottomNavigation)
+        NavigationUI.setupWithNavController(bottomNavigationView, navController)
+    }
 
 
     private fun drawerListener() {
-        binding?.drawer?.setOnTouchListener(object: Swipe(requireContext()) {
+        binding?.drawer?.setOnTouchListener(object : Swipe(requireContext()) {
 
             override fun onSwipeRight() {
-                startDrawer()
+                binding?.drawer?.openDrawer(
+                    GravityCompat.START, true
+                )
             }
 
             override fun onSwipeLeft() {
-                endDrawer()
+                binding?.drawer?.closeDrawer(
+                    GravityCompat.END, true
+                )
             }
         }
         )
     }
-
-
-    private fun startDrawer() {
-        binding?.drawer?.openDrawer(
-            GravityCompat.START, true
-        )
-
-    }
-
-    private fun endDrawer() {
-        binding?.drawer?.closeDrawer(
-            GravityCompat.END, true
-        )
-
-    }
-
-
     
 
+    private fun drawerNavigation() {
+        binding?.btnConverter?.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToConverterFragment())
+        }
 
+        binding?.btnSettings?.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsFragment())
+        }
+
+        binding?.btnUser?.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUserInfoFragment())
+        }
+
+
+    }
 
 
     override fun onDestroyView() {

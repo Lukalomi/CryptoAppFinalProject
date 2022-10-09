@@ -9,6 +9,15 @@
         android:name="com.example.cryptoappfinalproject.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_converterFragment"
+            app:destination="@id/converterFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -25,5 +34,20 @@
         android:name="com.example.cryptoappfinalproject.ui.educational.EducationalFragment"
         android:label="fragment_educational"
         tools:layout="@layout/fragment_educational" />
+    <fragment
+        android:id="@+id/converterFragment"
+        android:name="com.example.cryptoappfinalproject.ui.converter.ConverterFragment"
+        android:label="fragment_converter"
+        tools:layout="@layout/fragment_converter" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.cryptoappfinalproject.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.example.cryptoappfinalproject.ui.userinfo.UserInfoFragment"
+        android:label="fragment_user_info"
+        tools:layout="@layout/fragment_user_info" />
 
 </navigation>
