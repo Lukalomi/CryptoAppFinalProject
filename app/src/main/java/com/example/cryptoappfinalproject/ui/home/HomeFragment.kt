@@ -91,7 +91,10 @@ class HomeFragment : Fragment() {
             val crypto = Crypto(
                 uid = 0,
                 image = it.image!!,
-                originalTitle = it.name!!
+                originalTitle = it.name!!,
+                marketCapRank = it.marketCapRank!!,
+                currentPrice = it.currentPrice!!,
+                priceChangePercentage24h = it.priceChangePercentage24h!!
             )
             val builder = AlertDialog.Builder(requireContext())
             builder.setPositiveButton("Yes") { _, _ ->
@@ -104,7 +107,7 @@ class HomeFragment : Fragment() {
             }
             builder.setNegativeButton("No") { _, _ -> }
             builder.setTitle("Add ${crypto.originalTitle}?")
-            builder.setMessage("Are You Sure You Want To Add ${crypto.originalTitle} To Favorite Movies?")
+            builder.setMessage("Are You Sure You Want To Add ${crypto.originalTitle} To Favorite Cryptos?")
             builder.create().show()
 
         }

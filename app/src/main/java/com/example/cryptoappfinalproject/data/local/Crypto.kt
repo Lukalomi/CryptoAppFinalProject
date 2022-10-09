@@ -12,4 +12,10 @@ data class Crypto(
     val image: String,
     @ColumnInfo(name = "original_title")
     val originalTitle: String,
+    @ColumnInfo(name = "marketcap_Rank")
+    val marketCapRank: Int,
+    @ColumnInfo(name = "current_Price")
+    val currentPrice: Double,
+    @ColumnInfo(name = "price_change")
+    val priceChangePercentage24h: Double
 )
