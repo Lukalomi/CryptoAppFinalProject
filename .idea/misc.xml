@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_converter.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_settings.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_user_info.xml" value="0.14130434782608695" />
+
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/drawable/arrow_down.xml" value="0.1445" />
         <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/drawable/arrow_up.xml" value="0.1445" />
@@ -24,10 +30,5 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
