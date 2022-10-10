@@ -16,8 +16,8 @@ class FavoritesAdapter(
 ) : RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder>() {
     var onClickListener: ((Crypto) -> Unit)? = null
 
-    var list: List<Crypto> = mutableListOf()
-    fun submitList(newList: List<Crypto>) {
+    var list: MutableList<Crypto> = mutableListOf()
+    fun submitList(newList: MutableList<Crypto>) {
         list = newList
     }
 

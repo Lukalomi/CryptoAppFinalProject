@@ -17,7 +17,7 @@ class CoinsDataSource @Inject constructor(private val fetchedCrypto: FetchedCryp
         val prevPage = if (page != 1) page - 1 else null
         val nextPage = page + 1
         return try {
-            val response = fetchedCrypto.searchCoins(page)
+            val response = fetchedCrypto.getCoins(page)
             if (response.isSuccessful) {
                 val coins = response.body() ?: mutableListOf()
                 return LoadResult.Page(coins, prevPage, nextPage)
