@@ -15,7 +15,7 @@ data class Crypto(
     @ColumnInfo(name = "marketcap_Rank")
     val marketCapRank: Int,
     @ColumnInfo(name = "current_Price")
-    val currentPrice: Double,
+    val currentPrice: Double?,
     @ColumnInfo(name = "price_change")
-    val priceChangePercentage24h: Double
+    val priceChangePercentage24h: Double?
 )

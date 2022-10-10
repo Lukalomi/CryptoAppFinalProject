@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.R
+import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.databinding.SingleCryptoBinding
 import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
+import com.example.cryptoappfinalproject.domain.CryptoSearchModel
 
 class CoinsHomeAdapter(
     private val context: Context,

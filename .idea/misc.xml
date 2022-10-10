@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/layout/fragment_favorites.xml" value="0.25025641025641027" />
+        <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/layout/fragment_home.xml" value="0.25025641025641027" />
+        <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/layout/fragment_registration.xml" value="0.25416666666666665" />
+        <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/layout/single_crypto.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/arrow_down.xml" value="0.117" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/arrow_up.xml" value="0.117" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/home_screen_background.xml" value="0.117" />
