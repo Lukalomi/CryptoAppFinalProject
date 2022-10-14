@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable-v24/ic_email_focused.xml" value="0.116" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable-v24/ic_password_focused.xml" value="0.116" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable-v24/ic_person_focused.xml" value="0.116" />
         <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/drawable/home_screen_background.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/layout/drawer.xml" value="0.253125" />
@@ -12,13 +15,26 @@
         <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/layout/single_crypto.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/arrow_down.xml" value="0.117" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/arrow_up.xml" value="0.117" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/custom_email_icon.xml" value="0.116" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/custom_eye_icon.xml" value="0.123" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/custom_input.xml" value="0.116" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/custom_password_icon.xml" value="0.116" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/custom_person_icon.xml" value="0.116" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/drawer_background.xml" value="0.117" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/home_screen_background.xml" value="0.117" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_arrow_back.xml" value="0.117" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_delete_fav.xml" value="0.117" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_email.xml" value="0.116" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_eye.xml" value="0.123" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_eye_focused.xml" value="0.123" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_home.xml" value="0.116" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_password.xml" value="0.116" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_person.xml" value="0.116" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_user.xml" value="0.116" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_converter.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_home.xml" value="0.22" />
-        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_login.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_login.xml" value="0.22" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_registration.xml" value="0.22" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_settings.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_user_info.xml" value="0.14130434782608695" />
