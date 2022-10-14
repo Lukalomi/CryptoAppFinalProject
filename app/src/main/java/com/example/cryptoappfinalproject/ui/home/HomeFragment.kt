@@ -7,19 +7,13 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatImageButton
-import androidx.core.content.ContextCompat
 
-
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,7 +30,6 @@ import com.example.cryptoappfinalproject.ui.adapters.CoinsSearchAdapter
 import com.example.cryptoappfinalproject.ui.favorites.FavoritesViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.delay
 import java.util.*
 
 @AndroidEntryPoint
@@ -63,8 +56,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getAllCoinsPager()
         setUpBottomNavigation()
-        drawerListener()
-        drawerNavigation()
         addCoinsToFavList()
         searchCryptos()
 
@@ -301,68 +292,6 @@ class HomeFragment : Fragment() {
         val bottomNavigationView: BottomNavigationView =
             activity!!.findViewById(R.id.bottomNavigation)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
-    }
-
-
-//    private fun drawerListener() {
-//        binding?.drawer?.setOnTouchListener(object : Swipe(requireContext()) {
-//
-//            override fun onSwipeRight() {
-//                binding?.drawer?.openDrawer(
-//                    GravityCompat.START, true
-//                )
-//            }
-//
-//            override fun onSwipeLeft() {
-//                binding?.drawer?.closeDrawer(
-//                    GravityCompat.END, true
-//                )
-//            }
-//        }
-//        )
-//    }
-
-    private  fun drawerListener() {
-
-        binding!!.constraintLayout.setOnTouchListener(object : Swipe(requireContext()) {
-            override fun onSwipeRight() {
-                binding!!.drawer.visibility = View.VISIBLE
-              binding!!.drawer.openDrawer(GravityCompat.START, true)
-
-            }
-            override fun onSwipeLeft() {
-                binding!!.drawer.visibility = View.GONE
-                binding?.drawer?.closeDrawer(
-                    GravityCompat.END, true
-                )
-           }
-
-        })
-    }
-
-
-    private fun drawerNavigation() {
-
-        binding?.btnLogin?.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
-        }
-
-        binding?.btnConverter?.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToConverterFragment())
-        }
-
-        binding?.btnSettings?.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsFragment())
-        }
-
-        binding?.btnUser?.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUserInfoFragment())
-        }
-
-        binding?.btnLogOut?.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-        }
-
     }
 
 
