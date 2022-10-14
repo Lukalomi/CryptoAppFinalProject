@@ -56,6 +56,7 @@ class FavoritesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModelFav.readAllData().collect {
                 setFavAdapter()
+                binding!!.pbHome.visibility = View.GONE
                 adapter.submitList(it)
             }
         }

@@ -13,5 +13,5 @@
     <color name ="login">#BF10333E</color>
     <color name ="text_color">#BFA7ABAE</color>
     <color name ="blue">#BF1253AA</color>
-
+    <color name="status_bar">#1F2729</color>
 </resources>
