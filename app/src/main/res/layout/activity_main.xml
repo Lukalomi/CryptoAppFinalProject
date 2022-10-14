@@ -42,14 +42,22 @@
 
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/sideNavigation"
         android:layout_width="260dp"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
         android:layout_marginBottom="50dp"
-        android:layout_gravity="start">
+        android:background="@drawable/drawer_background"
+        app:itemTextColor="@color/white"
+        app:itemVerticalPadding="30dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="40dp"
+        app:menu="@menu/side_nav">
 
-        <include layout="@layout/drawer">
+        <!--        <include layout="@layout/drawer">-->
 
-        </include>
+        <!--        </include>-->
 
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
