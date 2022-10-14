@@ -2,7 +2,11 @@ package com.example.cryptoappfinalproject
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -15,6 +19,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
+
+
+        val sideNav = findViewById<NavigationView>(R.id.sideNavigation)
+        sideNav.itemIconTintList = null
+
+        setUpSideNavigation()
+    }
+
+
+    private fun setUpSideNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        val navigationView: NavigationView = binding!!.sideNavigation
+        NavigationUI.setupWithNavController(navigationView, navController)
     }
 
     }
