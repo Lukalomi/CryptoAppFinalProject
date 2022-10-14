@@ -3,10 +3,8 @@ package com.example.cryptoappfinalproject.ui.home
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageButton
@@ -14,6 +12,7 @@ import androidx.core.content.ContextCompat
 
 
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -37,6 +36,7 @@ import com.example.cryptoappfinalproject.ui.adapters.CoinsSearchAdapter
 import com.example.cryptoappfinalproject.ui.favorites.FavoritesViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.delay
 import java.util.*
 
 @AndroidEntryPoint
@@ -105,6 +105,7 @@ class HomeFragment : Fragment() {
         binding!!.pbHome.visibility = View.GONE
 
     }
+
     private fun setSearchAdapter() {
         searchAdapter = CoinsSearchAdapter(requireContext())
         binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(activity)
@@ -115,72 +116,72 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun favoritesListener(singleItem:CryptoCoinsModel.CryptoCoinsModelItem) {
-            val crypto = Crypto(
-                uid = 0,
-                image = singleItem.image!!,
-                originalTitle = singleItem.name!!,
-                marketCapRank = singleItem.marketCapRank!!,
-                currentPrice = singleItem.currentPrice!!,
-                priceChangePercentage24h = singleItem.priceChangePercentage24h!!
-            )
+    private fun favoritesListener(singleItem: CryptoCoinsModel.CryptoCoinsModelItem) {
+        val crypto = Crypto(
+            uid = 0,
+            image = singleItem.image!!,
+            originalTitle = singleItem.name!!,
+            marketCapRank = singleItem.marketCapRank!!,
+            currentPrice = singleItem.currentPrice!!,
+            priceChangePercentage24h = singleItem.priceChangePercentage24h!!
+        )
 
-            val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext())
 
-            if (favList.size == 0) {
-                builder.setPositiveButton("Yes") { _, _ ->
+        if (favList.size == 0) {
+            builder.setPositiveButton("Yes") { _, _ ->
 
-                    viewLifecycleOwner.lifecycleScope.launch {
+                viewLifecycleOwner.lifecycleScope.launch {
 
-                        viewModelFav.insertCrypto(crypto)
-                        favList.add(crypto)
-                        Toast.makeText(
-                            requireContext(),
-                            " ${crypto.originalTitle}, Has Been Added To Favorites",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    viewModelFav.insertCrypto(crypto)
+                    favList.add(crypto)
+                    Toast.makeText(
+                        requireContext(),
+                        " ${crypto.originalTitle}, Has Been Added To Favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
-            if (favList.toString().contains(crypto.originalTitle)) {
+        }
+        if (favList.toString().contains(crypto.originalTitle)) {
 
-                builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton("Yes") { _, _ ->
 
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        Toast.makeText(
-                            requireContext(),
-                            " ${crypto.originalTitle}, Is Already Added To Favorites",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                viewLifecycleOwner.lifecycleScope.launch {
+                    Toast.makeText(
+                        requireContext(),
+                        " ${crypto.originalTitle}, Is Already Added To Favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                    }
                 }
             }
-            if (!favList.toString().contains(crypto.originalTitle)) {
+        }
+        if (!favList.toString().contains(crypto.originalTitle)) {
 
-                builder.setPositiveButton("Yes") { _, _ ->
-                    viewLifecycleOwner.lifecycleScope.launch {
+            builder.setPositiveButton("Yes") { _, _ ->
+                viewLifecycleOwner.lifecycleScope.launch {
 
-                        viewModelFav.insertCrypto(crypto)
-                        favList.add(crypto)
-                        Toast.makeText(
-                            requireContext(),
-                            " ${crypto.originalTitle}, Has Been Added To Favorites",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    viewModelFav.insertCrypto(crypto)
+                    favList.add(crypto)
+                    Toast.makeText(
+                        requireContext(),
+                        " ${crypto.originalTitle}, Has Been Added To Favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+        }
 
-            builder.setNegativeButton("No") { _, _ -> }
-            builder.setTitle("Add ${crypto.originalTitle}?")
-            builder.setMessage("Are You Sure You Want To Add ${crypto.originalTitle} To Favorite Cryptos?")
-            builder.create().show()
-
+        builder.setNegativeButton("No") { _, _ -> }
+        builder.setTitle("Add ${crypto.originalTitle}?")
+        builder.setMessage("Are You Sure You Want To Add ${crypto.originalTitle} To Favorite Cryptos?")
+        builder.create().show()
 
 
     }
-    private fun favoritesSearchListener(singleItem:CryptoSearchModel.Coin) {
+
+    private fun favoritesSearchListener(singleItem: CryptoSearchModel.Coin) {
         val crypto = Crypto(
             uid = 0,
             image = singleItem.thumb!!,
@@ -244,7 +245,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun searchCryptos(){
+    private fun searchCryptos() {
         var displayList: MutableList<CryptoSearchModel.Coin> = mutableListOf()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -291,7 +292,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-        }
+    }
 
     private fun setUpBottomNavigation() {
         val navHostFragment =
@@ -303,22 +304,40 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun drawerListener() {
-        binding?.drawer?.setOnTouchListener(object : Swipe(requireContext()) {
+//    private fun drawerListener() {
+//        binding?.drawer?.setOnTouchListener(object : Swipe(requireContext()) {
+//
+//            override fun onSwipeRight() {
+//                binding?.drawer?.openDrawer(
+//                    GravityCompat.START, true
+//                )
+//            }
+//
+//            override fun onSwipeLeft() {
+//                binding?.drawer?.closeDrawer(
+//                    GravityCompat.END, true
+//                )
+//            }
+//        }
+//        )
+//    }
 
+    private  fun drawerListener() {
+
+        binding!!.constraintLayout.setOnTouchListener(object : Swipe(requireContext()) {
             override fun onSwipeRight() {
-                binding?.drawer?.openDrawer(
-                    GravityCompat.START, true
-                )
-            }
+                binding!!.drawer.visibility = View.VISIBLE
+              binding!!.drawer.openDrawer(GravityCompat.START, true)
 
+            }
             override fun onSwipeLeft() {
+                binding!!.drawer.visibility = View.GONE
                 binding?.drawer?.closeDrawer(
                     GravityCompat.END, true
                 )
-            }
-        }
-        )
+           }
+
+        })
     }
 
 
