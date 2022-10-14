@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface CryptoDao {
     @Query("SELECT * FROM crypto")
-    suspend fun getAll(): List<Crypto>
+    suspend fun getAll(): MutableList<Crypto>
 
     @Query("DELETE FROM crypto")
     suspend fun deleteAll()

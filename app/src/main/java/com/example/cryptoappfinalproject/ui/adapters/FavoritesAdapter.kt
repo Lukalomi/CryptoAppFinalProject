@@ -3,7 +3,6 @@ package com.example.cryptoappfinalproject.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,8 +15,8 @@ class FavoritesAdapter(
 ) : RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder>() {
     var onClickListener: ((Crypto) -> Unit)? = null
 
-    var list: List<Crypto> = mutableListOf()
-    fun submitList(newList: List<Crypto>) {
+    var list: MutableList<Crypto> =mutableListOf()
+    fun submitList(newList: MutableList<Crypto>) {
         list = newList
     }
 
@@ -59,6 +58,13 @@ class FavoritesAdapter(
                     R.color.green
                 )
             )
+        }
+
+        if(list[position].priceChangePercentage24h == null) {
+            holder.binding.tvCryptoVolume.text = ""
+        }
+        if( list[position].currentPrice == null) {
+            holder.binding.tvCryptoPrice.text = ""
         }
         holder.binding.ibCryptoFav.setOnClickListener {
             onClickListener?.invoke(list[position])
