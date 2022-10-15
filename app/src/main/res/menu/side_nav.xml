@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <item
+        android:id="@+id/loginFragment"
+        android:title="@string/log_in_register"
+        />
+    <item
+        android:id="@+id/userInfoFragment"
+        android:icon="@drawable/ic_user"
+        android:title="@string/user_info" />
+
+    <item
+        android:id="@+id/converterFragment"
+        android:icon="@drawable/ic_calculator"
+        android:title="@string/converter"
+        />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
+
+    <item
+        android:icon="@drawable/ic_log_out"
+        android:title="Log Out" />
+
+</menu>
