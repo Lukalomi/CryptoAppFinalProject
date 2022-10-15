@@ -12,7 +12,7 @@ data class UserInfo(
     @PrimaryKey(autoGenerate = true)
     val uid: Int,
     @ColumnInfo(name = "image")
-    val image: String,
+    val image: Bitmap,
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "surname")
