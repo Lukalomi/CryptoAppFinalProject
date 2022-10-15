@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun populateProfilePicture() {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             viewModel.readAllUserInfo().collect{
                 val profilePicture = findViewById<ImageView>(R.id.ivUserPhoto)
                 it.forEach {
