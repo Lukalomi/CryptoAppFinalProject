@@ -30,4 +30,13 @@ interface CryptoDao {
     @Delete
     suspend fun deleteExchange(exchange: Exchanges)
 
+    @Query("SELECT * FROM userInfo")
+    suspend fun getAllUserInfo(): MutableList<UserInfo>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addUserInfo(user: UserInfo)
+
+    @Delete
+    suspend fun deleteUserInfo(user: UserInfo)
+
 }

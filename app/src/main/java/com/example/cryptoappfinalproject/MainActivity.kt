@@ -1,20 +1,26 @@
 package com.example.cryptoappfinalproject
 
 import android.os.Bundle
+import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.cryptoappfinalproject.ui.registration.RegistrationViewModel
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
+
+    private val viewModel: RegistrationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding!!.sideNavigation.itemIconTintList = null
 
         setUpSideNavigation()
+        populateProfilePicture()
     }
 
 
@@ -34,6 +41,18 @@ class MainActivity : AppCompatActivity() {
         val navigationView: NavigationView = binding!!.sideNavigation
         NavigationUI.setupWithNavController(navigationView, navController)
     }
+
+    private fun populateProfilePicture() {
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.readAllUserInfo().collect{
+                val profilePicture = findViewById<ImageView>(R.id.ivUserPhoto)
+                it.forEach {
+                    profilePicture.setImageResource(it.image.toInt())
+                }
+            }
+        }
+    }
+
 
 }
 
