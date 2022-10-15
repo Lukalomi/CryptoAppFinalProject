@@ -21,9 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
-
-        val sideNav = findViewById<NavigationView>(R.id.sideNavigation)
-        sideNav.itemIconTintList = null
+        binding!!.sideNavigation.itemIconTintList = null
 
         setUpSideNavigation()
     }
