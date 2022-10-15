@@ -6,7 +6,7 @@
     <string name="user_info">User Info</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="enter_your_email_address">Enter email address...</string>
+    <string name="email_address">Email address...</string>
     <string name="name">Name</string>
     <string name="log_in">log in</string>
     <string name="surname">Surname</string>
@@ -14,4 +14,5 @@
     <string name="repeat_your_password">Repeat password...</string>
     <string name="register">Register</string>
     <string name="enter_password">Enter password...</string>
+    <string name="choose_a_photo">Choose a photo</string>
 </resources>
