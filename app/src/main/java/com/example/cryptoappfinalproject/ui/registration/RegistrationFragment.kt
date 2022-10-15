@@ -3,6 +3,7 @@ package com.example.cryptoappfinalproject.ui.registration
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,7 +71,8 @@ class RegistrationFragment : Fragment() {
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
            binding?.ivProfilePhoto?.setImageURI(data?.data)
 
-            val profilePicture = binding?.ivProfilePhoto?.setImageURI(data?.data).toString()
+            val profileBitMap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data?.data)
+
             binding?.btnRegister?.setOnClickListener {
 
                 val name = binding?.etName?.text.toString()
@@ -81,14 +83,13 @@ class RegistrationFragment : Fragment() {
 
                 val user = UserInfo(
                     uid = 0,
-                    image = profilePicture,
+                    image = profileBitMap,
                     name = name,
                     surname = surname,
                     email = email,
                     password = password
                 )
 
-                registrationViewModel.insertUserInfo(user)
 
 
                 if (name.isEmpty() || surname.isEmpty() ||
@@ -110,6 +111,7 @@ class RegistrationFragment : Fragment() {
 
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener { _ ->
+                        registrationViewModel.insertUserInfo(user)
 
 
                         findNavController()
