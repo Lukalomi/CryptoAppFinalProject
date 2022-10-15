@@ -9,11 +9,14 @@ import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.data.remote.FetchedCrypto
 import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
+import com.example.cryptoappfinalproject.domain.CryptoExchangesModel
 import com.example.cryptoappfinalproject.domain.CryptoSearchModel
 import com.example.cryptoappfinalproject.ui.datasource.CoinsDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,13 +25,19 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val fetchedCrypto: FetchedCrypto) : ViewModel() {
 
     val coinsPager =
-        Pager(config = PagingConfig(30), pagingSourceFactory = { CoinsDataSource(fetchedCrypto) }).flow.cachedIn(
+        Pager(
+            config = PagingConfig(30),
+            pagingSourceFactory = { CoinsDataSource(fetchedCrypto) }).flow.cachedIn(
             viewModelScope
         )
 
 
     private val _newState =
-        MutableStateFlow<Resource<MutableList<CryptoSearchModel.Coin>>>(Resource.Success(mutableListOf()))
+        MutableStateFlow<Resource<MutableList<CryptoSearchModel.Coin>>>(
+            Resource.Success(
+                mutableListOf()
+            )
+        )
     val newState = _newState.asStateFlow()
 
 
@@ -43,4 +52,20 @@ class HomeViewModel @Inject constructor(private val fetchedCrypto: FetchedCrypto
             }
         }
     }
+
+
+    fun getExchanges(): Flow<Resource<MutableList<CryptoExchangesModel.CryptoExchangesModelItem>>> =
+        flow {
+            val response = fetchedCrypto.searchExchanges()
+            val value: Resource<MutableList<CryptoExchangesModel.CryptoExchangesModelItem>>
+            if (response.isSuccessful) {
+                value = Resource.Success(response.body() ?: mutableListOf())
+            } else {
+                value = Resource.Error(response.errorBody().toString() ?: "")
+            }
+
+            emit(value)
+            emit(Resource.Loader(false))
+
+        }
 }
