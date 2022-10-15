@@ -54,6 +54,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:paddingTop="40dp"
+        app:headerLayout="@layout/nav_header"
         app:menu="@menu/side_nav">
 
         <!--        <include layout="@layout/drawer">-->
