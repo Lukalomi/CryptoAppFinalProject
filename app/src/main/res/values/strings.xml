@@ -15,4 +15,5 @@
     <string name="register">Register</string>
     <string name="enter_password">Enter password...</string>
     <string name="choose_a_photo">Choose a photo</string>
+    <string name="enter_your_email_address">enter your email address</string>
 </resources>
