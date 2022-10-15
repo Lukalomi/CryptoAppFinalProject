@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.cryptoappfinalproject.common.ApiEndPoints
 import com.example.cryptoappfinalproject.data.local.CryptoLocalDatabase
 import com.example.cryptoappfinalproject.data.remote.FetchedCrypto
+import com.example.cryptoappfinalproject.data.remote.FetchedNews
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,5 +51,13 @@ object AppModule {
             Retrofit.Builder().baseUrl(ApiEndPoints.BASE_URL).client(providesOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create()).build()
                 .create(FetchedCrypto::class.java)
+
+        @Singleton
+        @Provides
+        fun cryptoNews(): FetchedNews =
+            Retrofit.Builder().baseUrl(ApiEndPoints.BASE_URL_NEWS).client(providesOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create()).build()
+                .create(FetchedNews::class.java)
+
     }
 }
