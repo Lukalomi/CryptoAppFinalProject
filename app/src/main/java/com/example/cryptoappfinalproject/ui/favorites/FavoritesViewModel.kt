@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.data.local.CryptoDao
+import com.example.cryptoappfinalproject.data.local.Exchanges
 import com.example.cryptoappfinalproject.domain.CryptoSearchModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +22,21 @@ class FavoritesViewModel @Inject constructor(private val cryptoDao: CryptoDao) :
         emit(cryptoDao.getAll())
     }
 
+    fun readAllExchanges() = flow {
+        emit(cryptoDao.getAllExchanges())
+    }
 
+    fun deleteExchange(exchanges: Exchanges) {
+        viewModelScope.launch {
+            cryptoDao.deleteExchange(exchanges)
+        }
+    }
+
+    fun insertExchange(exchanges: Exchanges) {
+        viewModelScope.launch {
+            cryptoDao.addExchange(exchanges)
+        }
+    }
 
     fun insertCrypto(crypto: Crypto) {
         viewModelScope.launch {

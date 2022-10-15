@@ -19,4 +19,15 @@ interface CryptoDao {
     @Delete
     suspend fun delete(crypto: Crypto)
 
+
+
+    @Query("SELECT * FROM exchange")
+    suspend fun getAllExchanges(): MutableList<Exchanges>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addExchange(exchange: Exchanges)
+
+    @Delete
+    suspend fun deleteExchange(exchange: Exchanges)
+
 }

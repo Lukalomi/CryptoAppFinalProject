@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -24,9 +25,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import com.example.cryptoappfinalproject.*
 import com.example.cryptoappfinalproject.common.Resource
+import com.example.cryptoappfinalproject.data.local.Exchanges
 import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
+import com.example.cryptoappfinalproject.domain.CryptoExchangesModel
 import com.example.cryptoappfinalproject.domain.CryptoSearchModel
 import com.example.cryptoappfinalproject.ui.adapters.CoinsSearchAdapter
+import com.example.cryptoappfinalproject.ui.adapters.ExchangesAdapter
 import com.example.cryptoappfinalproject.ui.favorites.FavoritesViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -39,6 +43,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var adapter: CoinsHomeAdapter
     private lateinit var searchAdapter: CoinsSearchAdapter
+    private lateinit var adapterExchanges: ExchangesAdapter
 
     private val viewModel: HomeViewModel by viewModels()
     private val viewModelFav: FavoritesViewModel by activityViewModels()
@@ -54,10 +59,24 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getAllCoinsPager()
         setUpBottomNavigation()
-        addCoinsToFavList()
+        getAllCoinsPager()
         searchCryptos()
+        addCoinsToFavList()
+        binding!!.tvExchanges.setOnClickListener {
+            getAllExchanges()
+            searchExchanges()
+            addExchangesToFavList()
+
+        }
+        binding!!.tvCryptoAssets.setOnClickListener {
+            getAllCoinsPager()
+            searchCryptos()
+            addCoinsToFavList()
+            binding!!.tvExchanges.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey));
+            binding!!.tvCryptoAssets.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+
+        }
 
     }
 
@@ -67,9 +86,16 @@ class HomeFragment : Fragment() {
                 it.forEach {
                     favList.add(it)
                 }
-                Log.d("roomCrypto", favList.size.toString())
+            }
+        }
+    }
 
-
+    private fun addExchangesToFavList() {
+        lifecycleScope.launch {
+            viewModelFav.readAllExchanges().collect {
+                it.forEach {
+                    favExchanges.add(it)
+                }
             }
         }
     }
@@ -79,6 +105,29 @@ class HomeFragment : Fragment() {
             viewModel.coinsPager.collect {
                 setAllCoinsAdapter()
                 adapter.submitData(it)
+
+            }
+        }
+    }
+
+    private fun getAllExchanges() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getExchanges().collect {
+                when(it) {
+                    is Resource.Success -> {
+                        setExchangesAdapter()
+                        adapterExchanges.submitList(it)
+                        binding!!.tvExchanges.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+                        binding!!.tvCryptoAssets.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
+                    }
+
+                    is Resource.Error -> {
+
+                    }
+                    is Resource.Loader -> {
+
+                    }
+                }
 
             }
         }
@@ -99,10 +148,21 @@ class HomeFragment : Fragment() {
 
     private fun setSearchAdapter() {
         searchAdapter = CoinsSearchAdapter(requireContext())
-        binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(activity)
+        binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
         binding!!.rvHomeCryptoAssets.adapter = searchAdapter
         searchAdapter.onClickListener = {
             favoritesSearchListener(it)
+        }
+    }
+
+
+
+    private fun setExchangesAdapter() {
+        adapterExchanges = ExchangesAdapter(requireContext())
+        binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
+        binding!!.rvHomeCryptoAssets.adapter = adapterExchanges
+        adapterExchanges.onClickListener = {
+            favoritesExchangesListener(it)
         }
     }
 
@@ -167,6 +227,69 @@ class HomeFragment : Fragment() {
         builder.setNegativeButton("No") { _, _ -> }
         builder.setTitle("Add ${crypto.originalTitle}?")
         builder.setMessage("Are You Sure You Want To Add ${crypto.originalTitle} To Favorite Cryptos?")
+        builder.create().show()
+
+
+    }
+    private fun favoritesExchangesListener(singleItem: CryptoExchangesModel.CryptoExchangesModelItem) {
+        val exchange = Exchanges(
+            uid = 0,
+            image = singleItem.image!!,
+            title = singleItem.name!!,
+            rank = singleItem.trustScoreRank!!,
+            volume = singleItem.tradeVolume24hBtc,
+        )
+
+        val builder = AlertDialog.Builder(requireContext())
+
+        if (favExchanges.size == 0) {
+            builder.setPositiveButton("Yes") { _, _ ->
+
+                viewLifecycleOwner.lifecycleScope.launch {
+
+                    viewModelFav.insertExchange(exchange)
+                    favExchanges.add(exchange)
+                    Toast.makeText(
+                        requireContext(),
+                        " ${exchange.title}, Has Been Added To Favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+        if (favExchanges.toString().contains(exchange.title)) {
+
+            builder.setPositiveButton("Yes") { _, _ ->
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    Toast.makeText(
+                        requireContext(),
+                        " ${exchange.title}, Is Already Added To Favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
+            }
+        }
+        if (!favExchanges.toString().contains(exchange.title)) {
+
+            builder.setPositiveButton("Yes") { _, _ ->
+                viewLifecycleOwner.lifecycleScope.launch {
+
+                    viewModelFav.insertExchange(exchange)
+                    favExchanges.add(exchange)
+                    Toast.makeText(
+                        requireContext(),
+                        " ${exchange.title}, Has Been Added To Favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
+        builder.setNegativeButton("No") { _, _ -> }
+        builder.setTitle("Add ${exchange.title}?")
+        builder.setMessage("Are You Sure You Want To Add ${exchange.title} To Favorite Cryptos?")
         builder.create().show()
 
 
@@ -285,6 +408,54 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun searchExchanges() {
+        var displayList: MutableList<CryptoExchangesModel.CryptoExchangesModelItem> = mutableListOf()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getExchanges().collect {
+                    when (it) {
+                        is Resource.Success -> {
+                            binding!!.svHome.setOnQueryTextListener(object :
+                                SearchView.OnQueryTextListener {
+                                override fun onQueryTextSubmit(query: String?): Boolean {
+                                    return true
+                                }
+
+                                override fun onQueryTextChange(newText: String?): Boolean {
+                                    if (newText!!.isNotEmpty()) {
+                                        displayList.clear()
+                                        val search = newText.lowercase(Locale.getDefault())
+                                        it.data.forEach {
+                                            if (it.name!!.lowercase(Locale.getDefault())
+                                                    .contains(search)
+                                            ) {
+                                                displayList.add(it)
+                                            }
+                                        }
+                                        setExchangesAdapter()
+                                        adapterExchanges.submitList(Resource.Success(displayList))
+                                    } else {
+                                        getAllExchanges()
+                                    }
+
+                                    return true
+
+                                }
+
+                            })
+                        }
+                        is Resource.Error -> {
+                            Log.d("error", it.errorMsg)
+                        }
+                        is Resource.Loader -> {
+                            Log.d("loader", "loading")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private fun setUpBottomNavigation() {
         val navHostFragment =
             activity!!.supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -299,6 +470,7 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         binding = null
         favList.clear()
+        favExchanges.clear()
 
     }
 
