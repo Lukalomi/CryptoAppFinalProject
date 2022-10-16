@@ -4,9 +4,11 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 
 import androidx.fragment.app.activityViewModels
@@ -18,6 +20,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
 import com.example.cryptoappfinalproject.ui.adapters.CoinsHomeAdapter
@@ -32,8 +35,11 @@ import com.example.cryptoappfinalproject.domain.CryptoSearchModel
 import com.example.cryptoappfinalproject.ui.adapters.CoinsSearchAdapter
 import com.example.cryptoappfinalproject.ui.adapters.ExchangesAdapter
 import com.example.cryptoappfinalproject.ui.favorites.FavoritesViewModel
+import com.example.cryptoappfinalproject.ui.registration.RegistrationViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 @AndroidEntryPoint
@@ -44,6 +50,7 @@ class HomeFragment : Fragment() {
     private lateinit var adapter: CoinsHomeAdapter
     private lateinit var searchAdapter: CoinsSearchAdapter
     private lateinit var adapterExchanges: ExchangesAdapter
+    private val viewModelReg: RegistrationViewModel by viewModels()
 
     private val viewModel: HomeViewModel by viewModels()
     private val viewModelFav: FavoritesViewModel by activityViewModels()
@@ -63,6 +70,7 @@ class HomeFragment : Fragment() {
         getAllCoinsPager()
         searchCryptos()
         addCoinsToFavList()
+        populateProfilePicture()
         binding!!.tvExchanges.setOnClickListener {
             getAllExchanges()
             searchExchanges()
@@ -456,6 +464,8 @@ class HomeFragment : Fragment() {
         }
     }
 
+
+
     private fun setUpBottomNavigation() {
         val navHostFragment =
             activity!!.supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -463,6 +473,30 @@ class HomeFragment : Fragment() {
         val bottomNavigationView: BottomNavigationView =
             activity!!.findViewById(R.id.bottomNavigation)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
+    }
+
+    private fun populateProfilePicture() {
+
+        lifecycleScope.launch {
+            viewModelReg.readAllUserInfo().collect {
+                val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
+                if(Firebase.auth.currentUser != null){
+                    it.forEach {
+                        Glide.with(requireContext())
+                            .load(it.image)
+                            .error(R.drawable.ic_launcher_background)
+                            .into(profilePicture)
+                    }
+                }
+                else {
+                    Glide.with(requireContext())
+                        .load(R.drawable.ic_person)
+                        .error(R.drawable.ic_launcher_background)
+                        .into(profilePicture)
+                }
+
+            }
+        }
     }
 
 
