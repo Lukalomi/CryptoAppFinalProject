@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
             val email = binding?.etEmail?.text.toString()
             val password = binding?.etPassword?.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()
+            if (email.isNotEmpty() && password.isNotEmpty() &&  FirebaseAuth.getInstance().currentUser == null
             ) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     try {
@@ -52,7 +52,7 @@ class LoginFragment : Fragment() {
                         ).addOnCompleteListener {
 
                             if (it.isSuccessful) {
-                                checkLoggedInstance()
+                                Toast.makeText(requireContext(), "you are logged in", Toast.LENGTH_SHORT).show()
                                 findNavController()
                                     .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                             } else {
@@ -75,6 +75,11 @@ class LoginFragment : Fragment() {
                 }
 
             }
+
+            if(FirebaseAuth.getInstance().currentUser != null) {
+                Toast.makeText(requireContext(), "You Are Already Logged In", Toast.LENGTH_SHORT).show()
+
+            }
             if(email.isEmpty() || password.isEmpty() ) {
                 Toast.makeText(requireContext(), "Fill out all fields", Toast.LENGTH_SHORT).show()
 
@@ -93,15 +98,7 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun checkLoggedInstance() {
-        if (FirebaseAuth.getInstance().currentUser == null) {
-            Toast.makeText(requireContext(), "you havent registered", Toast.LENGTH_SHORT).show()
-        } else if (FirebaseAuth.getInstance().currentUser !== null) {
-            Toast.makeText(requireContext(), "you are logged in ", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(requireContext(), "you are already logged in", Toast.LENGTH_SHORT).show()
-        }
-    }
+
 
 
     override fun onDestroyView() {

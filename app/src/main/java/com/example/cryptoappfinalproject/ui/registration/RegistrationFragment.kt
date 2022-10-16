@@ -111,7 +111,7 @@ class RegistrationFragment : Fragment() {
                             if (it.isSuccessful) {
                                 checkLoggedInstance()
                                 registrationViewModel.insertUserInfo(user)
-                                Log.d("lala","lsls")
+
                                 findNavController()
                                     .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
                             } else {
