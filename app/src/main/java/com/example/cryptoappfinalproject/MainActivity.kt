@@ -7,11 +7,13 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
+import com.example.cryptoappfinalproject.ui.home.HomeFragment
 import com.example.cryptoappfinalproject.ui.registration.RegistrationFragment
 import com.example.cryptoappfinalproject.ui.registration.RegistrationViewModel
 import com.google.android.material.navigation.NavigationView
@@ -26,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
     private lateinit var firebaseAuth: FirebaseAuth
-    private val viewModel: RegistrationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         binding!!.sideNavigation.itemIconTintList = null
         increaseMemorySize()
         setUpSideNavigation()
-//        populateProfilePicture()
 
 
     }
@@ -52,12 +52,11 @@ class MainActivity : AppCompatActivity() {
         val menuSignOut = navigationView.menu.getItem(4)
 
         val menuLogReg = navigationView.menu.getItem(0)
-
-
-
         menuSignOut.setOnMenuItemClickListener {
             if (firebaseAuth.currentUser != null) {
                 firebaseAuth.signOut()
+                val intent = Intent(this,MainActivity::class.java)
+                startActivity(intent)
                 Toast.makeText(this@MainActivity, "You Signed Out", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this@MainActivity, "You are already signed out", Toast.LENGTH_LONG)
@@ -70,29 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-//    private fun populateProfilePicture() {
-//
-//        lifecycleScope.launch {
-//            viewModel.readAllUserInfo().collect {
-//                val profilePicture = findViewById<ImageView>(R.id.ivUserPhoto)
-//                if(firebaseAuth.currentUser != null){
-//                    it.forEach {
-//                        Glide.with(this@MainActivity)
-//                            .load(it.image)
-//                            .error(R.drawable.ic_launcher_background)
-//                            .into(profilePicture)
-//                    }
-//                }
-//                else {
-//                    Glide.with(this@MainActivity)
-//                        .load(R.drawable.ic_person)
-//                        .error(R.drawable.ic_launcher_background)
-//                        .into(profilePicture)
-//                }
-//
-//            }
-//        }
-//    }
+
 
     private fun increaseMemorySize() {
         try {

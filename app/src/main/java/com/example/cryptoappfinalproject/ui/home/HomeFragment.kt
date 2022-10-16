@@ -7,6 +7,7 @@ import android.view.*
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -480,19 +481,25 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             viewModelReg.readAllUserInfo().collect {
                 val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
+                val drawerProfileName = activity!!.findViewById<TextView>(R.id.tvUsernameHeader)
                 if(Firebase.auth.currentUser != null){
                     it.forEach {
                         Glide.with(requireContext())
                             .load(it.image)
                             .error(R.drawable.ic_launcher_background)
                             .into(profilePicture)
+                        drawerProfileName.text = it.name + " " + it.surname
+
                     }
+
                 }
                 else {
                     Glide.with(requireContext())
                         .load(R.drawable.ic_person)
                         .error(R.drawable.ic_launcher_background)
                         .into(profilePicture)
+                    drawerProfileName.text = ""
+
                 }
 
             }
