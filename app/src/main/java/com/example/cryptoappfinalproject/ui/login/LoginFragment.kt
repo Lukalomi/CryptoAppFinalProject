@@ -6,10 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -37,21 +42,46 @@ class LoginFragment : Fragment() {
             val email = binding?.etEmail?.text.toString()
             val password = binding?.etPassword?.text.toString()
 
-            if (email.isEmpty() || password.isEmpty()
+            if (email.isNotEmpty() && password.isNotEmpty()
             ) {
-                Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+                viewLifecycleOwner.lifecycleScope.launch {
+                    try {
+                        FirebaseAuth.getInstance().signInWithEmailAndPassword(
+                            email,
+                            password
+                        ).addOnCompleteListener {
+
+                            if (it.isSuccessful) {
+                                checkLoggedInstance()
+                                findNavController()
+                                    .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    it.exception.toString(),
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                            }
+                        }
+
+
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                        }
+
+                    }
+                }
+
             }
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener { task ->
-                    findNavController()
-                        .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
-                }
-                .addOnFailureListener {
-                    Toast.makeText(requireContext(), "Wrong Credentials", Toast.LENGTH_SHORT)
-                        .show()
-                }
+            if(email.isEmpty() || password.isEmpty() ) {
+                Toast.makeText(requireContext(), "Fill out all fields", Toast.LENGTH_SHORT).show()
+
+            }
+
         }
+
 
         binding?.btnBack?.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
@@ -63,6 +93,15 @@ class LoginFragment : Fragment() {
 
     }
 
+    private fun checkLoggedInstance() {
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            Toast.makeText(requireContext(), "you havent registered", Toast.LENGTH_SHORT).show()
+        } else if (FirebaseAuth.getInstance().currentUser !== null) {
+            Toast.makeText(requireContext(), "you are logged in ", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "you are already logged in", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
     override fun onDestroyView() {

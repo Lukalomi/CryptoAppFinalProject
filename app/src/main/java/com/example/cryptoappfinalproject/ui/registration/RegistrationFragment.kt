@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,9 @@ import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentRegistrationBinding
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class RegistrationFragment : Fragment() {
@@ -69,11 +72,15 @@ class RegistrationFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
-           binding?.ivProfilePhoto?.setImageURI(data?.data)
+            binding?.ivProfilePhoto?.setImageURI(data?.data)
 
-            val profileBitMap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data?.data)
+            val profileBitMap =
+                MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data?.data)
 
             binding?.btnRegister?.setOnClickListener {
+                if(data?.data == null) {
+                    Toast.makeText(requireContext(),"Please upload a picture",Toast.LENGTH_SHORT).show()
+                }
 
                 val name = binding?.etName?.text.toString()
                 val surname = binding?.etSurname?.text.toString()
@@ -92,12 +99,44 @@ class RegistrationFragment : Fragment() {
 
 
 
-                if (name.isEmpty() || surname.isEmpty() ||
+                if (name.isNotEmpty() && surname.isNotEmpty() &&
+                    email.isNotEmpty() && password.isNotEmpty() && repeatPassword.isNotEmpty()
+                ) {
+
+                    try {
+                        FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+                            email, password
+                        ).addOnCompleteListener {
+
+                            if (it.isSuccessful) {
+                                checkLoggedInstance()
+                                registrationViewModel.insertUserInfo(user)
+                                Log.d("lala","lsls")
+                                findNavController()
+                                    .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    it.exception.toString(),
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                            }
+                        }
+
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+
+                    }
+
+
+                }
+
+                if(name.isEmpty() || surname.isEmpty() ||
                     email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()) {
 
-                    Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT)
-                        .show()
-                    return@setOnClickListener
+                    Toast.makeText(requireContext(),"fill out every field",Toast.LENGTH_SHORT).show()
+
                 }
 
                 if (password != repeatPassword) {
@@ -109,18 +148,6 @@ class RegistrationFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                    .addOnSuccessListener { _ ->
-                        registrationViewModel.insertUserInfo(user)
-
-
-                        findNavController()
-                            .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
-                    }
-                    .addOnFailureListener { _ ->
-                        Toast.makeText(requireContext(), "Password should contain at least 6 characters", Toast.LENGTH_SHORT)
-                            .show()
-                    }
             }
             binding?.btnBack?.setOnClickListener {
                 findNavController()
@@ -132,8 +159,13 @@ class RegistrationFragment : Fragment() {
     }
 
 
-
-
+    private fun checkLoggedInstance() {
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            Toast.makeText(requireContext(), "you havent registered", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "you are registered", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
     override fun onDestroyView() {
