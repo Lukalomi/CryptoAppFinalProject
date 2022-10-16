@@ -57,9 +57,5 @@
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/side_nav">
 
-        <!--        <include layout="@layout/drawer">-->
-
-        <!--        </include>-->
-
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
