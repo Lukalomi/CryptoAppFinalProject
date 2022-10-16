@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject
+package com.example.cryptoappfinalproject.common
 
 import android.content.Context
 import android.view.GestureDetector
