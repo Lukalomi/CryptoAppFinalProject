@@ -38,6 +38,9 @@ interface CryptoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUserInfo(user: UserInfo)
 
+    @Update
+    suspend fun updateUserInfo(user: UserInfo)
+
     @Delete
     suspend fun deleteUserInfo(user: UserInfo)
 

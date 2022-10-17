@@ -3,23 +3,21 @@ package com.example.cryptoappfinalproject
 import android.content.Intent
 import android.database.CursorWindow
 import android.os.Bundle
-import android.widget.ImageView
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.appcompat.app.AppCompatDelegate
+
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
-import com.example.cryptoappfinalproject.ui.home.HomeFragment
-import com.example.cryptoappfinalproject.ui.registration.RegistrationFragment
-import com.example.cryptoappfinalproject.ui.registration.RegistrationViewModel
+
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.lang.reflect.Field
 
 
@@ -37,10 +35,7 @@ class MainActivity : AppCompatActivity() {
         binding!!.sideNavigation.itemIconTintList = null
         increaseMemorySize()
         setUpSideNavigation()
-
-
     }
-
 
     private fun setUpSideNavigation() {
         val navHostFragment =
@@ -51,11 +46,10 @@ class MainActivity : AppCompatActivity() {
 
         val menuSignOut = navigationView.menu.getItem(4)
 
-        val menuLogReg = navigationView.menu.getItem(0)
         menuSignOut.setOnMenuItemClickListener {
             if (firebaseAuth.currentUser != null) {
                 firebaseAuth.signOut()
-                val intent = Intent(this,MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 Toast.makeText(this@MainActivity, "You Signed Out", Toast.LENGTH_LONG).show()
             } else {
@@ -69,8 +63,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun increaseMemorySize() {
         try {
             val field: Field = CursorWindow::class.java.getDeclaredField("sCursorWindowSize")
@@ -80,6 +72,8 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
+
 
 
 }
