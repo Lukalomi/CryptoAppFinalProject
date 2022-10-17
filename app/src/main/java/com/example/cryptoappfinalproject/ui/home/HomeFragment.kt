@@ -482,6 +482,7 @@ class HomeFragment : Fragment() {
             viewModelReg.readAllUserInfo().collect {
                 val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
                 val drawerProfileName = activity!!.findViewById<TextView>(R.id.tvUsernameHeader)
+
                 if(Firebase.auth.currentUser != null){
                     it.forEach {
                         Glide.with(requireContext())

@@ -16,4 +16,19 @@
     <string name="enter_password">Enter password...</string>
     <string name="choose_a_photo">Choose a photo</string>
     <string name="enter_your_email_address">enter your email address</string>
+
+    <string-array name="spinner_items">
+        <item>Home</item>
+        <item>News</item>
+        <item>Favorites</item>
+        <item>Learn</item>
+
+    </string-array>
+
+    <string name="home">Home</string>
+    <string name="news">News</string>
+    <string name="favorites">Favorites</string>
+    <string name="learn">Learn</string>
+
+
 </resources>

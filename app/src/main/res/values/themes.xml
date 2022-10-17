@@ -18,6 +18,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/status_bar</item>
         <item name="android:navigationBarColor">@color/status_bar</item>
 
+
+
+
+        <item name="android:autofilledHighlight" tools:targetApi="o">@android:color/transparent</item>
+
         <!-- Customize your theme here. -->
     </style>
 

@@ -48,7 +48,7 @@ class RegistrationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         registrationListener()
         chooseProfilePicture()
-
+        goBack()
 
     }
 
@@ -78,8 +78,9 @@ class RegistrationFragment : Fragment() {
                 MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data?.data)
 
             binding?.btnRegister?.setOnClickListener {
-                if(data?.data == null) {
-                    Toast.makeText(requireContext(),"Please upload a picture",Toast.LENGTH_SHORT).show()
+                if (data?.data == null) {
+                    Toast.makeText(requireContext(), "Please upload a picture", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
                 val name = binding?.etName?.text.toString()
@@ -132,10 +133,12 @@ class RegistrationFragment : Fragment() {
 
                 }
 
-                if(name.isEmpty() || surname.isEmpty() ||
-                    email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()) {
+                if (name.isEmpty() || surname.isEmpty() ||
+                    email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()
+                ) {
 
-                    Toast.makeText(requireContext(),"fill out every field",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "fill out every field", Toast.LENGTH_SHORT)
+                        .show()
 
                 }
 
@@ -149,15 +152,17 @@ class RegistrationFragment : Fragment() {
                 }
 
             }
-            binding?.btnBack?.setOnClickListener {
-                findNavController()
-                    .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
-            }
 
 
         }
     }
 
+    private fun goBack() {
+        binding?.btnBack?.setOnClickListener {
+            findNavController()
+                .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
+        }
+    }
 
     private fun checkLoggedInstance() {
         if (FirebaseAuth.getInstance().currentUser == null) {

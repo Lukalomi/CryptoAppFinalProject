@@ -39,6 +39,7 @@ class LoginFragment : Fragment() {
 
     private fun loginListeners() {
         binding?.btnLogin?.setOnClickListener {
+            if(FirebaseAuth.getInstance().currentUser == null) {
             val email = binding?.etEmail?.text.toString()
             val password = binding?.etPassword?.text.toString()
 
@@ -86,7 +87,11 @@ class LoginFragment : Fragment() {
             }
 
         }
+            else {
+                Toast.makeText(requireContext(), "You are already logged in", Toast.LENGTH_SHORT).show()
 
+            }
+        }
 
         binding?.btnBack?.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
