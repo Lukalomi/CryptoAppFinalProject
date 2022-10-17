@@ -18,7 +18,7 @@ data class UserInfo(
     @ColumnInfo(name = "surname")
     val surname: String,
     @ColumnInfo(name = "email")
-    val email: String?,
+    var email: String?,
     @ColumnInfo(name = "password")
-    val password: String,
+    var password: String,
 )
