@@ -2,6 +2,7 @@ package com.example.cryptoappfinalproject.data.remote
 
 import com.example.cryptoappfinalproject.common.ApiEndPoints
 import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
+import com.example.cryptoappfinalproject.domain.CryptoConverterModel
 import com.example.cryptoappfinalproject.domain.CryptoExchangesModel
 import com.example.cryptoappfinalproject.domain.CryptoSearchModel
 import retrofit2.Response
@@ -17,5 +18,9 @@ interface FetchedCrypto {
 
     @GET(ApiEndPoints.searchCoins)
     suspend fun searchCoins(@Query("query") query: String):Response<CryptoSearchModel>
+
+    @GET(ApiEndPoints.convertCoins)
+    suspend fun convertCoins(@Query("ids") ids: String, @Query("vs_currencies") vsCurrencies: String, ) : Response<CryptoConverterModel>
+
 
 }
