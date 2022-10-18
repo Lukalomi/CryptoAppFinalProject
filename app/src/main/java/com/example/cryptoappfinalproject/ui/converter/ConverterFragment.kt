@@ -21,7 +21,7 @@ class ConverterFragment : Fragment() {
 
     private val converterAdapter = ConverterAdapter()
 
-    private val viewModel: ConverterViewModel by viewModels()
+//    private val viewModel: ConverterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
