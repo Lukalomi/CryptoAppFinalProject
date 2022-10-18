@@ -4,10 +4,7 @@ import android.content.Intent
 import android.database.CursorWindow
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 
@@ -35,6 +32,26 @@ class MainActivity : AppCompatActivity() {
         binding!!.sideNavigation.itemIconTintList = null
         increaseMemorySize()
         setUpSideNavigation()
+        setScreenMode()
+
+
+
+
+
+    }
+
+
+    private fun setScreenMode() {
+        val state = getSharedPreferences("AppSettingPrefs", 0).getBoolean("DayMode", true)
+
+        if (state) {
+
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+            //when dark mode is enabled, we use the dark theme
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     private fun setUpSideNavigation() {
@@ -44,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         val navigationView: NavigationView = binding!!.sideNavigation
         NavigationUI.setupWithNavController(navigationView, navController)
 
-        val menuSignOut = navigationView.menu.getItem(4)
+        val menuSignOut = navigationView.menu.getItem(3)
 
         menuSignOut.setOnMenuItemClickListener {
             if (firebaseAuth.currentUser != null) {
@@ -72,8 +89,6 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
-
 
 
 }

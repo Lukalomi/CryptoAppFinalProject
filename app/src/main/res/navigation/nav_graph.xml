@@ -21,9 +21,7 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
+
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -60,11 +58,7 @@
             android:id="@+id/action_settingsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/userInfoFragment"
-        android:name="com.example.cryptoappfinalproject.ui.userinfo.UserInfoFragment"
-        android:label="fragment_user_info"
-        tools:layout="@layout/fragment_user_info" />
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.cryptoappfinalproject.ui.login.LoginFragment"

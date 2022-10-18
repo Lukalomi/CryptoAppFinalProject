@@ -2,7 +2,9 @@ package com.example.cryptoappfinalproject.ui.settings
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.provider.MediaStore
@@ -19,6 +21,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.cryptoappfinalproject.App
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentSettingsBinding
@@ -30,14 +33,19 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class SettingsFragment : Fragment() {
+class SettingsFragment() : Fragment() {
 
 
     private val settingsViewModel: SettingsViewModel by viewModels()
     private var binding: FragmentSettingsBinding? = null
 
     private var count = 0
+    val context =  App.appContext
 
+    private val appSettingPrefs: SharedPreferences =
+        context.getSharedPreferences("AppSettingPrefs", 0)
+    val sharedPrefEdit: SharedPreferences.Editor = appSettingPrefs.edit()
+    val isDayMode: Boolean = appSettingPrefs.getBoolean("DayMode", false)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,28 +63,38 @@ class SettingsFragment : Fragment() {
         updateEmail()
         handlingNightAndDayModes()
         setDayMode()
-        checkNightMode()
     }
 
 
     private fun handlingNightAndDayModes() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            requireActivity().setTheme(R.style.Theme_CryptoAppFinalProject) //when dark mode is enabled, we use the dark theme
+        if (isDayMode) {
+            binding!!.switchNightMode.isChecked = true
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            requireActivity().setTheme(R.style.Theme_CryptoAppFinalProject)
+
+        //when dark mode is enabled, we use the dark theme
         } else {
+            binding!!.switchNightMode.isChecked = false
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             requireActivity().setTheme(R.style.Theme_CryptoAppFinalProject)  //default app theme
         }
     }
+
+
 
     private fun setDayMode() {
 
         binding!!.switchNightMode.setOnClickListener {
             if (binding!!.switchNightMode.isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToHomeFragment())
+                sharedPrefEdit.putBoolean("DayMode", true)
+                sharedPrefEdit.apply()
+
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToHomeFragment())
-
+                sharedPrefEdit.putBoolean("DayMode", false)
+                sharedPrefEdit.apply()
             }
         }
     }
@@ -346,17 +364,7 @@ class SettingsFragment : Fragment() {
 
     }
 
-    private fun checkNightMode() {
-        val nightModeFlags =
-            requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
-            binding!!.switchNightMode.isChecked = true
-        }
-        else {
-            binding!!.switchNightMode.isChecked = false
 
-        }
-    }
 
     private fun goBack() {
         binding!!.ivBackSettings.setOnClickListener {
@@ -367,7 +375,6 @@ class SettingsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        checkNightMode()
         binding = null
 
     }

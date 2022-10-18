@@ -186,7 +186,7 @@ class HomeFragment : Fragment() {
             priceChangePercentage24h = singleItem.priceChangePercentage24h!!
         )
 
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext(),R.style.MyDialogTheme)
 
         if (favList.size == 0) {
             builder.setPositiveButton("Yes") { _, _ ->
@@ -249,7 +249,7 @@ class HomeFragment : Fragment() {
             volume = singleItem.tradeVolume24hBtc,
         )
 
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext(),R.style.MyDialogTheme)
 
         if (favExchanges.size == 0) {
             builder.setPositiveButton("Yes") { _, _ ->
@@ -314,7 +314,7 @@ class HomeFragment : Fragment() {
             priceChangePercentage24h = null
         )
 
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext(),R.style.MyDialogTheme)
 
         if (favList.size == 0) {
             builder.setPositiveButton("Yes") { _, _ ->
