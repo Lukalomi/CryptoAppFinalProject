@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         binding!!.sideNavigation.itemIconTintList = null
         increaseMemorySize()
         setUpSideNavigation()
-        setScreenMode()
+//        setScreenMode()
 
 
 
