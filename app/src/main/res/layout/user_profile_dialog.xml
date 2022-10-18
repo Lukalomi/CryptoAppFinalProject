@@ -6,7 +6,9 @@
     android:layout_height="wrap_content"
     android:id="@+id/userProfileDialog"
     android:layout_gravity="center"
-    android:background="@drawable/home_screen_background">
+    android:theme="@style/CustomCardStyle"
+
+    >
 
 
     <EditText

@@ -99,7 +99,7 @@ class FavoritesFragment : Fragment() {
         binding!!.rvFavCryptoAssets.layoutManager = LinearLayoutManager(activity)
         binding!!.rvFavCryptoAssets.adapter = adapter
         adapter.onClickListener = {
-            val builder = AlertDialog.Builder(requireContext())
+            val builder = AlertDialog.Builder(requireContext(),R.style.MyDialogTheme)
             builder.setPositiveButton("Yes") { _, _ ->
                 viewModelFav.deleteCrypto(it)
                 viewLifecycleOwner.lifecycleScope.launch {
@@ -123,7 +123,7 @@ class FavoritesFragment : Fragment() {
         binding!!.rvFavCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
         binding!!.rvFavCryptoAssets.adapter = adapterExchanges
         adapterExchanges.onClickListener = {
-            val builder = AlertDialog.Builder(requireContext())
+            val builder = AlertDialog.Builder(requireContext(),R.style.MyDialogTheme)
             builder.setPositiveButton("Yes") { _, _ ->
                 viewModelFav.deleteExchange(it)
                 viewLifecycleOwner.lifecycleScope.launch {

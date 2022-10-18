@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.CryptoAppFinalProject" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimary">#BDA0A0</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
@@ -20,8 +20,54 @@
         <item name="android:editTextColor">@color/white</item>
         <item name="android:textColorHint">#151515</item>
 
+        <item name="android:autofilledHighlight" tools:targetApi="o">@android:color/transparent</item>
+        <item name="android:windowBackground">@drawable/home_screen_light</item>
+
 
 
 
     </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">#BDA0A0</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">#424040</item>
+        <item name="android:textColorSecondary">#424040</item>
+    </style>
+
+    <style name="CustomTitle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#BF383839</item>
+    </style>
+
+
+    <style name="CustomTitleDark" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+
+    <style name="CustomThemeNav">
+        <item name="android:background">#8E8181</item>
+    </style>
+
+
+    <style name="CustomCardStyle">
+        <item name="android:background">#BDA0A0</item>
+    </style>
+
+
+
+
+    <style name="CustomTitleSettings" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#BF444647</item>
+    </style>
+
 </resources>

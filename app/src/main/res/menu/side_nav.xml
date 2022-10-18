@@ -7,10 +7,6 @@
         android:id="@+id/loginFragment"
         android:title="@string/log_in_register"
         />
-    <item
-        android:id="@+id/userInfoFragment"
-        android:icon="@drawable/ic_user"
-        android:title="@string/user_info" />
 
     <item
         android:id="@+id/converterFragment"

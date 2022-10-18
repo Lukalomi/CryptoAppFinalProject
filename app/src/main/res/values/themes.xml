@@ -3,10 +3,11 @@
     <style name="Theme.CryptoAppFinalProject" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/black</item>
-        <item name="android:textColor">@color/teal_200</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@color/grey</item>
+
         <item name="android:editTextColor">@color/white</item>
         <item name="android:textColorHint">#728887</item>
-        <item name="android:textColorSecondary">@android:color/white</item>
 
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -17,13 +18,58 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/status_bar</item>
         <item name="android:navigationBarColor">@color/status_bar</item>
-
-
+        <item name="background">@drawable/home_screen_background</item>
 
 
         <item name="android:autofilledHighlight" tools:targetApi="o">@android:color/transparent</item>
+        <item name="android:windowBackground">@drawable/home_screen_background</item>
 
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- styles.xml -->
+
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">#2E2C2C</item>
+        <item name="android:textColor">#EAE6E6</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+
+    </style>
+
+    <style name="CustomTitle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="CustomTitleDark" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+
+    <style name="CustomThemeNav">
+        <item name="android:background">@drawable/home_screen_background</item>
+    </style>
+
+
+    <style name="CustomCardStyle">
+        <item name="android:background">#4C4A53</item>
+    </style>
+
+
+    <style name="CustomTitleSettings" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
 
 </resources>
