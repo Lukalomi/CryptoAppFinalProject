@@ -10,6 +10,11 @@
         app:destination="@id/homeFragment"
         app:launchSingleTop="false" />
 
+    <action
+        android:id="@+id/action_reloadFavFragment"
+        app:destination="@id/favoritesFragment"
+        app:launchSingleTop="false" />
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.cryptoappfinalproject.ui.home.HomeFragment"

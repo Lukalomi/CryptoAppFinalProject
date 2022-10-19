@@ -16,6 +16,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.common.Resource
@@ -61,7 +62,12 @@ class FavoritesFragment : Fragment() {
         getAllFavCoins()
         searchCryptos()
         openDrawer()
+        setOnExchangesListener()
+        setOnCoinsListener()
+        btnSortListener()
+    }
 
+    private fun btnSortListener() {
         binding!!.btnSort.setOnClickListener {
             if (count == 0 && isCoin) {
                 sortCoinsByDesc()
@@ -87,7 +93,9 @@ class FavoritesFragment : Fragment() {
                 count --
             }
         }
+    }
 
+    private fun setOnCoinsListener() {
         binding!!.tvCoins.setOnClickListener {
             val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.arrow_down)
             binding!!.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
@@ -104,7 +112,9 @@ class FavoritesFragment : Fragment() {
 
 
         }
+    }
 
+    private fun setOnExchangesListener() {
         binding!!.tvExchanges.setOnClickListener {
             val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.arrow_up)
             binding!!.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
@@ -208,7 +218,7 @@ class FavoritesFragment : Fragment() {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
             builder.setPositiveButton("Yes") { _, _ ->
                 viewModelFav.deleteCrypto(it)
-                        sortCoinsByDesc()
+                findNavController().navigate(FavoritesFragmentDirections.actionReloadFavFragment())
 
 
             }
@@ -228,9 +238,7 @@ class FavoritesFragment : Fragment() {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
             builder.setPositiveButton("Yes") { _, _ ->
                 viewModelFav.deleteCrypto(it)
-                     sortCoinsByAsc()
-
-
+                findNavController().navigate(FavoritesFragmentDirections.actionReloadFavFragment())
             }
             builder.setNegativeButton("No") { _, _ -> }
             builder.setTitle("Remove ${it.originalTitle}?")
@@ -248,7 +256,7 @@ class FavoritesFragment : Fragment() {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
             builder.setPositiveButton("Yes") { _, _ ->
                 viewModelFav.deleteCrypto(it)
-                getAllFavCoins()
+                findNavController().navigate(FavoritesFragmentDirections.actionReloadFavFragment())
 
             }
             builder.setNegativeButton("No") { _, _ -> }
