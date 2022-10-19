@@ -18,12 +18,15 @@ import javax.inject.Inject
 class ConverterViewModel @Inject constructor(private val fetchedCrypto: FetchedCrypto) : ViewModel() {
 
 
-    fun convertCrypto (id: String, currency: String): Flow<Resource<MutableList<CryptoConverterModel.Bitcoin>>> =
+    fun convertCrypto(
+        id: String,
+        currency: String
+    ): Flow<Resource<MutableList<CryptoConverterModel.Bitcoin>>> =
         flow {
             val response = fetchedCrypto.convertCoins(id, currency)
             val value: Resource<MutableList<CryptoConverterModel.Bitcoin>>
             if (response.isSuccessful) {
-                value = Resource.Success(response.body()?.bitcoin?: mutableListOf())
+                value = Resource.Success(response.body()?.bitcoin ?: mutableListOf())
             } else {
                 value = Resource.Error(response.errorBody().toString() ?: "")
             }
@@ -31,4 +34,5 @@ class ConverterViewModel @Inject constructor(private val fetchedCrypto: FetchedC
             emit(value)
             emit(Resource.Loader(false))
         }
+}
 
