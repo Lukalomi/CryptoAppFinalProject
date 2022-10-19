@@ -81,7 +81,6 @@ class SettingsFragment() : Fragment() {
     }
 
 
-
     private fun setDayMode() {
 
         binding!!.switchNightMode.setOnClickListener {
@@ -280,10 +279,10 @@ class SettingsFragment() : Fragment() {
                     )
                     binding!!.showPass.setOnClickListener {
                         if (count == 0) {
-                            binding!!.tvUserPass.text = "******"
+                            binding!!.tvUserPass.text = password
                             count++
                         } else {
-                            binding!!.tvUserPass.text = password
+                            binding!!.tvUserPass.text = "******"
                             count--
 
                         }

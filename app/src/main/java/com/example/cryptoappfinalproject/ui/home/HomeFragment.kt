@@ -1,17 +1,18 @@
 package com.example.cryptoappfinalproject.ui.home
 
+import android.animation.ValueAnimator
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import androidx.fragment.app.Fragment
-import android.widget.SearchView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.viewModels
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-
+import androidx.core.content.res.ResourcesCompat.FontCallback.getHandler
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -19,29 +20,29 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.cryptoappfinalproject.data.local.Crypto
-import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
-import com.example.cryptoappfinalproject.ui.adapters.CoinsHomeAdapter
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import com.example.cryptoappfinalproject.*
 import com.example.cryptoappfinalproject.common.Resource
+import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.data.local.Exchanges
+import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
 import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
 import com.example.cryptoappfinalproject.domain.CryptoExchangesModel
 import com.example.cryptoappfinalproject.domain.CryptoSearchModel
+import com.example.cryptoappfinalproject.ui.adapters.CoinsHomeAdapter
 import com.example.cryptoappfinalproject.ui.adapters.CoinsSearchAdapter
 import com.example.cryptoappfinalproject.ui.adapters.ExchangesAdapter
 import com.example.cryptoappfinalproject.ui.favorites.FavoritesViewModel
 import com.example.cryptoappfinalproject.ui.registration.RegistrationViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.*
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -52,7 +53,6 @@ class HomeFragment : Fragment() {
     private lateinit var searchAdapter: CoinsSearchAdapter
     private lateinit var adapterExchanges: ExchangesAdapter
     private val viewModelReg: RegistrationViewModel by viewModels()
-
     private val viewModel: HomeViewModel by viewModels()
     private val viewModelFav: FavoritesViewModel by activityViewModels()
 
@@ -72,21 +72,63 @@ class HomeFragment : Fragment() {
         searchCryptos()
         addCoinsToFavList()
         populateProfilePicture()
+        openDrawer()
+        recyclerScrollState()
+
+
         binding!!.tvExchanges.setOnClickListener {
             getAllExchanges()
             searchExchanges()
             addExchangesToFavList()
-
         }
         binding!!.tvCryptoAssets.setOnClickListener {
             getAllCoinsPager()
             searchCryptos()
             addCoinsToFavList()
-            binding!!.tvExchanges.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey));
-            binding!!.tvCryptoAssets.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            binding!!.tvExchanges.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.grey
+                )
+            )
+            binding!!.tvCryptoAssets.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.white
+                )
+            )
 
         }
 
+
+    }
+    private fun recyclerScrollState() {
+        binding!!.rvHomeCryptoAssets.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if(dy > 0) {
+                    binding!!.rvScrollUp.apply {
+                        visibility = View.VISIBLE
+                        setOnClickListener {
+                            binding!!.rvHomeCryptoAssets.smoothScrollToPosition(0)
+                        }
+                    }
+                }
+                else {
+                    binding!!.rvScrollUp.visibility = View.GONE
+
+                }
+            }
+
+
+        }
+        )
+    }
+
+    private fun openDrawer() {
+        binding!!.btnAuth.setOnClickListener {
+            val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer)
+            drawer.openDrawer(Gravity.LEFT)
+        }
     }
 
     private fun addCoinsToFavList() {
@@ -98,6 +140,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 
     private fun addExchangesToFavList() {
         lifecycleScope.launch {
@@ -114,7 +157,6 @@ class HomeFragment : Fragment() {
             viewModel.coinsPager.collect {
                 setAllCoinsAdapter()
                 adapter.submitData(it)
-
             }
         }
     }
@@ -122,12 +164,22 @@ class HomeFragment : Fragment() {
     private fun getAllExchanges() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.getExchanges().collect {
-                when(it) {
+                when (it) {
                     is Resource.Success -> {
                         setExchangesAdapter()
                         adapterExchanges.submitList(it)
-                        binding!!.tvExchanges.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-                        binding!!.tvCryptoAssets.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
+                        binding!!.tvExchanges.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.white
+                            )
+                        )
+                        binding!!.tvCryptoAssets.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.grey
+                            )
+                        )
                     }
 
                     is Resource.Error -> {
@@ -143,7 +195,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAllCoinsAdapter() {
-
         adapter = CoinsHomeAdapter(requireContext())
         binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(activity)
         binding!!.rvHomeCryptoAssets.adapter = adapter
@@ -155,6 +206,7 @@ class HomeFragment : Fragment() {
 
     }
 
+
     private fun setSearchAdapter() {
         searchAdapter = CoinsSearchAdapter(requireContext())
         binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
@@ -163,7 +215,6 @@ class HomeFragment : Fragment() {
             favoritesSearchListener(it)
         }
     }
-
 
 
     private fun setExchangesAdapter() {
@@ -186,7 +237,7 @@ class HomeFragment : Fragment() {
             priceChangePercentage24h = singleItem.priceChangePercentage24h!!
         )
 
-        val builder = AlertDialog.Builder(requireContext(),R.style.MyDialogTheme)
+        val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
 
         if (favList.size == 0) {
             builder.setPositiveButton("Yes") { _, _ ->
@@ -200,13 +251,16 @@ class HomeFragment : Fragment() {
                         " ${crypto.originalTitle}, Has Been Added To Favorites",
                         Toast.LENGTH_SHORT
                     ).show()
+
+
                 }
+
+
             }
         }
         if (favList.toString().contains(crypto.originalTitle)) {
 
             builder.setPositiveButton("Yes") { _, _ ->
-
                 viewLifecycleOwner.lifecycleScope.launch {
                     Toast.makeText(
                         requireContext(),
@@ -240,6 +294,7 @@ class HomeFragment : Fragment() {
 
 
     }
+
     private fun favoritesExchangesListener(singleItem: CryptoExchangesModel.CryptoExchangesModelItem) {
         val exchange = Exchanges(
             uid = 0,
@@ -249,7 +304,7 @@ class HomeFragment : Fragment() {
             volume = singleItem.tradeVolume24hBtc,
         )
 
-        val builder = AlertDialog.Builder(requireContext(),R.style.MyDialogTheme)
+        val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
 
         if (favExchanges.size == 0) {
             builder.setPositiveButton("Yes") { _, _ ->
@@ -314,7 +369,7 @@ class HomeFragment : Fragment() {
             priceChangePercentage24h = null
         )
 
-        val builder = AlertDialog.Builder(requireContext(),R.style.MyDialogTheme)
+        val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
 
         if (favList.size == 0) {
             builder.setPositiveButton("Yes") { _, _ ->
@@ -418,7 +473,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun searchExchanges() {
-        var displayList: MutableList<CryptoExchangesModel.CryptoExchangesModelItem> = mutableListOf()
+        var displayList: MutableList<CryptoExchangesModel.CryptoExchangesModelItem> =
+            mutableListOf()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getExchanges().collect {
@@ -466,7 +522,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
     private fun setUpBottomNavigation() {
         val navHostFragment =
             activity!!.supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -483,7 +538,7 @@ class HomeFragment : Fragment() {
                 val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
                 val drawerProfileName = activity!!.findViewById<TextView>(R.id.tvUsernameHeader)
 
-                if(Firebase.auth.currentUser != null){
+                if (Firebase.auth.currentUser != null) {
                     it.forEach {
                         Glide.with(requireContext())
                             .load(it.image)
@@ -493,8 +548,7 @@ class HomeFragment : Fragment() {
 
                     }
 
-                }
-                else {
+                } else {
                     Glide.with(requireContext())
                         .load(R.drawable.ic_person)
                         .error(R.drawable.ic_launcher_background)
@@ -513,7 +567,6 @@ class HomeFragment : Fragment() {
         binding = null
         favList.clear()
         favExchanges.clear()
-
     }
 
 }
