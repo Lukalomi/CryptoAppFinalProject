@@ -3,6 +3,7 @@ package com.example.cryptoappfinalproject
 import android.content.Intent
 import android.database.CursorWindow
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatDelegate
 
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
 
 import com.google.android.material.navigation.NavigationView
@@ -32,26 +34,11 @@ class MainActivity : AppCompatActivity() {
         binding!!.sideNavigation.itemIconTintList = null
         increaseMemorySize()
         setUpSideNavigation()
-//        setScreenMode()
 
 
 
 
 
-    }
-
-
-    private fun setScreenMode() {
-        val state = getSharedPreferences("AppSettingPrefs", 0).getBoolean("DayMode", true)
-
-        if (state) {
-
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
-            //when dark mode is enabled, we use the dark theme
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
     }
 
     private fun setUpSideNavigation() {
