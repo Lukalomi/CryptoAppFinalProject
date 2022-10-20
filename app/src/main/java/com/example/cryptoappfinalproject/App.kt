@@ -2,10 +2,10 @@ package com.example.cryptoappfinalproject
 
 import android.app.Application
 import android.content.ContentValues.TAG
-import android.support.multidex.MultiDexApplication
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.multidex.MultiDexApplication
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.HiltAndroidApp
