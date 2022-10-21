@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.example.cryptoappfinalproject.common.ApiEndPoints
 import com.example.cryptoappfinalproject.data.local.CryptoLocalDatabase
+import com.example.cryptoappfinalproject.data.remote.FetchVideoTitles
 import com.example.cryptoappfinalproject.data.remote.FetchedCrypto
 import com.example.cryptoappfinalproject.data.remote.FetchedNews
 import dagger.Module
@@ -58,6 +59,15 @@ object AppModule {
             Retrofit.Builder().baseUrl(ApiEndPoints.BASE_URL_NEWS).client(providesOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create()).build()
                 .create(FetchedNews::class.java)
+
+
+        @Singleton
+        @Provides
+        fun videoTitleData(): FetchVideoTitles =
+            Retrofit.Builder().baseUrl(ApiEndPoints.BASE_URL_YTVIDEO).client(providesOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create()).build()
+                .create(FetchVideoTitles::class.java)
+
 
     }
 }
