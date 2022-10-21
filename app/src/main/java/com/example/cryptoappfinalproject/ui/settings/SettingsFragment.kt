@@ -109,6 +109,8 @@ class SettingsFragment() : Fragment() {
                             tvUserSurname.text = it.surname
                             tvUserPass.text = "******"
                             tvUserEmail.text = it.email
+                            binding!!.showPass.visibility = View.VISIBLE
+
                             Glide.with(requireContext())
                                 .load(it.image)
                                 .error(R.drawable.ic_launcher_background)
@@ -118,6 +120,7 @@ class SettingsFragment() : Fragment() {
                             tvUserSurname.text = ""
                             tvUserPass.text = ""
                             tvUserEmail.text = ""
+                            binding!!.showPass.visibility = View.GONE
                             Glide.with(requireContext())
                                 .load(R.drawable.ic_person)
                                 .error(R.drawable.ic_launcher_background)

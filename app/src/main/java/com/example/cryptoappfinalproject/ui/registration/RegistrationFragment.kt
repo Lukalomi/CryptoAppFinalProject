@@ -109,6 +109,7 @@ class RegistrationFragment : Fragment() {
                 ) {
 
                     try {
+                        binding!!.pbRegister.visibility = View.VISIBLE
                         FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                             email, password
                         ).addOnCompleteListener {
@@ -116,6 +117,7 @@ class RegistrationFragment : Fragment() {
                             if (it.isSuccessful) {
                                 checkLoggedInstance()
                                 registrationViewModel.insertUserInfo(user)
+                                binding!!.pbRegister.visibility = View.GONE
 
                                 findNavController()
                                     .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())

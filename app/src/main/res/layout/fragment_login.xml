@@ -72,19 +72,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvNoAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="60dp"
-        android:textSize="15sp"
         android:text="@string/don_t_have_an_account"
         android:textColor="@color/grey"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnRegister"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPass"
-        app:layout_constraintEnd_toStartOf="@+id/btnRegister"/>
+        app:layout_constraintTop_toBottomOf="@+id/etPass" />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -92,6 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginTop="60dp"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="98dp"
         android:layout_marginLeft="10dp"
         android:background="@null"
@@ -108,7 +108,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="200dp"
         android:backgroundTint="@color/login"
         android:fontFamily="monospace"
         android:foreground="?attr/selectableItemBackground"
@@ -123,5 +123,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pbLogin"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="25dp"
+        android:indeterminateTint="#EDD60B"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNoAccount"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

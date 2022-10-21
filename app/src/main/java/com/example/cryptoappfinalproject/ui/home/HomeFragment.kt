@@ -1,16 +1,11 @@
 package com.example.cryptoappfinalproject.ui.home
 
-import android.animation.ValueAnimator
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat.FontCallback.getHandler
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -31,15 +27,14 @@ import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
 import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
 import com.example.cryptoappfinalproject.domain.CryptoExchangesModel
 import com.example.cryptoappfinalproject.domain.CryptoSearchModel
-import com.example.cryptoappfinalproject.ui.adapters.CoinsHomeAdapter
-import com.example.cryptoappfinalproject.ui.adapters.CoinsSearchAdapter
-import com.example.cryptoappfinalproject.ui.adapters.ExchangesAdapter
+import com.example.cryptoappfinalproject.ui.adapters.*
 import com.example.cryptoappfinalproject.ui.favorites.FavoritesViewModel
 import com.example.cryptoappfinalproject.ui.registration.RegistrationViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -49,7 +44,8 @@ class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
 
-    private lateinit var adapter: CoinsHomeAdapter
+
+    private lateinit var homeAdapter: CoinsHomeAdapter
     private lateinit var searchAdapter: CoinsSearchAdapter
     private lateinit var adapterExchanges: ExchangesAdapter
     private val viewModelReg: RegistrationViewModel by viewModels()
@@ -102,18 +98,18 @@ class HomeFragment : Fragment() {
 
 
     }
+
     private fun recyclerScrollState() {
         binding!!.rvHomeCryptoAssets.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if(dy > 0) {
+                if (dy > 0) {
                     binding!!.rvScrollUp.apply {
                         visibility = View.VISIBLE
                         setOnClickListener {
                             binding!!.rvHomeCryptoAssets.smoothScrollToPosition(0)
                         }
                     }
-                }
-                else {
+                } else {
                     binding!!.rvScrollUp.visibility = View.GONE
 
                 }
@@ -156,10 +152,26 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.coinsPager.collect {
                 setAllCoinsAdapter()
-                adapter.submitData(it)
+                homeAdapter.addLoadStateListener {
+                    when (it.source.refresh) {
+                        is LoadState.NotLoading -> {
+                            binding!!.pbHome.visibility = View.GONE
+                        }
+                        else -> {
+                            binding!!.pbHome.visibility = View.VISIBLE
+                        }
+                    }
+                }
+
+                homeAdapter.submitData(it)
+
+
             }
+
         }
+
     }
+
 
     private fun getAllExchanges() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -195,14 +207,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAllCoinsAdapter() {
-        adapter = CoinsHomeAdapter(requireContext())
+        homeAdapter = CoinsHomeAdapter(requireContext())
         binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(activity)
-        binding!!.rvHomeCryptoAssets.adapter = adapter
-        adapter.onFavListener = {
+        binding!!.rvHomeCryptoAssets.adapter = homeAdapter
+
+        binding!!.rvHomeCryptoAssets.adapter = homeAdapter.withLoadStateFooter(
+            footer= MovieLoadStateAdapter{homeAdapter.retry()}
+        )
+        homeAdapter.onFavListener = {
             favoritesListener(it)
         }
 
-        binding!!.pbHome.visibility = View.GONE
+//        binding!!.pbHome.visibility = View.GONE
 
     }
 
