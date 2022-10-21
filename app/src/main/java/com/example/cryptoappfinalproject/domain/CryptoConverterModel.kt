@@ -1,7 +1,8 @@
 package com.example.cryptoappfinalproject.domain
 
+
 data class CryptoConverterModel(
-    val bitcoin: MutableList<Bitcoin>?
+    val bitcoin: Bitcoin?
 ) {
     data class Bitcoin(
         val usd: Double?

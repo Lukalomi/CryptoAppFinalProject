@@ -57,7 +57,7 @@ class ConverterAdapter : ListAdapter<ButtonTypes, RecyclerView.ViewHolder>(Butto
     inner class NumericViewHolder(private val binding: SingleNumericButtonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-            val numeric = getItem(adapterPosition) as ButtonTypes.Numeric
+            val numeric = getItem(absoluteAdapterPosition) as ButtonTypes.Numeric
             binding.root.apply {
                 text = numeric.number.toString()
                 setOnClickListener {

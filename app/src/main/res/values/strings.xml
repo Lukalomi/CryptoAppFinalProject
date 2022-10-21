@@ -31,4 +31,19 @@
     <string name="learn">Learn</string>
 
 
+    <string-array name="CryptoCurrencies">
+        <item>Bitcoin</item>
+        <item>Ethereum</item>
+        <item>Dogecoin</item>
+        <item>Lightcoin</item>
+    </string-array>
+
+
+    <string-array name="FiatCurrencies">
+        <item>USD</item>
+        <item>EURO</item>
+        <item>GEL</item>
+        <item>POUNDS</item>
+    </string-array>
+
 </resources>

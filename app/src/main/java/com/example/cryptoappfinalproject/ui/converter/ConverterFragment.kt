@@ -1,26 +1,32 @@
 package com.example.cryptoappfinalproject.ui.converter
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.common.ButtonUtil
+import com.example.cryptoappfinalproject.common.Currencies
 import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.databinding.FragmentConverterBinding
 import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
 import com.example.cryptoappfinalproject.domain.ButtonTypes
 import com.example.cryptoappfinalproject.ui.adapters.ConverterAdapter
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ConverterFragment : Fragment() {
 
     private var binding: FragmentConverterBinding? = null
@@ -40,18 +46,74 @@ class ConverterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupAdapter()
+        setUpConverter()
+        setupButtonsAdapter()
         onClickListeners()
-        convertCrypto()
 
     }
 
 
-    private fun setupAdapter() {
+
+    private fun setUpConverter() {
+        setDropDownItems()
+        setAmountInput()
+
+    }
+
+    private fun setDropDownItems(){
+        val cryptoCurrencies = resources.getStringArray(R.array.CryptoCurrencies)
+        val cryptoAdapter = ArrayAdapter(requireContext(), R.layout.currency_dropdown_items, cryptoCurrencies)
+        binding?.tvChooseCrypto?.setAdapter(cryptoAdapter)
+
+        val fiatCurrencies = resources.getStringArray(R.array.FiatCurrencies)
+        val fiatAdapter = ArrayAdapter(requireContext(), R.layout.currency_dropdown_items, fiatCurrencies)
+        binding?.tvFiatCurrency?.setAdapter(fiatAdapter)
+    }
+
+    private fun setAmountInput(){
+        binding?.etAmount?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (binding?.etAmount?.text.toString().isNotEmpty()) {
+                    convertCrypto()
+                } else {
+                    binding?.tvResult?.setText("")
+                }
+            }
+        })
+    }
+
+    private fun convertCrypto() {
+
+        val amount = binding?.etAmount?.text.toString()
+        val fromCrypto = binding?.tvChooseCrypto?.text.toString()
+        val toCurrency = binding?.tvFiatCurrency?.text.toString()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.convertCrypto(id = fromCrypto, currency = toCurrency).collect {
+                when (it) {
+                    is Resource.Error -> Log.d("error", "${it.errorMsg}")
+
+                    is Resource.Loader -> Log.d("loader", "loading")
+
+                    is Resource.Success -> {
+
+                        binding?.tvResult?.text = it.data.usd.toString()
+
+                        Log.d("convert",  "${it.data.usd.toString()}")
+
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setupButtonsAdapter() {
         binding?.rvConverter?.adapter = converterAdapter
         converterAdapter.submitList(ButtonUtil.BUTTONS)
     }
-
 
     private fun onClickListeners() {
         converterAdapter.onNumericClickListener = {
@@ -69,33 +131,15 @@ class ConverterFragment : Fragment() {
 
 
     private fun handleRemoveButtonClick() {
+        var amount = binding?.etAmount?.text.toString().toInt()
 
-    }
 
 
-    private fun convertCrypto() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.convertCrypto(
-                    id = binding?.tvChooseCrypto.toString(),
-                    currency = binding?.tvFiatCurrency.toString()
-                )
-                    .collect {
-                    when (it) {
-                        is Resource.Error -> Log.d("error", "${it.errorMsg}")
-
-                        is Resource.Loader -> Log.d("loader", "loading")
-
-                        is Resource.Success -> {
-                            binding?.etResult?.setText( it.data.toString() )
-
-                        }
-                    }
-                }
-            }
+        if (amount != null) {
+            var changedAmount = amount.minus(1)
+            amount = changedAmount
         }
     }
-
 
 
 

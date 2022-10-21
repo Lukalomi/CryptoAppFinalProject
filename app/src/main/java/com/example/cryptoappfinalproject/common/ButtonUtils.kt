@@ -16,7 +16,7 @@ object ButtonUtil {
         ButtonTypes.Numeric(7),
         ButtonTypes.Numeric(8),
         ButtonTypes.Numeric(9),
-        ButtonTypes.Dot("."),
+//        ButtonTypes.Dot("."),
         ButtonTypes.Numeric(0),
         ButtonTypes.Remove(R.drawable.ic_remove_button, ButtonActions.REMOVE),
     )

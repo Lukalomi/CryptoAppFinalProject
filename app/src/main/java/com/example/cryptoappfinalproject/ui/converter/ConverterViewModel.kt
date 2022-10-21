@@ -1,5 +1,6 @@
 package com.example.cryptoappfinalproject.ui.converter
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptoappfinalproject.common.Resource
@@ -18,17 +19,19 @@ import javax.inject.Inject
 class ConverterViewModel @Inject constructor(private val fetchedCrypto: FetchedCrypto) : ViewModel() {
 
 
-    fun convertCrypto(
-        id: String,
-        currency: String
-    ): Flow<Resource<MutableList<CryptoConverterModel.Bitcoin>>> =
+    fun convertCrypto(id: String, currency: String):
+            Flow<Resource<CryptoConverterModel.Bitcoin>> =
+
         flow {
             val response = fetchedCrypto.convertCoins(id, currency)
-            val value: Resource<MutableList<CryptoConverterModel.Bitcoin>>
+            val value: Resource<CryptoConverterModel.Bitcoin>
             if (response.isSuccessful) {
-                value = Resource.Success(response.body()?.bitcoin ?: mutableListOf())
+                value = Resource.Success(response.body()!!)
+                Log.d("success", "${response.body()}")
             } else {
                 value = Resource.Error(response.errorBody().toString() ?: "")
+                Log.d("error", response.errorBody().toString())
+
             }
 
             emit(value)
