@@ -40,6 +40,7 @@ class LoginFragment : Fragment() {
     private fun loginListeners() {
         binding?.btnLogin?.setOnClickListener {
             if(FirebaseAuth.getInstance().currentUser == null) {
+                binding!!.pbLogin.visibility = View.VISIBLE
             val email = binding?.etEmail?.text.toString()
             val password = binding?.etPassword?.text.toString()
 
@@ -53,6 +54,7 @@ class LoginFragment : Fragment() {
                         ).addOnCompleteListener {
 
                             if (it.isSuccessful) {
+                                binding!!.pbLogin.visibility = View.GONE
                                 Toast.makeText(requireContext(), "you are logged in", Toast.LENGTH_SHORT).show()
                                 findNavController()
                                     .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())

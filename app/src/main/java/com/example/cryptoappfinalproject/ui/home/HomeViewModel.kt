@@ -1,9 +1,11 @@
 package com.example.cryptoappfinalproject.ui.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.data.local.Crypto
@@ -24,12 +26,15 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val fetchedCrypto: FetchedCrypto) : ViewModel() {
 
+
     val coinsPager =
-        Pager(
-            config = PagingConfig(30),
-            pagingSourceFactory = { CoinsDataSource(fetchedCrypto) }).flow.cachedIn(
-            viewModelScope
-        )
+            Pager(
+                config = PagingConfig(30),
+                pagingSourceFactory = { CoinsDataSource(fetchedCrypto) }).flow.cachedIn(
+                viewModelScope
+            )
+
+
 
 
     private val _newState =

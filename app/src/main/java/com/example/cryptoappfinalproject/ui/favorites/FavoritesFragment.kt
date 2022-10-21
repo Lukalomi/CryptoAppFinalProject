@@ -2,14 +2,12 @@ package com.example.cryptoappfinalproject.ui.favorites
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
@@ -19,19 +17,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptoappfinalproject.R
-import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.data.local.Exchanges
 import com.example.cryptoappfinalproject.databinding.FragmentFavoritesBinding
-import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
-import com.example.cryptoappfinalproject.domain.CryptoSearchModel
-import com.example.cryptoappfinalproject.favExchanges
-import com.example.cryptoappfinalproject.favList
-import com.example.cryptoappfinalproject.ui.adapters.CoinsHomeAdapter
 import com.example.cryptoappfinalproject.ui.adapters.FavoritesAdapter
+import com.example.cryptoappfinalproject.ui.adapters.FavoritesExchangesAdapter
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -59,12 +52,25 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getAllFavCoins()
-        searchCryptos()
+        isUserAvailable()
         openDrawer()
-        setOnExchangesListener()
-        setOnCoinsListener()
-        btnSortListener()
+    }
+
+
+    private fun isUserAvailable() {
+        if(Firebase.auth.currentUser != null) {
+            getAllFavCoins()
+            searchCryptos()
+            setOnExchangesListener()
+            setOnCoinsListener()
+            btnSortListener()
+
+            binding!!.linearNotAvailable.visibility = View.GONE
+        }
+        else {
+            binding!!.linearNotAvailable.visibility = View.VISIBLE
+
+        }
     }
 
     private fun btnSortListener() {

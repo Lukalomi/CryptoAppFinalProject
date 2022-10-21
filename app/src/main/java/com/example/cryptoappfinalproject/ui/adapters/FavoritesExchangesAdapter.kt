@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject.ui.favorites
+package com.example.cryptoappfinalproject.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.R
-import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.data.local.Exchanges
 import com.example.cryptoappfinalproject.databinding.SingleCryptoBinding
 
