@@ -122,6 +122,7 @@ class RegistrationFragment : Fragment() {
                                 findNavController()
                                     .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
                             } else {
+                                binding!!.pbRegister.visibility = View.GONE
                                 Toast.makeText(
                                     requireContext(),
                                     it.exception.toString(),

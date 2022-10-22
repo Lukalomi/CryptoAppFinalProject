@@ -65,10 +65,23 @@ class FavoritesFragment : Fragment() {
             setOnCoinsListener()
             btnSortListener()
 
-            binding!!.linearNotAvailable.visibility = View.GONE
+            binding!!.apply {
+                linearNotAvailable.visibility = View.GONE
+                svFavorites.visibility = View.VISIBLE
+                tvCoins.visibility = View.VISIBLE
+                tvExchanges.visibility = View.VISIBLE
+                btnSort.visibility = View.VISIBLE
+            }
         }
         else {
-            binding!!.linearNotAvailable.visibility = View.VISIBLE
+            binding!!.apply {
+                linearNotAvailable.visibility = View.VISIBLE
+                svFavorites.visibility = View.GONE
+                tvExchanges.visibility = View.GONE
+                tvCoins.visibility = View.GONE
+                btnSort.visibility = View.GONE
+            }
+            navigateToAuth()
 
         }
     }
@@ -409,6 +422,15 @@ class FavoritesFragment : Fragment() {
                 }
 
             }
+        }
+    }
+
+    private fun navigateToAuth(){
+        binding!!.btnRegisterFav.setOnClickListener{
+            findNavController().navigate(FavoritesFragmentDirections.actionFavoritesFragmentToRegistrationFragment())
+        }
+        binding!!.btnLoginFav.setOnClickListener{
+            findNavController().navigate(FavoritesFragmentDirections.actionFavoritesFragmentToLoginFragment())
         }
     }
 
