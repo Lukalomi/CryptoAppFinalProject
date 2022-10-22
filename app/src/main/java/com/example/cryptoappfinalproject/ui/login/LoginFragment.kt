@@ -40,7 +40,6 @@ class LoginFragment : Fragment() {
     private fun loginListeners() {
         binding?.btnLogin?.setOnClickListener {
             if(FirebaseAuth.getInstance().currentUser == null) {
-                binding!!.pbLogin.visibility = View.VISIBLE
             val email = binding?.etEmail?.text.toString()
             val password = binding?.etPassword?.text.toString()
 
@@ -48,6 +47,7 @@ class LoginFragment : Fragment() {
             ) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     try {
+                        binding!!.pbLogin.visibility = View.VISIBLE
                         FirebaseAuth.getInstance().signInWithEmailAndPassword(
                             email,
                             password
@@ -59,6 +59,7 @@ class LoginFragment : Fragment() {
                                 findNavController()
                                     .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                             } else {
+                                binding!!.pbLogin.visibility = View.GONE
                                 Toast.makeText(
                                     requireContext(),
                                     it.exception.toString(),

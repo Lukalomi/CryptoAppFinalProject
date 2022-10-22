@@ -3,16 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable-v24/shape_button.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/drawer_background.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_arrow_up.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_baseline_skip_next_24.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_baseline_skip_previous_24.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/round_btn_favorites.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/custom_exo_playback_control_view.xml" value="0.2" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_educational.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_favorites.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_registration.xml" value="0.25416666666666665" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_settings.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/load_state_item.xml" value="0.253125" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/load_state_view.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_video_item.xml" value="0.253125" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/user_profile_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/drawable/arrow_up.xml" value="0.1635" />

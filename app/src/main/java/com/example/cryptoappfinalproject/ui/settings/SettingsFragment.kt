@@ -115,18 +115,7 @@ class SettingsFragment() : Fragment() {
                                 .load(it.image)
                                 .error(R.drawable.ic_launcher_background)
                                 .into(ivUserSettings)
-                        } else {
-                            tvUserName.text = ""
-                            tvUserSurname.text = ""
-                            tvUserPass.text = ""
-                            tvUserEmail.text = ""
-                            binding!!.showPass.visibility = View.GONE
-                            Glide.with(requireContext())
-                                .load(R.drawable.ic_person)
-                                .error(R.drawable.ic_launcher_background)
-                                .into(ivUserSettings)
                         }
-
                     }
 
 
@@ -326,8 +315,8 @@ class SettingsFragment() : Fragment() {
                                         }
                                     }
                                 updatedUser.password = newPass.text.toString()
-                                binding!!.tvUserPass.text = updatedUser.password
                                 settingsViewModel.updateUserInfo(updatedUser)
+                                binding!!.tvUserPass.text = updatedUser.password
                                 dialog.dismiss()
                             } else {
                                 Toast.makeText(
@@ -340,7 +329,6 @@ class SettingsFragment() : Fragment() {
 
                         btnCancelUpdatedPass.setOnClickListener {
                             dialog.dismiss()
-
                         }
 
                         true

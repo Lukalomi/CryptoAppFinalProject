@@ -38,7 +38,14 @@
         android:id="@+id/favoritesFragment"
         android:name="com.example.cryptoappfinalproject.ui.favorites.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.example.cryptoappfinalproject.ui.news.NewsFragment"
