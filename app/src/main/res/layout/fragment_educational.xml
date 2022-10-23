@@ -5,50 +5,34 @@
     android:id="@+id/constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.educational.EducationalFragment">
+    tools:context=".ui.educational.EducationalFragment"
+    >
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnAuth"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_profile_svg"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnAuth"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_profile_svg"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-        <com.google.android.exoplayer2.ui.PlayerView
-            android:id="@+id/playerView"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_gravity="center"
-            app:auto_show="true"
-            app:controller_layout_id="@layout/custom_exo_playback_control_view"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            app:layout_constraintVertical_bias="0.1"
-            app:repeat_toggle_modes="none"
-            app:resize_mode="fixed_width"
-            app:surface_type="surface_view"
-            app:use_controller="true" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:gravity="center"
-            android:textAppearance="@style/CustomTitle"
-            android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.447"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAuth" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEducation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAuth"
+        tools:listitem="@layout/single_video_item"
+       />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

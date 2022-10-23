@@ -3,6 +3,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class VideoTitleModel(
+    val id:Int?,
     val title: String?,
     @SerializedName("author_name")
     val authorName: String?,
@@ -22,5 +23,6 @@ data class VideoTitleModel(
     val thumbnailWidth: Int?,
     @SerializedName("thumbnail_url")
     val thumbnailUrl: String?,
-    val html: String?
+    val html: String?,
+    val videoUrl: String?
 )

@@ -1,6 +1,7 @@
 package com.example.cryptoappfinalproject.ui.educational
 
 import android.R.string
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.util.SparseArray
@@ -14,18 +15,23 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.FragmentEducationalBinding
 import com.example.cryptoappfinalproject.domain.VideoTitleModel
+import com.example.cryptoappfinalproject.ui.adapters.CoinsHomeAdapter
+import com.example.cryptoappfinalproject.ui.adapters.EducationVideosAdapter
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -40,22 +46,23 @@ class EducationalFragment : Fragment(), Player.Listener {
 
 
     private var binding: FragmentEducationalBinding? = null
-    private var blockChain = "https://www.youtube.com/watch?v=SSo_EIwHSd4&t=1s&ab_channel=SimplyExplained"
-    private var smartContracts = "https://www.youtube.com/watch?v=ZE2HxTmxfrI&ab_channel=SimplyExplained"
+    private var blockChain =
+        "https://www.youtube.com/watch?v=SSo_EIwHSd4&t=1s&ab_channel=SimplyExplained"
+    private var smartContracts =
+        "https://www.youtube.com/watch?v=ZE2HxTmxfrI&ab_channel=SimplyExplained"
     private val pOsPoW = "https://www.youtube.com/watch?v=M3EFi_POhps&ab_channel=SimplyExplained"
 
 
     var position = 0
     private var nextClicked: Boolean = false
 
-
+    private lateinit var learnAdapter: EducationVideosAdapter
     private var player: SimpleExoPlayer? = null
     private var playWhenReady = true
     private var currentWindow = 0
     private var playbackPosition: Long = 0
-
-    private  val viewModel: EducationalViewModel by viewModels()
-
+    private var videosList: MutableList<VideoTitleModel> = mutableListOf()
+    private val viewModel: EducationalViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,67 +79,69 @@ class EducationalFragment : Fragment(), Player.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        submitVideos()
         openDrawer()
-        getYtTitle ()
+        setAdapter()
 
     }
 
 
-    private fun getYtTitle () {
-        lifecycleScope.launch {
-            player = SimpleExoPlayer.Builder(requireContext()).build()
-            binding!!.playerView.player = player
-            extractYoutubeVid(player!!, blockChain)
-            viewModel.getYTTitle1().collect {
-                binding!!.tvTitle.text = it.title
-            }
-                requireActivity().findViewById<ImageButton>(R.id.next).setOnClickListener {
-                    if(position == 0 ) {
-                        nextClicked = true
-                        extractYoutubeVid(player!!, smartContracts)
-                        position++
-                        lifecycleScope.launch {
-                            viewModel.getYTTitle2().collect {
-                                binding!!.tvTitle.text = it.title
-                            }
+    private fun setAdapter() {
+        learnAdapter = EducationVideosAdapter(requireContext())
+        binding!!.rvEducation.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding!!.rvEducation.adapter = learnAdapter
+        learnAdapter.submitList(videosList)
+        learnAdapter.onClickListener = { adapterItem ->
 
-                            }
-
-                    }
-                    else{
-                        nextClicked = true
-                        extractYoutubeVid(player!!, pOsPoW)
-                        lifecycleScope.launch {
-                            viewModel.getYTTitles3().collect {
-                                binding!!.tvTitle.text = it.title
-                            }
-                        }
-                        position--
-                    }
-            }
-            requireActivity().findViewById<ImageButton>(R.id.back).setOnClickListener {
-                if(position == 0 && nextClicked) {
-                    extractYoutubeVid(player!!, blockChain)
-                    lifecycleScope.launch {
-                        viewModel.getYTTitle1().collect {
-                            binding!!.tvTitle.text = it.title
-                        }
-                    }
+            when (adapterItem.id) {
+                1 -> {
+                    setVideoDialog()
+                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
                 }
-                if(position == 1) {
-                    extractYoutubeVid(player!!, smartContracts)
-                    lifecycleScope.launch {
-                        viewModel.getYTTitle2().collect {
-                            binding!!.tvTitle.text = it.title
-                        }
-                    }
-                    position --
+                2 -> {
+                    setVideoDialog()
+                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
                 }
-            }
+                3 -> {
+                    setVideoDialog()
+                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                }
+                4 -> {
+                    setVideoDialog()
+                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                }
+                5 -> {
+                    setVideoDialog()
+                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                }
+                6 -> {
+                    setVideoDialog()
+                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                }
+                7 -> {
+                    setVideoDialog()
+                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                }
+
 
             }
+
         }
 
+    }
+
+    private fun setVideoDialog() {
+        val dialogBinding = layoutInflater.inflate(R.layout.video_dialog, null)
+        val dialog = Dialog(requireContext())
+        player = SimpleExoPlayer.Builder(requireContext()).build()
+        dialogBinding.findViewById<PlayerView>(R.id.playerViewDialog).player = player
+        dialog.setContentView(dialogBinding)
+        dialog.setCancelable(true)
+        dialog.setOnDismissListener {
+            releasePlayer()
+        }
+        dialog.show()
+    }
 
 
     private fun extractYoutubeVid(vidPlayer: SimpleExoPlayer, URL: String) {
@@ -164,18 +173,6 @@ class EducationalFragment : Fragment(), Player.Listener {
     }
 
 
-    override fun onResume() {
-        super.onResume()
-//        initPlayer()
-        getYtTitle()
-        hideSystemUi()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        releasePlayer()
-    }
-
     private fun releasePlayer() {
         if (player != null) {
             playWhenReady = player!!.playWhenReady
@@ -186,16 +183,15 @@ class EducationalFragment : Fragment(), Player.Listener {
         }
     }
 
-    private fun hideSystemUi() {
-        binding!!.playerView.systemUiVisibility =
-            (View.SYSTEM_UI_FLAG_LOW_PROFILE or
-                    View.SYSTEM_UI_FLAG_FULLSCREEN or
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
-                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
-    }
+//    private fun hideSystemUi() {
+//        binding!!.playerView.systemUiVisibility =
+//            (View.SYSTEM_UI_FLAG_LOW_PROFILE or
+//                    View.SYSTEM_UI_FLAG_FULLSCREEN or
+//                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+//                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
+//                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+//    }
 
-    //
     private fun openDrawer() {
         binding!!.btnAuth.setOnClickListener {
             val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer)
@@ -204,6 +200,160 @@ class EducationalFragment : Fragment(), Player.Listener {
         }
     }
 
+    private fun submitVideos() {
+        videosList.add(
+            VideoTitleModel(
+                id = 1,
+                title = "How does a blockchain work - Simply Explained",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "https://i.ytimg.com/vi/SSo_EIwHSd4/hqdefault.jpg",
+                null,
+                "https://www.youtube.com/watch?v=SSo_EIwHSd4&t=1s&ab_channel=SimplyExplained"
+            )
+        )
+        videosList.add(
+            VideoTitleModel(
+                id = 2,
+                title = "Smart contracts - Simply Explained",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "https://i.ytimg.com/vi/ZE2HxTmxfrI/hqdefault.jpg",
+                null,
+                "https://www.youtube.com/watch?v=ZE2HxTmxfrI&ab_channel=SimplyExplained"
+            )
+        )
+        videosList.add(
+            VideoTitleModel(
+                id = 3,
+                title = "Proof-of-Stake (vs proof-of-work)",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "https://i.ytimg.com/vi/M3EFi_POhps/hqdefault.jpg",
+                null,
+                "https://www.youtube.com/watch?v=M3EFi_POhps&ab_channel=SimplyExplained"
+            )
+        )
+        videosList.add(
+            VideoTitleModel(
+                id = 4,
+                title = "How the blockchain is changing money and business",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "https://i.ytimg.com/vi/Pl8OlkkwRpc/hqdefault.jpg",
+                null,
+                "https://www.youtube.com/watch?v=Pl8OlkkwRpc&t=3s&ab_channel=TED"
+            )
+        )
+        videosList.add(
+            VideoTitleModel(
+                id = 5,
+                title = "How the blockchain will radically transform the economy",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "https://i.ytimg.com/vi/RplnSVTzvnU/hqdefault.jpg",
+                null,
+                "https://www.youtube.com/watch?v=RplnSVTzvnU&ab_channel=TED"
+            )
+        )
+        videosList.add(
+            VideoTitleModel(
+                id = 6,
+                title = "The future will be decentralized",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "https://i.ytimg.com/vi/97ufCT6lQcY/hqdefault.jpg",
+                null,
+                "https://www.youtube.com/watch?v=97ufCT6lQcY&ab_channel=TEDxTalks"
+            )
+        )
+        videosList.add(
+            VideoTitleModel(
+                id = 7,
+                title = "Best Cryptocurrency Exchanges of 2022",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "https://i.ytimg.com/vi/PXSjbdOXgUE/hqdefault.jpg",
+                null,
+                "https://www.youtube.com/watch?v=PXSjbdOXgUE&ab_channel=99Bitcoins"
+            )
+        )
+        videosList.add(
+            VideoTitleModel(
+                id = 7,
+                title = "How to Invest in Cryptocurrency",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "https://i.ytimg.com/vi/3ZplgUKlDgI/hqdefault.jpg",
+                null,
+                "https://www.youtube.com/watch?v=3ZplgUKlDgI&ab_channel=MoneyZG"
+            )
+        )
+    }
 
 
     override fun onDestroyView() {

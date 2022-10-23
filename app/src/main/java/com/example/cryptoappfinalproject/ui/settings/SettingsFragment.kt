@@ -91,7 +91,6 @@ class SettingsFragment() : Fragment() {
 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToHomeFragment())
                 sharedPrefEdit.putBoolean("DayMode", false)
                 sharedPrefEdit.apply()
             }

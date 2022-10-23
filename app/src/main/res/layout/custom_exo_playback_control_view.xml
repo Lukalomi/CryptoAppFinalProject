@@ -18,19 +18,6 @@
         android:orientation="horizontal"
         android:paddingTop="4dp">
 
-        <ImageButton
-            android:id="@+id/back"
-            app:tint="@color/white"
-            android:tintMode="src_in"
-            android:visibility="visible"
-            android:focusable="true"
-            android:clickable="true"
-            android:background="@null"
-            android:src="@drawable/ic_baseline_skip_previous_24"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_height="50dp"
-            android:layout_width="70dp"
-            />
 
         <ImageButton
             android:id="@id/exo_rew"
@@ -59,18 +46,6 @@
             app:tint="@color/white"
             android:tintMode="src_in" />
 
-        <ImageButton
-            android:id="@+id/next"
-            app:tint="@color/white"
-            android:tintMode="src_in"
-            android:visibility="visible"
-            android:focusable="true"
-            android:clickable="true"
-            android:background="@null"
-            android:src="@drawable/ic_baseline_skip_next_24"
-            android:foreground="?android:attr/selectableItemBackground"
-             android:layout_height="50dp"
-             android:layout_width="70dp"/>
 
 
     </LinearLayout>
@@ -89,7 +64,7 @@
             android:includeFontPadding="false"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textAppearance="@style/CustomTitle"
+            android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -108,7 +83,7 @@
             android:includeFontPadding="false"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textAppearance="@style/CustomTitle"
+            android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
 
