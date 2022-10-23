@@ -19,8 +19,6 @@ interface FetchedCrypto {
     @GET(ApiEndPoints.searchCoins)
     suspend fun searchCoins(@Query("query") query: String):Response<CryptoSearchModel>
 
-    @GET(ApiEndPoints.convertCoins)
-    suspend fun convertCoins(@Query("ids") ids: String, @Query("vs_currencies") vsCurrencies: String, ) : Response<CryptoConverterModel.Bitcoin>
 
 
 }

@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         getAllCoinsPager()
         searchCryptos()
         addCoinsToFavList()
-        populateProfilePicture()
+//        populateProfilePicture()
         openDrawer()
         recyclerScrollState()
 
@@ -547,35 +547,35 @@ class HomeFragment : Fragment() {
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
 
-    private fun populateProfilePicture() {
-
-        lifecycleScope.launch {
-            viewModelReg.readAllUserInfo().collect {
-                val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
-                val drawerProfileName = activity!!.findViewById<TextView>(R.id.tvUsernameHeader)
-
-                if (Firebase.auth.currentUser != null) {
-                    it.forEach {
-                        Glide.with(requireContext())
-                            .load(it.image)
-                            .error(R.drawable.ic_launcher_background)
-                            .into(profilePicture)
-                        drawerProfileName.text = it.name + " " + it.surname
-
-                    }
-
-                } else {
-                    Glide.with(requireContext())
-                        .load(R.drawable.ic_person)
-                        .error(R.drawable.ic_launcher_background)
-                        .into(profilePicture)
-                    drawerProfileName.text = ""
-
-                }
-
-            }
-        }
-    }
+//    private fun populateProfilePicture() {
+//
+//        lifecycleScope.launch {
+//            viewModelReg.readAllUserInfo().collect {
+//                val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
+//                val drawerProfileName = activity!!.findViewById<TextView>(R.id.tvUsernameHeader)
+//
+//                if (Firebase.auth.currentUser != null) {
+//                    it.forEach {
+//                        Glide.with(requireContext())
+//                            .load(it.image)
+//                            .error(R.drawable.ic_launcher_background)
+//                            .into(profilePicture)
+//                        drawerProfileName.text = it.name + " " + it.surname
+//
+//                    }
+//
+//                } else {
+//                    Glide.with(requireContext())
+//                        .load(R.drawable.ic_person)
+//                        .error(R.drawable.ic_launcher_background)
+//                        .into(profilePicture)
+//                    drawerProfileName.text = ""
+//
+//                }
+//
+//            }
+//        }
+//    }
 
 
     override fun onDestroyView() {

@@ -4,26 +4,18 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.cryptoappfinalproject.R
-import com.example.cryptoappfinalproject.common.ButtonUtil
-import com.example.cryptoappfinalproject.common.Currencies
 import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.databinding.FragmentConverterBinding
-import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
-import com.example.cryptoappfinalproject.domain.ButtonTypes
-import com.example.cryptoappfinalproject.ui.adapters.ConverterAdapter
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -31,7 +23,7 @@ class ConverterFragment : Fragment() {
 
     private var binding: FragmentConverterBinding? = null
 
-    private val converterAdapter = ConverterAdapter()
+//    private val converterAdapter = ConverterAdapter()
 
     private val viewModel: ConverterViewModel by viewModels()
 
@@ -47,16 +39,19 @@ class ConverterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpConverter()
-        setupButtonsAdapter()
-        onClickListeners()
+        convertCrypto()
+        activateConvertButton()
+//        setupButtonsAdapter()
+//        onClickListeners()
+
+
 
     }
 
 
-
     private fun setUpConverter() {
         setDropDownItems()
-        setAmountInput()
+//        setAmountInput()
 
     }
 
@@ -70,76 +65,92 @@ class ConverterFragment : Fragment() {
         binding?.tvFiatCurrency?.setAdapter(fiatAdapter)
     }
 
-    private fun setAmountInput(){
-        binding?.etAmount?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun afterTextChanged(p0: Editable?) {}
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (binding?.etAmount?.text.toString().isNotEmpty()) {
-                    convertCrypto()
-                } else {
-                    binding?.tvResult?.setText("")
-                }
+    private fun activateConvertButton() {
+        binding?.etAmount?.doAfterTextChanged { text ->
+            if (text != null) {
+                binding?.btnConvert?.isEnabled = text.isNotEmpty()
             }
-        })
+        }
     }
 
     private fun convertCrypto() {
 
-        val amount = binding?.etAmount?.text.toString()
-        val fromCrypto = binding?.tvChooseCrypto?.text.toString()
-        val toCurrency = binding?.tvFiatCurrency?.text.toString()
+        binding?.btnConvert?.setOnClickListener {
+            val amount = binding?.etAmount?.text.toString()
+            val fromCrypto = binding?.tvChooseCrypto?.text.toString()
+            val toCurrency = binding?.tvFiatCurrency?.text.toString()
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.convertCrypto(id = fromCrypto, currency = toCurrency).collect {
-                when (it) {
-                    is Resource.Error -> Log.d("error", "${it.errorMsg}")
 
-                    is Resource.Loader -> Log.d("loader", "loading")
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.convertCrypto(from = fromCrypto, to = toCurrency, amount = amount).collect {
+                    when (it) {
+                        is Resource.Error -> Log.d("error", "${it.errorMsg}")
 
-                    is Resource.Success -> {
+                        is Resource.Loader -> Log.d("loader", "loading")
 
-                        binding?.tvResult?.text = it.data.usd.toString()
+                        is Resource.Success -> {
 
-                        Log.d("convert",  "${it.data.usd.toString()}")
+                            binding?.tvResult?.text = it.data.result.toString().dropLast(4)
 
+                            Log.d("convert",  "${it.data.result.toString()}")
+
+                        }
                     }
                 }
             }
         }
-    }
 
-    private fun setupButtonsAdapter() {
-        binding?.rvConverter?.adapter = converterAdapter
-        converterAdapter.submitList(ButtonUtil.BUTTONS)
-    }
-
-    private fun onClickListeners() {
-        converterAdapter.onNumericClickListener = {
-            handleNumericButtonClick(it)
-        }
-        converterAdapter.onRemoveClickListener = {
-            handleRemoveButtonClick()
-        }
-    }
-
-    private fun handleNumericButtonClick(numeric: ButtonTypes.Numeric) {
 
     }
 
 
+    //    private fun setAmountInput(){
+//        binding?.etAmount?.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+//            override fun afterTextChanged(p0: Editable?) {}
+//
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                if (binding?.etAmount?.text.toString().isNotEmpty()) {
+//                    convertCrypto()
+//                } else {
+//                    binding?.tvResult?.setText("")
+//                }
+//            }
+//        })
+//    }
 
-    private fun handleRemoveButtonClick() {
-        var amount = binding?.etAmount?.text.toString().toInt()
 
-
-
-        if (amount != null) {
-            var changedAmount = amount.minus(1)
-            amount = changedAmount
-        }
-    }
+//
+//    private fun setupButtonsAdapter() {
+//        binding?.rvConverter?.adapter = converterAdapter
+//        converterAdapter.submitList(ButtonUtil.BUTTONS)
+//    }
+//
+//    private fun onClickListeners() {
+//        converterAdapter.onNumericClickListener = {
+//            handleNumericButtonClick(it)
+//        }
+//        converterAdapter.onRemoveClickListener = {
+//            handleRemoveButtonClick()
+//        }
+//    }
+//
+//
+//
+//    private fun handleNumericButtonClick(numeric: ButtonTypes.Numeric) {
+//
+//    }
+//
+//
+//
+//    private fun handleRemoveButtonClick() {
+//        var amount = binding?.etAmount?.text.toString().toInt()
+//
+//        if (amount != null) {
+//            var changedAmount = amount.minus(1)
+//            amount = changedAmount
+//        }
+//    }
 
 
 
