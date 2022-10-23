@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptoappfinalproject.common.Resource
+import com.example.cryptoappfinalproject.data.remote.FetchedConversion
 import com.example.cryptoappfinalproject.data.remote.FetchedCrypto
 import com.example.cryptoappfinalproject.domain.CryptoConverterModel
 import com.example.cryptoappfinalproject.domain.CryptoExchangesModel
@@ -16,15 +17,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ConverterViewModel @Inject constructor(private val fetchedCrypto: FetchedCrypto) : ViewModel() {
+class ConverterViewModel @Inject constructor(private val FetchedConversion: FetchedConversion) : ViewModel() {
 
 
-    fun convertCrypto(id: String, currency: String):
-            Flow<Resource<CryptoConverterModel.Bitcoin>> =
+    fun convertCrypto(from: String, to: String, amount: String):
+            Flow<Resource<CryptoConverterModel>> =
 
         flow {
-            val response = fetchedCrypto.convertCoins(id, currency)
-            val value: Resource<CryptoConverterModel.Bitcoin>
+            val response = FetchedConversion.convertCoins( from, to, amount)
+            val value: Resource<CryptoConverterModel>
             if (response.isSuccessful) {
                 value = Resource.Success(response.body()!!)
                 Log.d("success", "${response.body()}")

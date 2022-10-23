@@ -29,21 +29,35 @@
     <string name="news">News</string>
     <string name="favorites">Favorites</string>
     <string name="learn">Learn</string>
+    <string name="convert">Convert</string>
+    <string name="result">Result</string>
+    <string name="amount">Amount</string>
+    <string name="to">To</string>
+    <string name="from">From</string>
 
 
     <string-array name="CryptoCurrencies">
-        <item>Bitcoin</item>
-        <item>Ethereum</item>
-        <item>Dogecoin</item>
-        <item>Lightcoin</item>
+        <item>BTC</item>
+        <item>ETH</item>
+        <item>DOGE</item>
+        <item>LTC</item>
+        <item>USDT</item>
+        <item>USDC</item>
+        <item>XRP</item>
+        <item>BUSD</item>
+        <item>SOL</item>
+        <item>SHIB</item>
+        <item>XLM</item>
+        <item>XMR</item>
+
     </string-array>
 
 
     <string-array name="FiatCurrencies">
         <item>USD</item>
-        <item>EURO</item>
+        <item>EUR</item>
         <item>GEL</item>
-        <item>POUNDS</item>
+        <item>GBP</item>
     </string-array>
 
 </resources>
