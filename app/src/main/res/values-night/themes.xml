@@ -60,6 +60,8 @@
         <item name="android:background">#BDA0A0</item>
     </style>
 
+
+
     <style name="CustomTitleSettings" parent="TextAppearance.AppCompat.Title">
         <item name="android:textAllCaps">false</item>
         <item name="android:fontFamily">serif</item>
