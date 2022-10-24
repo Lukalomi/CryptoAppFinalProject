@@ -46,15 +46,7 @@ class EducationalFragment : Fragment(), Player.Listener {
 
 
     private var binding: FragmentEducationalBinding? = null
-    private var blockChain =
-        "https://www.youtube.com/watch?v=SSo_EIwHSd4&t=1s&ab_channel=SimplyExplained"
-    private var smartContracts =
-        "https://www.youtube.com/watch?v=ZE2HxTmxfrI&ab_channel=SimplyExplained"
-    private val pOsPoW = "https://www.youtube.com/watch?v=M3EFi_POhps&ab_channel=SimplyExplained"
 
-
-    var position = 0
-    private var nextClicked: Boolean = false
 
     private lateinit var learnAdapter: EducationVideosAdapter
     private var player: SimpleExoPlayer? = null
@@ -62,7 +54,6 @@ class EducationalFragment : Fragment(), Player.Listener {
     private var currentWindow = 0
     private var playbackPosition: Long = 0
     private var videosList: MutableList<VideoTitleModel> = mutableListOf()
-    private val viewModel: EducationalViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

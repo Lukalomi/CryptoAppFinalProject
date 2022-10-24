@@ -13,12 +13,12 @@
     <action
         android:id="@+id/action_reloadFavFragment"
         app:destination="@id/favoritesFragment"
-        app:launchSingleTop="false" />
+         />
 
     <action
         android:id="@+id/action_reloadSettings"
-        app:destination="@id/settingsFragment"
-        app:launchSingleTop="false" />
+        app:destination="@id/nav_graph"
+        />
 
     <fragment
         android:id="@+id/homeFragment"
@@ -74,6 +74,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
 
     <fragment
@@ -99,5 +102,9 @@
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.cryptoappfinalproject.MainActivity"
+        android:label="MainActivity" />
 
 </navigation>

@@ -80,9 +80,9 @@ class MainActivity : AppCompatActivity() {
                 firebaseAuth.signOut()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                Toast.makeText(this@MainActivity, "You Signed Out", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, getString(R.string.you_signed_out), Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this@MainActivity, "You are already signed out", Toast.LENGTH_LONG)
+                Toast.makeText(this@MainActivity, getString(R.string.already_signed_out), Toast.LENGTH_LONG)
                     .show()
             }
             true

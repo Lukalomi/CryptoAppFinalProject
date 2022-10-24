@@ -55,7 +55,7 @@ class LoginFragment : Fragment() {
 
                             if (it.isSuccessful) {
                                 binding!!.pbLogin.visibility = View.GONE
-                                Toast.makeText(requireContext(), "you are logged in", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(), getString(R.string.you_are_logged_in), Toast.LENGTH_SHORT).show()
                                 findNavController()
                                     .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                             } else {
@@ -81,17 +81,17 @@ class LoginFragment : Fragment() {
             }
 
             if(FirebaseAuth.getInstance().currentUser != null) {
-                Toast.makeText(requireContext(), "You Are Already Logged In", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.already_logged_in), Toast.LENGTH_SHORT).show()
 
             }
             if(email.isEmpty() || password.isEmpty() ) {
-                Toast.makeText(requireContext(), "Fill out all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.fill_every_field), Toast.LENGTH_SHORT).show()
 
             }
 
         }
             else {
-                Toast.makeText(requireContext(), "You are already logged in", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.already_logged_in), Toast.LENGTH_SHORT).show()
 
             }
         }

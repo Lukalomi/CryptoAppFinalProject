@@ -48,7 +48,6 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        registrationListener()
         chooseProfilePicture()
         goBack()
 
@@ -56,10 +55,6 @@ class RegistrationFragment : Fragment() {
 
 
 
-
-    private fun registrationListener() {
-
-    }
 
     private fun chooseProfilePicture() {
         binding?.btnProfilePhoto?.setOnClickListener {
@@ -144,7 +139,7 @@ class RegistrationFragment : Fragment() {
                     email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()
                 ) {
 
-                    Toast.makeText(requireContext(), "fill out every field", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), getString(R.string.fill_every_field), Toast.LENGTH_SHORT)
                         .show()
 
                 }
@@ -152,7 +147,7 @@ class RegistrationFragment : Fragment() {
                 if (password != repeatPassword) {
                     Toast.makeText(
                         requireContext(),
-                        "Passwords do not match",
+                        getString(R.string.pass_dont_match),
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -173,9 +168,9 @@ class RegistrationFragment : Fragment() {
 
     private fun checkLoggedInstance() {
         if (FirebaseAuth.getInstance().currentUser == null) {
-            Toast.makeText(requireContext(), "you havent registered", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.havent_registered), Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(requireContext(), "you are registered", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.you_are_registered), Toast.LENGTH_SHORT).show()
         }
     }
 

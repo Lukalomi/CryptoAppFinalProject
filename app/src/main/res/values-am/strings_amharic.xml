@@ -62,6 +62,33 @@
     <string name="video_sevem">የ2022 ምርጥ የ Cryptocurrency ልውውጦች</string>
     <string name="video_eight">በ Cryptocurrency ውስጥ እንዴት ኢንቨስት ማድረግ እንደሚቻል</string>
 
+
+
+    <string name="no">አይ</string>
+    <string name="yes">አዎ</string>
+    <string name="sure_to_add">እርግጠኛ ነዎት ማከል ይፈልጋሉ</string>
+    <string name="sure_to_remove">እርግጠኛ ነዎት ማስወገድ ይፈልጋሉ</string>
+    <string name="to_cryptos">ወደ ተወዳጅ Cryptos</string>
+    <string name="from_cryptos">ከተወዳጅ Cryptos</string>
+    <string name="been_added">ወደ ተወዳጆች ታክሏል።</string>
+    <string name="already_added">አስቀድሞ ወደ ተወዳጆች ታክሏል።</string>
+    <string name="add">አክል</string>
+    <string name="remove">አስወግድ</string>
+    <string name="old_pass_incorrect">የድሮ የይለፍ ቃል የተሳሳተ ነው።</string>
+    <string name="pass_updated">እንኳን ደስ ያለህ፣የይለፍ ቃል ተዘምኗል</string>
+    <string name="old_email_incorrect">የድሮ ኢሜይል ትክክል አይደለም።</string>
+    <string name="email_update">እንኳን ደስ አለህ ኢሜል ተዘምኗል</string>
+    <string name="enter_old_email">የድሮ ኢሜልዎን ያስገቡ</string>
+    <string name="picture_change_success">የመገለጫ ምስልህ በተሳካ ሁኔታ ተለውጧል</string>
+    <string name="you_are_logged_in">ገብተሃል</string>
+    <string name="already_logged_in">አስቀድመው ገብተዋል።</string>
+    <string name="fill_every_field">ሁሉንም መስኮች ይሙሉ</string>
+    <string name="pass_dont_match">የይለፍ ቃሎች ተመሳሳይ አይደሉም</string>
+    <string name="havent_registered">አልተመዘገብክም።</string>
+    <string name="you_are_registered">ተመዝግበሃል</string>
+    <string name="you_signed_out">ዘግተህ ወጥተሃል</string>
+    <string name="already_signed_out">አስቀድመው ዘግተው ወጥተዋል።</string>
+
     <string-array name="CryptoCurrencies">
         <item>BTC</item>
         <item>ETH</item>

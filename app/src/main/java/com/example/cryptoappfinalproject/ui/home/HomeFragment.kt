@@ -218,7 +218,6 @@ class HomeFragment : Fragment() {
             favoritesListener(it)
         }
 
-//        binding!!.pbHome.visibility = View.GONE
 
     }
 
@@ -256,7 +255,7 @@ class HomeFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
 
         if (favList.size == 0) {
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
 
                 viewLifecycleOwner.lifecycleScope.launch {
 
@@ -264,7 +263,7 @@ class HomeFragment : Fragment() {
                     favList.add(crypto)
                     Toast.makeText(
                         requireContext(),
-                        " ${crypto.originalTitle}, Has Been Added To Favorites",
+                        "${crypto.originalTitle}  ${resources.getString(R.string.been_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -276,11 +275,11 @@ class HomeFragment : Fragment() {
         }
         if (favList.toString().contains(crypto.originalTitle)) {
 
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 viewLifecycleOwner.lifecycleScope.launch {
                     Toast.makeText(
                         requireContext(),
-                        " ${crypto.originalTitle}, Is Already Added To Favorites",
+                        "${crypto.originalTitle}  ${resources.getString(R.string.already_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -289,23 +288,23 @@ class HomeFragment : Fragment() {
         }
         if (!favList.toString().contains(crypto.originalTitle)) {
 
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 viewLifecycleOwner.lifecycleScope.launch {
 
                     viewModelFav.insertCrypto(crypto)
                     favList.add(crypto)
                     Toast.makeText(
                         requireContext(),
-                        " ${crypto.originalTitle}, Has Been Added To Favorites",
+                        "${crypto.originalTitle}  ${resources.getString(R.string.been_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
         }
 
-        builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Add ${crypto.originalTitle}?")
-        builder.setMessage("Are You Sure You Want To Add ${crypto.originalTitle} To Favorite Cryptos?")
+        builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+        builder.setTitle("${resources.getString(R.string.add)}  ${crypto.originalTitle}?")
+        builder.setMessage("${resources.getString(R.string.sure_to_add)} ${crypto.originalTitle}  ${resources.getString(R.string.to_cryptos)}?")
         builder.create().show()
 
 
@@ -323,7 +322,7 @@ class HomeFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
 
         if (favExchanges.size == 0) {
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
 
                 viewLifecycleOwner.lifecycleScope.launch {
 
@@ -331,7 +330,7 @@ class HomeFragment : Fragment() {
                     favExchanges.add(exchange)
                     Toast.makeText(
                         requireContext(),
-                        " ${exchange.title}, Has Been Added To Favorites",
+                         "${exchange.title}  ${resources.getString(R.string.been_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -339,12 +338,12 @@ class HomeFragment : Fragment() {
         }
         if (favExchanges.toString().contains(exchange.title)) {
 
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
 
                 viewLifecycleOwner.lifecycleScope.launch {
                     Toast.makeText(
                         requireContext(),
-                        " ${exchange.title}, Is Already Added To Favorites",
+                        "${exchange.title}  ${resources.getString(R.string.already_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -353,23 +352,23 @@ class HomeFragment : Fragment() {
         }
         if (!favExchanges.toString().contains(exchange.title)) {
 
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 viewLifecycleOwner.lifecycleScope.launch {
 
                     viewModelFav.insertExchange(exchange)
                     favExchanges.add(exchange)
                     Toast.makeText(
                         requireContext(),
-                        " ${exchange.title}, Has Been Added To Favorites",
+                        "${exchange.title}  ${resources.getString(R.string.been_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
         }
 
-        builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Add ${exchange.title}?")
-        builder.setMessage("Are You Sure You Want To Add ${exchange.title} To Favorite Cryptos?")
+        builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+        builder.setTitle("${resources.getString(R.string.add)}  ${exchange.title}?")
+        builder.setMessage("${resources.getString(R.string.sure_to_add)} ${exchange.title} ${resources.getString(R.string.to_cryptos)}?")
         builder.create().show()
 
 
@@ -388,7 +387,7 @@ class HomeFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
 
         if (favList.size == 0) {
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
 
                 viewLifecycleOwner.lifecycleScope.launch {
 
@@ -396,7 +395,7 @@ class HomeFragment : Fragment() {
                     favList.add(crypto)
                     Toast.makeText(
                         requireContext(),
-                        " ${crypto.originalTitle}, Has Been Added To Favorites",
+                        "${crypto.originalTitle} ${resources.getString(R.string.been_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -404,12 +403,12 @@ class HomeFragment : Fragment() {
         }
         if (favList.toString().contains(crypto.originalTitle)) {
 
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
 
                 viewLifecycleOwner.lifecycleScope.launch {
                     Toast.makeText(
                         requireContext(),
-                        " ${crypto.originalTitle}, Is Already Added To Favorites",
+                        " ${crypto.originalTitle} ${resources.getString(R.string.already_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -418,23 +417,23 @@ class HomeFragment : Fragment() {
         }
         if (!favList.toString().contains(crypto.originalTitle)) {
 
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 viewLifecycleOwner.lifecycleScope.launch {
 
                     viewModelFav.insertCrypto(crypto)
                     favList.add(crypto)
                     Toast.makeText(
                         requireContext(),
-                        " ${crypto.originalTitle}, Has Been Added To Favorites",
+                        "${crypto.originalTitle} ${resources.getString(R.string.been_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
         }
 
-        builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Add ${crypto.originalTitle}?")
-        builder.setMessage("Are You Sure You Want To Add ${crypto.originalTitle} To Favorite Cryptos?")
+        builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+        builder.setTitle("${resources.getString(R.string.add)} ${crypto.originalTitle}?")
+        builder.setMessage("${resources.getString(R.string.sure_to_add)} ${crypto.originalTitle} ${resources.getString(R.string.to_cryptos)}?")
         builder.create().show()
 
     }

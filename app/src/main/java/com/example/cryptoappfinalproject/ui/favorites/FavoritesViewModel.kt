@@ -44,7 +44,6 @@ class FavoritesViewModel @Inject constructor(private val cryptoDao: CryptoDao) :
         }
     }
 
-    suspend fun deleteAllData() = cryptoDao.deleteAll()
 
 
     fun deleteCrypto(crypto: Crypto) {
