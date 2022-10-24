@@ -122,6 +122,10 @@ class EducationalFragment : Fragment(), Player.Listener {
                     setVideoDialog()
                     extractYoutubeVid(player!!, adapterItem.videoUrl!!)
                 }
+                8 -> {
+                    setVideoDialog()
+                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                }
 
 
             }
@@ -204,7 +208,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         videosList.add(
             VideoTitleModel(
                 id = 1,
-                title = "How does a blockchain work - Simply Explained",
+                title = getString(R.string.video_one),
                 null,
                 null,
                 null,
@@ -223,7 +227,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         videosList.add(
             VideoTitleModel(
                 id = 2,
-                title = "Smart contracts - Simply Explained",
+                title = getString(R.string.video_two),
                 null,
                 null,
                 null,
@@ -242,7 +246,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         videosList.add(
             VideoTitleModel(
                 id = 3,
-                title = "Proof-of-Stake (vs proof-of-work)",
+                title = getString(R.string.video_three),
                 null,
                 null,
                 null,
@@ -261,7 +265,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         videosList.add(
             VideoTitleModel(
                 id = 4,
-                title = "How the blockchain is changing money and business",
+                title = getString(R.string.video_four),
                 null,
                 null,
                 null,
@@ -280,7 +284,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         videosList.add(
             VideoTitleModel(
                 id = 5,
-                title = "How the blockchain will radically transform the economy",
+                title = getString(R.string.video_five),
                 null,
                 null,
                 null,
@@ -299,7 +303,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         videosList.add(
             VideoTitleModel(
                 id = 6,
-                title = "The future will be decentralized",
+                title = getString(R.string.video_six),
                 null,
                 null,
                 null,
@@ -318,7 +322,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         videosList.add(
             VideoTitleModel(
                 id = 7,
-                title = "Best Cryptocurrency Exchanges of 2022",
+                title = getString(R.string.video_sevem),
                 null,
                 null,
                 null,
@@ -336,8 +340,8 @@ class EducationalFragment : Fragment(), Player.Listener {
         )
         videosList.add(
             VideoTitleModel(
-                id = 7,
-                title = "How to Invest in Cryptocurrency",
+                id = 8,
+                title = getString(R.string.video_eight),
                 null,
                 null,
                 null,

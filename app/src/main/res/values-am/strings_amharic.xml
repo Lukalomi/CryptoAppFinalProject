@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">CryptoAppFinalProject</string>
+    <string name="log_in_register">ፍቃድ መስጠት</string>
+    <string name="converter">መቀየሪያ</string>
+    <string name="settings">ቅንብሮች</string>
+    <string name="user_info">የተጠቃሚ መረጃ</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="email_address">የ ኢሜል አድራሻ...</string>
+    <string name="name">ስም</string>
+    <string name="log_in">ግባ</string>
+    <string name="surname">የአያት ስም</string>
+    <string name="don_t_have_an_account">መለያ የለህም?</string>
+    <string name="repeat_your_password">የማለፊያ ቃልዎን ይድገሙ...</string>
+    <string name="register">ይመዝገቡ</string>
+    <string name="enter_password">የይለፍ ቃል ያስገቡ...</string>
+    <string name="choose_a_photo">ፎቶ ይምረጡ</string>
+    <string name="enter_your_email_address">የኢሜይል አድራሻዎን ያስገቡ</string>
+    <string name="log_out">ውጣ</string>
+
+    <string-array name="spinner_items">
+        <item>Home</item>
+        <item>News</item>
+        <item>Favorites</item>
+        <item>Learn</item>
+    </string-array>
+
+    <string name="home">ቤት</string>
+    <string name="news">ዜና</string>
+    <string name="favorites">ተወዳጆች</string>
+    <string name="learn">ተማር</string>
+    <string name="convert">መለወጥ</string>
+    <string name="result">ውጤት</string>
+    <string name="amount">መጠን</string>
+    <string name="to">ወደ</string>
+    <string name="from">ከ</string>
+    <string name="coins">ሳንቲሞች</string>
+    <string name="exchanges">ልውውጦች</string>
+    <string name="search">ፍለጋ</string>
+    <string name="sort_by_rank">ደርድር</string>
+    <string name="login_to_track_your_favourite_coins_exchanges">የእርስዎን ተወዳጅ ሳንቲሞች/ልውውጦች ለመከታተል ይግቡ!</string>
+    <string name="cryptoassets">ንብረቶች</string>
+    <string name="register_here">እዚህ ይመዝገቡ</string>
+    <string name="app">መተግበሪያ</string>
+    <string name="choose_language">ቋንቋ ይምረጡ</string>
+    <string name="day_mode">የቀን ሁነታ</string>
+    <string name="user">ተጠቃሚ</string>
+    <string name="password">ፕስወርድ</string>
+    <string name="enter_your_old_password">የድሮ የይለፍ ቃልዎን ያስገቡ</string>
+    <string name="enter_your_new_password">አዲሱን የይለፍ ቃልዎን ያስገቡ</string>
+    <string name="save">አስቀምጥ</string>
+    <string name="cancel">መሰረዝ</string>
+    <string name="email">ኢሜይል</string>
+
+
+
+        <string name="video_one">blockchain እንዴት እንደሚሰራ - በቀላሉ ተብራርቷል</string>
+    <string name="video_two">ብልጥ ኮንትራቶች - በቀላሉ ተብራርተዋል</string>
+    <string name="video_three">የአክሲዮን ማረጋገጫ (ከሥራ ማረጋገጫ ጋር)</string>
+    <string name="video_four">blockchain ገንዘብን እና ንግድን እንዴት እንደሚቀይር</string>
+    <string name="video_five">blockchain ኢኮኖሚውን እንዴት እንደሚለውጥ</string>
+    <string name="video_six">መጪው ጊዜ ያልተማከለ ይሆናል።</string>
+    <string name="video_sevem">የ2022 ምርጥ የ Cryptocurrency ልውውጦች</string>
+    <string name="video_eight">በ Cryptocurrency ውስጥ እንዴት ኢንቨስት ማድረግ እንደሚቻል</string>
+
+    <string-array name="CryptoCurrencies">
+        <item>BTC</item>
+        <item>ETH</item>
+        <item>DOGE</item>
+        <item>LTC</item>
+        <item>USDT</item>
+        <item>USDC</item>
+        <item>XRP</item>
+        <item>BUSD</item>
+        <item>SOL</item>
+        <item>SHIB</item>
+        <item>XLM</item>
+        <item>XMR</item>
+
+    </string-array>
+
+    <string-array name="FiatCurrencies">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GEL</item>
+        <item>GBP</item>
+    </string-array>
+
+</resources>

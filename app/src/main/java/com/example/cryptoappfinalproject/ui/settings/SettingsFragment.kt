@@ -2,7 +2,6 @@ package com.example.cryptoappfinalproject.ui.settings
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
@@ -30,12 +29,13 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 @AndroidEntryPoint
 class SettingsFragment() : Fragment() {
 
-
+    lateinit var locale: Locale
     private val settingsViewModel: SettingsViewModel by viewModels()
     private var binding: FragmentSettingsBinding? = null
 
@@ -46,6 +46,14 @@ class SettingsFragment() : Fragment() {
         context.getSharedPreferences("AppSettingPrefs", 0)
     val sharedPrefEdit: SharedPreferences.Editor = appSettingPrefs.edit()
     val isDayMode: Boolean = appSettingPrefs.getBoolean("DayMode", false)
+
+    private val languagePref: SharedPreferences =
+        context.getSharedPreferences("languagePref", 0)
+    val langEdit: SharedPreferences.Editor = languagePref.edit()
+
+    val customList = mutableListOf(
+        "", "En", "Geo","Amh"
+    )
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,7 +71,77 @@ class SettingsFragment() : Fragment() {
         updateEmail()
         handlingNightAndDayModes()
         setDayMode()
+        setSpinner()
+
     }
+
+
+
+    private fun setSpinner() {
+
+        val spinnerAdapter = ArrayAdapter(
+            requireContext(),
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+            customList
+        )
+        binding!!.spinnerSettings.adapter = spinnerAdapter
+
+
+        binding!!.spinnerSettings.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (position == 0) {
+
+                }
+                if (position == 1) {
+                    langEdit.putString("Language", "en")
+                    langEdit.apply()
+                    changeLanguage("en")
+                    findNavController().navigate(SettingsFragmentDirections.actionReloadSettings())
+
+                }
+
+                if (position == 2 ) {
+                    langEdit.putString("Language", "ge")
+                    langEdit.apply()
+                    changeLanguage("ge")
+                    findNavController().navigate(SettingsFragmentDirections.actionReloadSettings())
+
+                }
+
+                if (position == 3 ) {
+                    langEdit.putString("Language", "amharic")
+                    langEdit.apply()
+                    changeLanguage("am")
+                    findNavController().navigate(SettingsFragmentDirections.actionReloadSettings())
+
+                }
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+        }
+    }
+
+
+    private fun changeLanguage(language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        resources.updateConfiguration(
+            config,
+            resources.displayMetrics
+        )
+    }
+
 
 
     private fun handlingNightAndDayModes() {
