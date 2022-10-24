@@ -117,4 +117,8 @@ dependencies {
     implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
 
 
+    //splash screen
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+
+
 }
