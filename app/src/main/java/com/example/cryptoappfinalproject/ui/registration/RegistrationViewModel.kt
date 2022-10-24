@@ -17,9 +17,11 @@ class RegistrationViewModel @Inject constructor(private val cryptoDao: CryptoDao
         emit(cryptoDao.getAllUserInfo())
     }
 
-    fun deleteUserInfo(user: UserInfo) {
+
+
+    fun updateUserInfo(user: UserInfo) {
         viewModelScope.launch {
-            cryptoDao.deleteUserInfo(user)
+            cryptoDao.updateUserInfo(user)
         }
     }
 

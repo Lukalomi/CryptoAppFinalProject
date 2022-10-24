@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">CryptoAppFinalProject</string>
     <string name="log_in_register">ავტორიზაცია</string>
-    <string name="converter">ვალუტის გადამყვანი</string>
+    <string name="converter">კონვერტაცია</string>
     <string name="settings">პარამეტრები</string>
     <string name="user_info">მონაცემები</string>
     <string name="email_address">შეიყვანეთ იმეილი...</string>
@@ -42,6 +42,33 @@
     <string name="to">To</string>
     <string name="from">From</string>
     <string name="log_out">გამოსვლა</string>
+
+
+    <string name="no">არა</string>
+    <string name="yes">დიახ</string>
+    <string name="sure_to_add">ნამდვილად გსურთ დაამატოთ</string>
+    <string name="sure_to_remove">ნამდვილად გსურთ ამოიღოთ</string>
+
+    <string name="to_cryptos">ფავორიტ კრიპტოებში</string>
+    <string name="from_cryptos">ფავორიტი კრიპტოებიდან</string>
+    <string name="been_added">დაემატა ფავორიტებში</string>
+    <string name="already_added">უკვე დამატებულია ფავორიტებში</string>
+    <string name="add">დამატება</string>
+    <string name="remove">ამოღება</string>
+    <string name="old_pass_incorrect">ძველი პაროლი არასწორია</string>
+    <string name="pass_updated">პაროლი განახლდა!</string>
+    <string name="old_email_incorrect">ძველი იმეილი არასწორია</string>
+    <string name="email_update">იმეილი განახლდა!</string>
+    <string name="enter_old_email">შეიყვანეთ ძველი მეილი</string>
+    <string name="picture_change_success">პროფილის ფოტო წარმატებით შეიცვალა!</string>
+    <string name="you_are_logged_in">თქვენ შეხვედით ექაუნთზე</string>
+    <string name="already_logged_in">უკვე შესული ხართ ექაუნთზე</string>
+    <string name="fill_every_field">გთხოვთ, შეავსოთ ყველა ველი</string>
+    <string name="pass_dont_match">პაროლები არ ემთხვევა</string>
+    <string name="havent_registered">გაიარეთ რეგისტრაცია</string>
+    <string name="you_are_registered">დარეგისტრირებული ხართ</string>
+    <string name="you_signed_out">ექაუნთიდან გამოსული ხართ</string>
+    <string name="already_signed_out">უკვე გამოსული ხართ ექაუნთიდან</string>
 
 
     <string name="video_one">როგორ მუშაობს ბლოკჩეინი?</string>

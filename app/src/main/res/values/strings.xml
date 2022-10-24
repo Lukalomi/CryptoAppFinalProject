@@ -62,6 +62,34 @@
     <string name="video_eight">How to Invest in Cryptocurrency</string>
 
 
+
+
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="sure_to_add">Are You Sure You Want To Add</string>
+    <string name="sure_to_remove">Are You Sure You Want To Remove</string>
+
+    <string name="to_cryptos">To Favorite Cryptos</string>
+    <string name="from_cryptos">From Favorite Cryptos</string>
+    <string name="been_added">Has Been Added To Favorites</string>
+    <string name="already_added">Already Added To Favorites</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="old_pass_incorrect">Old Password is Incorrect</string>
+<string name="pass_updated">Congrats,Password Has Been Updated</string>
+    <string name="old_email_incorrect">Old Email is Incorrect</string>
+    <string name="email_update">Congrats,Email Has Been Updated</string>
+    <string name="enter_old_email">Enter Your Old Email</string>
+    <string name="picture_change_success">Your Profile Picture Has Been Changed Successfully</string>
+    <string name="you_are_logged_in">you are logged in</string>
+    <string name="already_logged_in">You Are Already Logged In</string>
+    <string name="fill_every_field">Fill out all fields</string>
+    <string name="pass_dont_match">Passwords do not match</string>
+    <string name="havent_registered">you haven\'t registered</string>
+    <string name="you_are_registered">you are registered</string>
+    <string name="you_signed_out">You Signed Out</string>
+    <string name="already_signed_out">You are already signed out</string>
+
     <string-array name="CryptoCurrencies">
         <item>BTC</item>
         <item>ETH</item>

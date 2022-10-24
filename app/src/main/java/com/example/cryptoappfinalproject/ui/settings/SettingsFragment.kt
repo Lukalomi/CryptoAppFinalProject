@@ -35,25 +35,25 @@ import java.util.*
 @AndroidEntryPoint
 class SettingsFragment() : Fragment() {
 
-    lateinit var locale: Locale
     private val settingsViewModel: SettingsViewModel by viewModels()
     private var binding: FragmentSettingsBinding? = null
 
     private var count = 0
-    val context =  App.appContext
+    val context = App.appContext
 
     private val appSettingPrefs: SharedPreferences =
         context.getSharedPreferences("AppSettingPrefs", 0)
-    val sharedPrefEdit: SharedPreferences.Editor = appSettingPrefs.edit()
-    val isDayMode: Boolean = appSettingPrefs.getBoolean("DayMode", false)
+    private val sharedPrefEdit: SharedPreferences.Editor = appSettingPrefs.edit()
+    private val isDayMode: Boolean = appSettingPrefs.getBoolean("DayMode", false)
 
     private val languagePref: SharedPreferences =
         context.getSharedPreferences("languagePref", 0)
     val langEdit: SharedPreferences.Editor = languagePref.edit()
 
-    val customList = mutableListOf(
-        "", "En", "Geo","Amh"
+    private val customList = mutableListOf(
+        "Choose", "En", "Geo", "Amh"
     )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,7 +76,6 @@ class SettingsFragment() : Fragment() {
     }
 
 
-
     private fun setSpinner() {
 
         val spinnerAdapter = ArrayAdapter(
@@ -87,47 +86,47 @@ class SettingsFragment() : Fragment() {
         binding!!.spinnerSettings.adapter = spinnerAdapter
 
 
-        binding!!.spinnerSettings.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                adapterView: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (position == 0) {
+        binding!!.spinnerSettings.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapterView: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    when (position) {
+                        0 -> {
+
+                        }
+                        1 -> {
+                            langEdit.putString("Language", "en")
+                            langEdit.apply()
+                            changeLanguage("en")
+                            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToMainActivity())
+                        }
+
+                        2 -> {
+                            langEdit.putString("Language", "ge")
+                            langEdit.apply()
+                            changeLanguage("ge")
+                            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToMainActivity())
+                        }
+                        3 -> {
+                            langEdit.putString("Language", "amharic")
+                            langEdit.apply()
+                            changeLanguage("am")
+                            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToMainActivity())
+                        }
+                    }
+
 
                 }
-                if (position == 1) {
-                    langEdit.putString("Language", "en")
-                    langEdit.apply()
-                    changeLanguage("en")
-                    findNavController().navigate(SettingsFragmentDirections.actionReloadSettings())
 
-                }
-
-                if (position == 2 ) {
-                    langEdit.putString("Language", "ge")
-                    langEdit.apply()
-                    changeLanguage("ge")
-                    findNavController().navigate(SettingsFragmentDirections.actionReloadSettings())
-
-                }
-
-                if (position == 3 ) {
-                    langEdit.putString("Language", "amharic")
-                    langEdit.apply()
-                    changeLanguage("am")
-                    findNavController().navigate(SettingsFragmentDirections.actionReloadSettings())
+                override fun onNothingSelected(parent: AdapterView<*>?) {
 
                 }
 
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-        }
     }
 
 
@@ -143,14 +142,13 @@ class SettingsFragment() : Fragment() {
     }
 
 
-
     private fun handlingNightAndDayModes() {
         if (isDayMode) {
             binding!!.switchNightMode.isChecked = true
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             requireActivity().setTheme(R.style.Theme_CryptoAppFinalProject)
 
-        //when dark mode is enabled, we use the dark theme
+            //when dark mode is enabled, we use the dark theme
         } else {
             binding!!.switchNightMode.isChecked = false
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -228,7 +226,7 @@ class SettingsFragment() : Fragment() {
                         settingsViewModel.updateUserInfo(updatedUser)
                         Toast.makeText(
                             requireContext(),
-                            "Your Profile Picture Has Been Changed Successfully $name",
+                            "${resources.getString(R.string.pass_updated)} + $name",
                             Toast.LENGTH_SHORT
                         ).show()
 
@@ -265,8 +263,8 @@ class SettingsFragment() : Fragment() {
                             val oldEmail =
                                 dialogBinding.findViewById<EditText>(R.id.etUserInfoConfirm)
                             val newEmail = dialogBinding.findViewById<EditText>(R.id.etUserInfo)
-                            oldEmail.hint = "Enter Your Old Email"
-                            newEmail.hint = "Enter Your New Email"
+                            oldEmail.hint = getString(R.string.enter_old_email)
+                            newEmail.hint = getString(R.string.enter_old_email)
 
                             dialog.setContentView(dialogBinding)
                             dialog.setCancelable(true)
@@ -290,7 +288,7 @@ class SettingsFragment() : Fragment() {
                                                 settingsViewModel.updateUserInfo(updatedUser)
                                                 Toast.makeText(
                                                     requireContext(),
-                                                    "Congrats,Email Has Been Updated $name!",
+                                                    "${resources.getString(R.string.email_update)} + $name!",
                                                     Toast.LENGTH_SHORT
                                                 ).show()
                                             } else {
@@ -307,7 +305,7 @@ class SettingsFragment() : Fragment() {
                                 } else {
                                     Toast.makeText(
                                         requireContext(),
-                                        "Old Email is Incorrect",
+                                        getString(R.string.old_email_incorrect),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -380,7 +378,7 @@ class SettingsFragment() : Fragment() {
                                             Firebase.auth.currentUser!!.updatePassword(newPass.text.toString())
                                             Toast.makeText(
                                                 requireContext(),
-                                                "Congrats,Password Has Been Updated $name!",
+                                                "${resources.getString(R.string.pass_updated)}+ $name!",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         } else {
@@ -398,7 +396,7 @@ class SettingsFragment() : Fragment() {
                             } else {
                                 Toast.makeText(
                                     requireContext(),
-                                    "Old Password is Incorrect",
+                                    getString(R.string.old_pass_incorrect),
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
@@ -430,7 +428,6 @@ class SettingsFragment() : Fragment() {
 
 
     }
-
 
 
     private fun goBack() {

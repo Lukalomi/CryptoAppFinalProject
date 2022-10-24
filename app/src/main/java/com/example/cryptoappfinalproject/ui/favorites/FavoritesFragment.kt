@@ -235,15 +235,15 @@ class FavoritesFragment : Fragment() {
         binding!!.rvFavCryptoAssets.adapter = adapter
         adapter.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 viewModelFav.deleteCrypto(it)
                 findNavController().navigate(FavoritesFragmentDirections.actionReloadFavFragment())
 
 
             }
-            builder.setNegativeButton("No") { _, _ -> }
-            builder.setTitle("Remove ${it.originalTitle}?")
-            builder.setMessage("Are You Sure You Want To Remove ${it.originalTitle} From Favorite Cryptos?")
+            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+            builder.setTitle("${resources.getString(R.string.remove)} ${it.originalTitle}?")
+            builder.setMessage("${resources.getString(R.string.sure_to_remove)} ${it.originalTitle} ${resources.getString(R.string.from_cryptos)}?")
             builder.create().show()
         }
     }
@@ -255,13 +255,13 @@ class FavoritesFragment : Fragment() {
         binding!!.rvFavCryptoAssets.adapter = adapter
         adapter.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 viewModelFav.deleteCrypto(it)
                 findNavController().navigate(FavoritesFragmentDirections.actionReloadFavFragment())
             }
-            builder.setNegativeButton("No") { _, _ -> }
-            builder.setTitle("Remove ${it.originalTitle}?")
-            builder.setMessage("Are You Sure You Want To Remove ${it.originalTitle} From Favorite Cryptos?")
+            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+            builder.setTitle("${resources.getString(R.string.remove)} ${it.originalTitle}?")
+            builder.setMessage("${resources.getString(R.string.sure_to_remove)} ${it.originalTitle} ${resources.getString(R.string.from_cryptos)}?")
             builder.create().show()
         }
     }
@@ -273,14 +273,14 @@ class FavoritesFragment : Fragment() {
         binding!!.rvFavCryptoAssets.adapter = adapter
         adapter.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 viewModelFav.deleteCrypto(it)
                 findNavController().navigate(FavoritesFragmentDirections.actionReloadFavFragment())
 
             }
-            builder.setNegativeButton("No") { _, _ -> }
-            builder.setTitle("Remove ${it.originalTitle}?")
-            builder.setMessage("Are You Sure You Want To Remove ${it.originalTitle} From Favorite Cryptos?")
+            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+            builder.setTitle("${resources.getString(R.string.remove)} ${it.originalTitle}?")
+            builder.setMessage("${resources.getString(R.string.sure_to_remove)} ${it.originalTitle} ${resources.getString(R.string.from_cryptos)}?")
             builder.create().show()
         }
     }
@@ -291,13 +291,13 @@ class FavoritesFragment : Fragment() {
         binding!!.rvFavCryptoAssets.adapter = adapterExchanges
         adapterExchanges.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 viewModelFav.deleteExchange(it)
                 sortExByAsc()
             }
-            builder.setNegativeButton("No") { _, _ -> }
-            builder.setTitle("Remove ${it.title}?")
-            builder.setMessage("Are You Sure You Want To Remove ${it.title} From Favorite Cryptos?")
+            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+            builder.setTitle("${resources.getString(R.string.remove)} ${it.title}?")
+            builder.setMessage("${resources.getString(R.string.sure_to_remove)} ${it.title} ${resources.getString(R.string.from_cryptos)}?")
             builder.create().show()
         }
     }
@@ -308,13 +308,13 @@ class FavoritesFragment : Fragment() {
         binding!!.rvFavCryptoAssets.adapter = adapterExchanges
         adapterExchanges.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 viewModelFav.deleteExchange(it)
                 sortExByDesc()
             }
-            builder.setNegativeButton("No") { _, _ -> }
-            builder.setTitle("Remove ${it.title}?")
-            builder.setMessage("Are You Sure You Want To Remove ${it.title} From Favorite Cryptos?")
+            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+            builder.setTitle("${resources.getString(R.string.remove)} ${it.title}?")
+            builder.setMessage("${resources.getString(R.string.sure_to_remove)} ${it.title} ${resources.getString(R.string.from_cryptos)}?")
             builder.create().show()
         }
     }
@@ -325,13 +325,13 @@ class FavoritesFragment : Fragment() {
         binding!!.rvFavCryptoAssets.adapter = adapterExchanges
         adapterExchanges.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 viewModelFav.deleteExchange(it)
                 getAllExchanges()
             }
-            builder.setNegativeButton("No") { _, _ -> }
-            builder.setTitle("Remove ${it.title}?")
-            builder.setMessage("Are You Sure You Want To Remove ${it.title} From Favorite Cryptos?")
+            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+            builder.setTitle("${resources.getString(R.string.remove)} ${it.title}?")
+            builder.setMessage("${resources.getString(R.string.sure_to_remove)} ${it.title} ${resources.getString(R.string.from_cryptos)}?")
             builder.create().show()
         }
     }
