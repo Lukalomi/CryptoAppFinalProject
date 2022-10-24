@@ -1,20 +1,17 @@
 package com.example.cryptoappfinalproject
 
+import android.app.Activity
 import android.app.Application
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.SharedPreferences
-import android.text.BoringLayout
+import android.content.Intent
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
-import androidx.navigation.fragment.findNavController
-import com.example.cryptoappfinalproject.ui.settings.SettingsFragmentDirections
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.HiltAndroidApp
 import java.util.*
+
 
 @HiltAndroidApp
 class App : MultiDexApplication() {
@@ -35,6 +32,8 @@ class App : MultiDexApplication() {
             Log.d("FirebaseMessaging", "$token")
         })
 
+        val intent = Intent(this,MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent)
 
     }
 

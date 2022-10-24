@@ -30,6 +30,7 @@ import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.system.exitProcess
 
 
 @AndroidEntryPoint
@@ -102,20 +103,38 @@ class SettingsFragment() : Fragment() {
                             langEdit.putString("Language", "en")
                             langEdit.apply()
                             changeLanguage("en")
-                            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToMainActivity())
+                            val i: Intent? = context.getPackageManager()
+                                .getLaunchIntentForPackage(context.getPackageName())
+                            if (i != null) {
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            }
+                            activity?.finish()
+                            startActivity(i)
                         }
 
                         2 -> {
                             langEdit.putString("Language", "ge")
                             langEdit.apply()
                             changeLanguage("ge")
-                            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToMainActivity())
+                            val i: Intent? = context.getPackageManager()
+                                .getLaunchIntentForPackage(context.getPackageName())
+                            if (i != null) {
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            }
+                            activity?.finish()
+                            startActivity(i)
                         }
                         3 -> {
                             langEdit.putString("Language", "amharic")
                             langEdit.apply()
                             changeLanguage("am")
-                            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToMainActivity())
+                            val i: Intent? = context.getPackageManager()
+                                .getLaunchIntentForPackage(context.getPackageName())
+                            if (i != null) {
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            }
+                            activity?.finish()
+                            startActivity(i)
                         }
                     }
 
