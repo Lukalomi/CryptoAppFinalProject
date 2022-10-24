@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         increaseMemorySize()
         setUpSideNavigation()
 
+
+
         val state = getSharedPreferences("languagePref", 0).getString("Language", "en")
         if(state == "en") {
             changeLanguage("en")
