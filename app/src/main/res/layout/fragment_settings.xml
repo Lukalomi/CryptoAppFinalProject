@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
-        android:text="App"
+        android:text="@string/app"
         android:textAppearance="@style/CustomTitleSettings"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="13dp"
-        android:text="Settings"
+        android:text="@string/settings"
         android:textAppearance="@style/CustomTitleSettings"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
         android:id="@+id/appContainer"
         android:layout_width="match_parent"
         android:layout_height="86dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
-            android:text="Launch Screen"
+            android:text="@string/choose_language"
             android:textAppearance="@style/CustomTitleSettings"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,11 +69,10 @@
             android:id="@+id/spinnerSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="236dp"
-            android:entries="@array/spinner_items"
+            android:layout_marginStart="216dp"
             android:foreground="?android:attr/selectableItemBackground"
-            android:popupBackground="@drawable/drawer_background"
             android:spinnerMode="dropdown"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvLaunchScreen"
             app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:layout_marginTop="28dp"
-            android:text="Day Mode"
+            android:text="@string/day_mode"
             android:textAppearance="@style/CustomTitleSettings"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,16 +93,20 @@
             android:id="@+id/switchNightMode"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_marginStart="246dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="276dp"
+            android:background="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.018"
             app:layout_constraintStart_toStartOf="@+id/tvNightMode"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerSettings" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.847" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/appDivider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvNightMode" />
@@ -117,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="User"
+        android:text="@string/user"
         android:textAppearance="@style/CustomTitleSettings"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -150,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:layout_marginTop="28dp"
-            android:text="Name"
+            android:text="@string/name"
             android:textAppearance="@style/CustomTitleSettings"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +178,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:layout_marginTop="28dp"
-            android:text="Surname"
+            android:text="@string/surname"
             android:textAppearance="@style/CustomTitleSettings"
 
             android:textSize="16sp"
@@ -201,7 +204,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:layout_marginTop="28dp"
-            android:text="Email"
+            android:text="@string/email"
             android:textAppearance="@style/CustomTitleSettings"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -231,7 +234,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:layout_marginTop="28dp"
-            android:text="Password"
+            android:text="@string/password"
             android:textAppearance="@style/CustomTitleSettings"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -276,6 +279,8 @@
             app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

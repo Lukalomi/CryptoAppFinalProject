@@ -16,7 +16,7 @@
         android:layout_width="200dp"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Your Old Password"
+        android:hint="@string/enter_your_old_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
-        android:hint="Enter Your New Password"
+        android:hint="@string/enter_your_new_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/etUserInfoConfirm" />
@@ -38,7 +38,7 @@
         android:layout_marginStart="89dp"
         android:layout_marginTop="16dp"
         android:background="@null"
-        android:text="Save"
+        android:text="@string/save"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.157"
@@ -52,7 +52,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@null"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUserInfo" />

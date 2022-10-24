@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CryptoAppFinalProject</string>
+    <string name="log_in_register">ავტორიზაცია</string>
+    <string name="converter">ვალუტის გადამყვანი</string>
+    <string name="settings">პარამეტრები</string>
+    <string name="user_info">მონაცემები</string>
+    <string name="email_address">შეიყვანეთ იმეილი...</string>
+    <string name="name">სახელი</string>
+    <string name="log_in">შესვლა</string>
+    <string name="surname">გვარი</string>
+    <string name="don_t_have_an_account">არ გაქვთ ექაუნთი?</string>
+    <string name="repeat_your_password">გაიმეორეთ პაროლი...</string>
+    <string name="register">დარეგისტრირება</string>
+    <string name="enter_password">შეიყვანეთ პაროლი</string>
+    <string name="choose_a_photo">აირჩიეთ ფოტო</string>
+    <string name="enter_your_email_address">შეიყვანეთ თქვენი იმეილი</string>
+    <string name="coins">კრიპტოვალუტები</string>
+    <string name="exchanges">ბირჟები</string>
+    <string name="search">მოძებნეთ...</string>
+    <string name="sort_by_rank"></string>
+    <string name="login_to_track_your_favourite_coins_exchanges">შედით თქვენს ექაუნთზე, რათა იხილოთ ფავორიტი კრიპტოვალუტები/ბირჟები!</string>
+    <string name="cryptoassets">კრიპტოასეტები</string>
+    <string name="register_here">დარეგისტრირდით</string>
+    <string name="app">App</string>
+    <string name="choose_language">აირჩიეთ ენა</string>
+    <string name="day_mode">დღის რეჟიმი</string>
+    <string name="user">მომხმარებელი</string>
+    <string name="password">პაროლი</string>
+    <string name="enter_your_old_password">შეიყვანეთ ძველი პაროლი</string>
+    <string name="enter_your_new_password">შეიყვანეთ ახალი პაროლი</string>
+    <string name="save">დამახსოვრება</string>
+    <string name="cancel">გაუქმება</string>
+    <string name="email">იმეილი</string>
+    <string name="home">სახლი</string>
+    <string name="news">News</string>
+    <string name="favorites">Favorites</string>
+    <string name="learn">Learn</string>
+    <string name="convert">გადაყვანა</string>
+    <string name="result">შედეგი</string>
+    <string name="amount">რაოდენობა</string>
+    <string name="to">To</string>
+    <string name="from">From</string>
+    <string name="log_out">გამოსვლა</string>
+
+
+    <string name="video_one">როგორ მუშაობს ბლოკჩეინი?</string>
+    <string name="video_two">ჭკვიანი ხელშეკრულებები</string>
+    <string name="video_three">Proof-of-Stake (vs proof-of-work)</string>
+    <string name="video_four">როგორ ცვლის ბლოკჩეინი ბიზნესს?</string>
+    <string name="video_five">როგორ შეცვლის ბლოკჩეინი ეკონომიკას?</string>
+    <string name="video_six">მომავალი იქნება დეცენტრალიზებული</string>
+    <string name="video_sevem">საუკეთესო ბირჟები 2022 წელს</string>
+    <string name="video_eight">როგორ გავაკეთოთ ინვესტიცია კრიპტოში?</string>
+
+</resources>

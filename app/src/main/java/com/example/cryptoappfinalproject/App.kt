@@ -2,20 +2,26 @@ package com.example.cryptoappfinalproject
 
 import android.app.Application
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.content.SharedPreferences
+import android.text.BoringLayout
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
+import androidx.navigation.fragment.findNavController
+import com.example.cryptoappfinalproject.ui.settings.SettingsFragmentDirections
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.HiltAndroidApp
+import java.util.*
 
 @HiltAndroidApp
 class App : MultiDexApplication() {
 
+
     override fun onCreate() {
         super.onCreate()
-
         appContext = this
         setScreenMode()
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -29,17 +35,15 @@ class App : MultiDexApplication() {
             Log.d("FirebaseMessaging", "$token")
         })
 
+
     }
-
-
-
 
 
     companion object {
 
         lateinit var appContext: Application
-
     }
+
     private fun setScreenMode() {
         val state = getSharedPreferences("AppSettingPrefs", 0).getBoolean("DayMode", true)
 
@@ -52,5 +56,7 @@ class App : MultiDexApplication() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
+
+
 
 }

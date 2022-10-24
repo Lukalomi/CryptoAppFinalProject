@@ -1,6 +1,7 @@
 package com.example.cryptoappfinalproject
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.database.CursorWindow
 import android.os.Bundle
 import android.view.Gravity
@@ -18,6 +19,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.Field
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
     private lateinit var firebaseAuth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +38,32 @@ class MainActivity : AppCompatActivity() {
         increaseMemorySize()
         setUpSideNavigation()
 
+        val state = getSharedPreferences("languagePref", 0).getString("Language", "en")
+        if(state == "en") {
+            changeLanguage("en")
+        }
+        if(state == "ge") {
+            changeLanguage("ge")
+
+        }
+        if(state == "amharic") {
+            changeLanguage("am")
+
+        }
 
 
 
+    }
 
+    private fun changeLanguage(language: String?) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        resources.updateConfiguration(
+            config,
+           resources.displayMetrics
+        )
     }
 
     private fun setUpSideNavigation() {

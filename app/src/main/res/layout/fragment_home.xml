@@ -20,7 +20,7 @@
             android:background="@drawable/searchview_background"
             android:iconifiedByDefault="false"
             android:queryBackground="@android:color/transparent"
-            android:queryHint="Search a coin"
+            android:queryHint="@string/search"
             android:searchIcon="@drawable/search_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnAuth"
@@ -57,7 +57,7 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
-                android:text="CryptoAssets"
+                android:text="@string/cryptoassets"
                 android:textAppearance="@style/CustomTitle"
                  />
 
@@ -69,7 +69,7 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
-                android:text="Exchanges"
+                android:text="@string/exchanges"
                 android:textAppearance="@style/CustomTitleDark"
                 />
 

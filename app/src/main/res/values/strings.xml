@@ -4,8 +4,9 @@
     <string name="converter">Converter</string>
     <string name="settings">Settings</string>
     <string name="user_info">User Info</string>
+    <string name="log_out">Log Out</string>
+
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email_address">Email address...</string>
     <string name="name">Name</string>
     <string name="log_in">log in</string>
@@ -34,6 +35,31 @@
     <string name="amount">Amount</string>
     <string name="to">To</string>
     <string name="from">From</string>
+    <string name="coins">Coins</string>
+    <string name="exchanges">Exchanges</string>
+    <string name="search">Search a coin</string>
+    <string name="sort_by_rank">Sort By Rank</string>
+    <string name="login_to_track_your_favourite_coins_exchanges">Login To Track Your Favourite Coins/Exchanges!</string>
+    <string name="cryptoassets">CryptoAssets</string>
+    <string name="register_here">Register here</string>
+    <string name="app">App</string>
+    <string name="choose_language">Choose Language</string>
+    <string name="day_mode">Day Mode</string>
+    <string name="user">User</string>
+    <string name="password">Password</string>
+    <string name="enter_your_old_password">Enter Your Old Password</string>
+    <string name="enter_your_new_password">Enter Your New Password</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="email">Email</string>
+    <string name="video_one">How does a blockchain work - Simply Explained</string>
+    <string name="video_two">Smart contracts - Simply Explained</string>
+    <string name="video_three">Proof-of-Stake (vs proof-of-work)</string>
+    <string name="video_four">How the blockchain is changing money and business</string>
+    <string name="video_five">How the blockchain will radically transform the economy</string>
+    <string name="video_six">The future will be decentralized</string>
+    <string name="video_sevem">Best Cryptocurrency Exchanges of 2022</string>
+    <string name="video_eight">How to Invest in Cryptocurrency</string>
 
 
     <string-array name="CryptoCurrencies">
