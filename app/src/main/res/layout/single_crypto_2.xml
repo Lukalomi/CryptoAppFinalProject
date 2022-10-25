@@ -89,11 +89,12 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="55dp"
-        android:foreground="?android:attr/selectableItemBackground"
+            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvCryptoPrice"
             app:layout_constraintTop_toTopOf="parent" />
+<!--        android:src="@drawable/ic_heart_checked"-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
