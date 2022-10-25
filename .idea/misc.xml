@@ -9,6 +9,10 @@
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_arrow_up.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_baseline_skip_next_24.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_baseline_skip_previous_24.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_delete_fav.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_favorite.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_heart_checked.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_heart_fav.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_splash_logo.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/round_btn_favorites.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/spinner_border.xml" value="0.1635" />
@@ -29,6 +33,7 @@
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/load_state_view.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/nav_header.xml" value="0.11302083333333333" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_crypto.xml" value="0.11302083333333333" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_crypto_2.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_news_item.xml" value="0.11302083333333333" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_numeric_button.xml" value="0.11302083333333333" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_remove_button.xml" value="0.11302083333333333" />

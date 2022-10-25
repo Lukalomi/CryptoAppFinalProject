@@ -4,7 +4,10 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -28,13 +31,12 @@ import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
 import com.example.cryptoappfinalproject.domain.CryptoExchangesModel
 import com.example.cryptoappfinalproject.domain.CryptoSearchModel
 import com.example.cryptoappfinalproject.ui.adapters.*
-import com.example.cryptoappfinalproject.ui.favorites.FavoritesViewModel
+import com.example.cryptoappfinalproject.ui.favorites.*
 import com.example.cryptoappfinalproject.ui.registration.RegistrationViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -52,6 +54,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private val viewModelFav: FavoritesViewModel by activityViewModels()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,6 +68,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpBottomNavigation()
         getAllCoinsPager()
+
         searchCryptos()
         addCoinsToFavList()
         populateProfilePicture()
@@ -73,11 +77,14 @@ class HomeFragment : Fragment() {
 
 
         binding!!.tvExchanges.setOnClickListener {
+            favList.clear()
             getAllExchanges()
             searchExchanges()
             addExchangesToFavList()
         }
         binding!!.tvCryptoAssets.setOnClickListener {
+            favExchanges.clear()
+
             getAllCoinsPager()
             searchCryptos()
             addCoinsToFavList()
@@ -132,6 +139,7 @@ class HomeFragment : Fragment() {
             viewModelFav.readAllData().collect {
                 it.forEach {
                     favList.add(it)
+                    favCoinTitle.add(it.originalTitle)
                 }
             }
         }
@@ -143,6 +151,7 @@ class HomeFragment : Fragment() {
             viewModelFav.readAllExchanges().collect {
                 it.forEach {
                     favExchanges.add(it)
+                    favExTitle.add(it.title)
                 }
             }
         }
@@ -255,12 +264,14 @@ class HomeFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
 
         if (favList.size == 0) {
+
             builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
 
                 viewLifecycleOwner.lifecycleScope.launch {
 
                     viewModelFav.insertCrypto(crypto)
                     favList.add(crypto)
+
                     Toast.makeText(
                         requireContext(),
                         "${crypto.originalTitle}  ${resources.getString(R.string.been_added)}",
@@ -270,21 +281,29 @@ class HomeFragment : Fragment() {
 
                 }
 
-
             }
+            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+            builder.setTitle("${resources.getString(R.string.add)}  ${crypto.originalTitle}?")
+            builder.setMessage("${resources.getString(R.string.sure_to_add)} ${crypto.originalTitle}  ${resources.getString(R.string.to_cryptos)}?")
+            builder.create().show()
         }
         if (favList.toString().contains(crypto.originalTitle)) {
 
-            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
-                viewLifecycleOwner.lifecycleScope.launch {
-                    Toast.makeText(
-                        requireContext(),
-                        "${crypto.originalTitle}  ${resources.getString(R.string.already_added)}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                }
-            }
+            Toast.makeText(
+                requireContext(),
+                "${crypto.originalTitle}  ${resources.getString(R.string.already_added)}",
+                Toast.LENGTH_SHORT
+            ).show()
+//            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
+//                viewLifecycleOwner.lifecycleScope.launch {
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "${crypto.originalTitle}  ${resources.getString(R.string.already_added)}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//
+//                }
+//            }
         }
         if (!favList.toString().contains(crypto.originalTitle)) {
 
@@ -293,6 +312,7 @@ class HomeFragment : Fragment() {
 
                     viewModelFav.insertCrypto(crypto)
                     favList.add(crypto)
+
                     Toast.makeText(
                         requireContext(),
                         "${crypto.originalTitle}  ${resources.getString(R.string.been_added)}",
@@ -300,12 +320,13 @@ class HomeFragment : Fragment() {
                     ).show()
                 }
             }
+            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+            builder.setTitle("${resources.getString(R.string.add)}  ${crypto.originalTitle}?")
+            builder.setMessage("${resources.getString(R.string.sure_to_add)} ${crypto.originalTitle}  ${resources.getString(R.string.to_cryptos)}?")
+            builder.create().show()
         }
 
-        builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
-        builder.setTitle("${resources.getString(R.string.add)}  ${crypto.originalTitle}?")
-        builder.setMessage("${resources.getString(R.string.sure_to_add)} ${crypto.originalTitle}  ${resources.getString(R.string.to_cryptos)}?")
-        builder.create().show()
+
 
 
     }
@@ -422,6 +443,7 @@ class HomeFragment : Fragment() {
 
                     viewModelFav.insertCrypto(crypto)
                     favList.add(crypto)
+
                     Toast.makeText(
                         requireContext(),
                         "${crypto.originalTitle} ${resources.getString(R.string.been_added)}",
@@ -579,9 +601,12 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
         favList.clear()
         favExchanges.clear()
+        favCoinTitle.clear()
+        favExTitle.clear()
+        binding = null
+
     }
 
 }

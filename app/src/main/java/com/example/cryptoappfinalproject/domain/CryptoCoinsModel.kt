@@ -51,8 +51,8 @@ class CryptoCoinsModel : ArrayList<CryptoCoinsModel.CryptoCoinsModelItem>(){
         val atlDate: String?,
         val roi: Roi?,
         @SerializedName("last_updated")
-        val lastUpdated: String?
-    ): Parcelable {
+        val lastUpdated: String?,
+        ): Parcelable {
         @Parcelize
         data class Roi(
             val times: Double?,

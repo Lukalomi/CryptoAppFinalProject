@@ -7,6 +7,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
+import com.example.cryptoappfinalproject.ui.favorites.favList
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.HiltAndroidApp
