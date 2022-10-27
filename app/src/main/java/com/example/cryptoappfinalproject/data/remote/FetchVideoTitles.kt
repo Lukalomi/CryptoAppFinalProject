@@ -1,20 +1,19 @@
 package com.example.cryptoappfinalproject.data.remote
 
 import com.example.cryptoappfinalproject.common.ApiEndPoints
-import com.example.cryptoappfinalproject.domain.CryptoNewsModel
-import com.example.cryptoappfinalproject.domain.VideoTitleModel
+import com.example.cryptoappfinalproject.data.remote.dto.VideoTitleModelDto
+import com.example.cryptoappfinalproject.domain.model.VideoTitleModel
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface FetchVideoTitles {
 
     @GET(ApiEndPoints.getFirstVideo)
-    suspend fun getFirstVideoTitle() : Response<VideoTitleModel>
+    suspend fun getFirstVideoTitle() : Response<VideoTitleModelDto>
     @GET(ApiEndPoints.getSecondVideo)
-    suspend fun getSecondVideoTitle() : Response<VideoTitleModel>
+    suspend fun getSecondVideoTitle() : Response<VideoTitleModelDto>
     @GET(ApiEndPoints.getThirdVideo)
-    suspend fun getThirdVideoTitle() : Response<VideoTitleModel>
+    suspend fun getThirdVideoTitle() : Response<VideoTitleModelDto>
 
 
 }
