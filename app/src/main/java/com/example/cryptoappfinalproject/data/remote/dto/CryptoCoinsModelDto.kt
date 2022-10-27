@@ -53,8 +53,8 @@ abstract class CryptoCoinsModelDto : MutableList<CryptoCoinsModelDto.CryptoCoins
         val atlDate: String?,
         val roi: Roi?,
         @SerializedName("last_updated")
-        val lastUpdated: String?
-    ): Parcelable {
+        val lastUpdated: String?,
+        ): Parcelable {
         @Parcelize
         data class Roi(
             val times: Double?,

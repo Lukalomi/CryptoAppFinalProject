@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
+import com.example.cryptoappfinalproject.ui.favorites.favList
 
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -37,8 +38,6 @@ class MainActivity : AppCompatActivity() {
         binding!!.sideNavigation.itemIconTintList = null
         increaseMemorySize()
         setUpSideNavigation()
-
-
 
         val state = getSharedPreferences("languagePref", 0).getString("Language", "en")
         if(state == "en") {
