@@ -2,7 +2,6 @@ package com.example.cryptoappfinalproject.data.remote
 
 import com.example.cryptoappfinalproject.common.ApiEndPoints
 import com.example.cryptoappfinalproject.data.remote.dto.VideoTitleModelDto
-import com.example.cryptoappfinalproject.domain.model.VideoTitleModel
 import retrofit2.Response
 import retrofit2.http.GET
 

@@ -2,7 +2,6 @@ package com.example.cryptoappfinalproject.data.remote.dto
 
 import android.os.Parcelable
 import com.example.cryptoappfinalproject.domain.model.CryptoCoinsModel
-import com.example.cryptoappfinalproject.domain.model.CryptoConverterModel
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 

@@ -1,35 +1,21 @@
 package com.example.cryptoappfinalproject.presentation.ui.adapters
 
 import android.content.Context
-<<<<<<< HEAD:app/src/main/java/com/example/cryptoappfinalproject/presentation/ui/adapters/CoinsHomeAdapter.kt
-import android.view.LayoutInflater
-import android.view.ViewGroup
-=======
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.annotation.RequiresApi
->>>>>>> 8ac69df4bc609d982b9370e492c377fe69238b5a:app/src/main/java/com/example/cryptoappfinalproject/ui/adapters/CoinsHomeAdapter.kt
 import androidx.core.content.ContextCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.R
-<<<<<<< HEAD:app/src/main/java/com/example/cryptoappfinalproject/presentation/ui/adapters/CoinsHomeAdapter.kt
-import com.example.cryptoappfinalproject.databinding.SingleCryptoBinding
-import com.example.cryptoappfinalproject.domain.model.CryptoCoinsModel
-=======
 import com.example.cryptoappfinalproject.databinding.SingleCrypto2Binding
 import com.example.cryptoappfinalproject.databinding.SingleCryptoBinding
-import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
+import com.example.cryptoappfinalproject.domain.model.CryptoCoinsModel
 import com.example.cryptoappfinalproject.ui.favorites.favCoinTitle
-import com.example.cryptoappfinalproject.ui.favorites.favExTitle
-import com.example.cryptoappfinalproject.ui.favorites.favList
->>>>>>> 8ac69df4bc609d982b9370e492c377fe69238b5a:app/src/main/java/com/example/cryptoappfinalproject/ui/adapters/CoinsHomeAdapter.kt
 
 class CoinsHomeAdapter(
     private val context: Context,

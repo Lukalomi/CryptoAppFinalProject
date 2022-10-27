@@ -1,7 +1,5 @@
 package com.example.cryptoappfinalproject.domain.model
 
-import com.google.gson.annotations.SerializedName
-
 data class CryptoSearchModel(
     val coins: MutableList<Coin>?,
 ) {

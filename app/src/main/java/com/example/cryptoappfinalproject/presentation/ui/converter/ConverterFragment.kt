@@ -88,7 +88,7 @@ class ConverterFragment : Fragment() {
 
                         is Resource.Success -> {
 
-                            binding?.tvResult?.text = it.data.result.toString().dropLast(4)
+                            binding?.tvResult?.text = it.data.result.toString().dropLast(2)
 
                             Log.d("convert",  "${it.data.result.toString()}")
 

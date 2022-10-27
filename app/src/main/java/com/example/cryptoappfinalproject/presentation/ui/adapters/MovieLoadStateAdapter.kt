@@ -2,7 +2,6 @@ package com.example.cryptoappfinalproject.presentation.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter

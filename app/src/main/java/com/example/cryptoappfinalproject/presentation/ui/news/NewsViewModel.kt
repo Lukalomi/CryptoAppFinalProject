@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.example.cryptoappfinalproject.data.remote.FetchedNews
 import com.example.cryptoappfinalproject.data.remote.repositoryImpl.CryptoNewsRepositoryImpl
 import com.example.cryptoappfinalproject.presentation.ui.datasource.NewsDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,20 +1,18 @@
 package com.example.cryptoappfinalproject.presentation
 
+//import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+
 import android.content.Intent
 import android.content.res.Configuration
 import android.database.CursorWindow
 import android.os.Bundle
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-//import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
-import com.example.cryptoappfinalproject.ui.favorites.favList
-
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint

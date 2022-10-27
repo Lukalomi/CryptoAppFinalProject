@@ -8,17 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.common.Resource
-<<<<<<< HEAD:app/src/main/java/com/example/cryptoappfinalproject/presentation/ui/adapters/ExchangesAdapter.kt
-import com.example.cryptoappfinalproject.databinding.SingleCryptoBinding
-import com.example.cryptoappfinalproject.domain.model.CryptoExchangesModel
-=======
-import com.example.cryptoappfinalproject.data.local.Exchanges
 import com.example.cryptoappfinalproject.databinding.SingleCrypto2Binding
 import com.example.cryptoappfinalproject.databinding.SingleCryptoBinding
-import com.example.cryptoappfinalproject.domain.CryptoExchangesModel
+import com.example.cryptoappfinalproject.domain.model.CryptoExchangesModel
 import com.example.cryptoappfinalproject.ui.favorites.favExTitle
 
->>>>>>> 8ac69df4bc609d982b9370e492c377fe69238b5a:app/src/main/java/com/example/cryptoappfinalproject/ui/adapters/ExchangesAdapter.kt
 
 class ExchangesAdapter(
     val context: Context,
