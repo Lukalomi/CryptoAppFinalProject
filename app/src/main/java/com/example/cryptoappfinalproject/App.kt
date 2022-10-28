@@ -30,7 +30,7 @@ class App : MultiDexApplication() {
             Log.d("FirebaseMessaging", "$token")
         })
 
-        val intent = Intent(this,MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        val intent = Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent)
 
     }

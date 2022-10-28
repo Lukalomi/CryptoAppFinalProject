@@ -11,7 +11,7 @@ import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.databinding.SingleCrypto2Binding
 import com.example.cryptoappfinalproject.databinding.SingleCryptoBinding
 import com.example.cryptoappfinalproject.domain.model.CryptoExchangesModel
-import com.example.cryptoappfinalproject.ui.favorites.favExTitle
+import com.example.cryptoappfinalproject.presentation.ui.favorites.favExTitle
 
 
 class ExchangesAdapter(

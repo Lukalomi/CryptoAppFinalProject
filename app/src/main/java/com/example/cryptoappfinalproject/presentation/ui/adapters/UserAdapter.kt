@@ -1,13 +1,10 @@
-package com.example.cryptoappfinalproject.ui.adapters
+package com.example.cryptoappfinalproject.presentation.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cryptoappfinalproject.common.Resource
-import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.databinding.SingleUserBinding
 import com.example.cryptoappfinalproject.domain.FirebaseUser
 

@@ -1,30 +1,18 @@
 package com.example.cryptoappfinalproject.ui.chat
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Database
-import com.example.cryptoappfinalproject.R
-import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.databinding.FragmentChatBinding
-import com.example.cryptoappfinalproject.databinding.FragmentRegistrationBinding
 import com.example.cryptoappfinalproject.domain.FirebaseUser
-import com.example.cryptoappfinalproject.ui.adapters.CoinsSearchAdapter
-import com.example.cryptoappfinalproject.ui.adapters.UserAdapter
+import com.example.cryptoappfinalproject.presentation.ui.adapters.UserAdapter
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.*
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
 
 class ChatFragment : Fragment() {
 

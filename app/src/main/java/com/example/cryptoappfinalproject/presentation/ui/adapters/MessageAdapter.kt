@@ -1,22 +1,12 @@
-package com.example.cryptoappfinalproject.ui.adapters
+package com.example.cryptoappfinalproject.presentation.ui.adapters
 
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.cryptoappfinalproject.R
-import com.example.cryptoappfinalproject.common.Resource
-import com.example.cryptoappfinalproject.data.local.Exchanges
 import com.example.cryptoappfinalproject.databinding.ReceivedDmBinding
 import com.example.cryptoappfinalproject.databinding.SentDmBinding
-import com.example.cryptoappfinalproject.databinding.SingleCrypto2Binding
-import com.example.cryptoappfinalproject.databinding.SingleCryptoBinding
-import com.example.cryptoappfinalproject.domain.CryptoExchangesModel
 import com.example.cryptoappfinalproject.domain.MessageModel
-import com.example.cryptoappfinalproject.ui.favorites.favExTitle
 import com.google.firebase.auth.FirebaseAuth
 
 

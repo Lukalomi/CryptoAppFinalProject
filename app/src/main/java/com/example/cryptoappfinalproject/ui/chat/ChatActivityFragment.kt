@@ -13,10 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptoappfinalproject.databinding.FragmentChatActivityBinding
-import com.example.cryptoappfinalproject.domain.FirebaseUser
 import com.example.cryptoappfinalproject.domain.MessageModel
-import com.example.cryptoappfinalproject.ui.adapters.MessageAdapter
-import com.example.cryptoappfinalproject.ui.adapters.UserAdapter
+import com.example.cryptoappfinalproject.presentation.ui.adapters.MessageAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 

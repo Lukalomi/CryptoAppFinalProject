@@ -15,7 +15,7 @@ import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.SingleCrypto2Binding
 import com.example.cryptoappfinalproject.databinding.SingleCryptoBinding
 import com.example.cryptoappfinalproject.domain.model.CryptoCoinsModel
-import com.example.cryptoappfinalproject.ui.favorites.favCoinTitle
+import com.example.cryptoappfinalproject.presentation.ui.favorites.favCoinTitle
 
 class CoinsHomeAdapter(
     private val context: Context,

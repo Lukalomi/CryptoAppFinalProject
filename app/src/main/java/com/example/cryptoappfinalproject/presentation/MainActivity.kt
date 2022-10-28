@@ -1,22 +1,19 @@
-package com.example.cryptoappfinalproject
+package com.example.cryptoappfinalproject.presentation
 
 import android.content.Intent
 import android.content.res.Configuration
 import android.database.CursorWindow
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.recyclerview.widget.RecyclerView
+import com.example.cryptoappfinalproject.NavGraphDirections
+import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
-import com.example.cryptoappfinalproject.ui.favorites.favList
 
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth

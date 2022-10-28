@@ -31,17 +31,14 @@ import com.example.cryptoappfinalproject.presentation.ui.adapters.CoinsHomeAdapt
 import com.example.cryptoappfinalproject.presentation.ui.adapters.CoinsSearchAdapter
 import com.example.cryptoappfinalproject.presentation.ui.adapters.ExchangesAdapter
 import com.example.cryptoappfinalproject.presentation.ui.adapters.MovieLoadStateAdapter
-import com.example.cryptoappfinalproject.presentation.ui.favorites.FavoritesViewModel
+import com.example.cryptoappfinalproject.presentation.ui.favorites.*
 import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
-import com.example.cryptoappfinalproject.ui.adapters.*
-import com.example.cryptoappfinalproject.ui.favorites.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
-
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
