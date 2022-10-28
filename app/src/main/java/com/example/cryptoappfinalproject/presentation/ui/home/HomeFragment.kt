@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject.ui.home
+package com.example.cryptoappfinalproject.presentation.ui.home
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -24,12 +24,17 @@ import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.data.local.Exchanges
 import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
-import com.example.cryptoappfinalproject.domain.CryptoCoinsModel
-import com.example.cryptoappfinalproject.domain.CryptoExchangesModel
-import com.example.cryptoappfinalproject.domain.CryptoSearchModel
+import com.example.cryptoappfinalproject.domain.model.CryptoCoinsModel
+import com.example.cryptoappfinalproject.domain.model.CryptoExchangesModel
+import com.example.cryptoappfinalproject.domain.model.CryptoSearchModel
+import com.example.cryptoappfinalproject.presentation.ui.adapters.CoinsHomeAdapter
+import com.example.cryptoappfinalproject.presentation.ui.adapters.CoinsSearchAdapter
+import com.example.cryptoappfinalproject.presentation.ui.adapters.ExchangesAdapter
+import com.example.cryptoappfinalproject.presentation.ui.adapters.MovieLoadStateAdapter
+import com.example.cryptoappfinalproject.presentation.ui.favorites.FavoritesViewModel
+import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
 import com.example.cryptoappfinalproject.ui.adapters.*
 import com.example.cryptoappfinalproject.ui.favorites.*
-import com.example.cryptoappfinalproject.ui.registration.RegistrationViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
