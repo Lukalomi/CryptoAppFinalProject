@@ -13,6 +13,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
 import com.example.cryptoappfinalproject.ui.favorites.favList
@@ -42,18 +43,17 @@ class MainActivity : AppCompatActivity() {
         setUpSideNavigation()
 
         val state = getSharedPreferences("languagePref", 0).getString("Language", "en")
-        if(state == "en") {
+        if (state == "en") {
             changeLanguage("en")
         }
-        if(state == "ge") {
+        if (state == "ge") {
             changeLanguage("ge")
 
         }
-        if(state == "amharic") {
+        if (state == "amharic") {
             changeLanguage("am")
 
         }
-
 
 
     }
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         config.locale = locale
         resources.updateConfiguration(
             config,
-           resources.displayMetrics
+            resources.displayMetrics
         )
     }
 
@@ -76,16 +76,37 @@ class MainActivity : AppCompatActivity() {
         val navigationView: NavigationView = binding!!.sideNavigation
         NavigationUI.setupWithNavController(navigationView, navController)
 
-        val menuSignOut = navigationView.menu.getItem(3)
+        val menuSignOut = navigationView.menu.getItem(4)
+        val menuSupport = navigationView.menu.getItem(3)
+
+        menuSupport.setOnMenuItemClickListener {
+            if (firebaseAuth.currentUser!!.email == "llomi18@freeuni.edu.ge") {
+                navController.navigate(NavGraphDirections.actionMenuToChatFragment())
+                binding!!.drawer.closeDrawer(Gravity.LEFT)
+            } else {
+                navController.navigate(NavGraphDirections.actionMenuToChatActivityFragment("Support"))
+                binding!!.drawer.closeDrawer(Gravity.LEFT)
+            }
+
+            true
+        }
 
         menuSignOut.setOnMenuItemClickListener {
             if (firebaseAuth.currentUser != null) {
                 firebaseAuth.signOut()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                Toast.makeText(this@MainActivity, getString(R.string.you_signed_out), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.you_signed_out),
+                    Toast.LENGTH_LONG
+                ).show()
             } else {
-                Toast.makeText(this@MainActivity, getString(R.string.already_signed_out), Toast.LENGTH_LONG)
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.already_signed_out),
+                    Toast.LENGTH_LONG
+                )
                     .show()
             }
             true

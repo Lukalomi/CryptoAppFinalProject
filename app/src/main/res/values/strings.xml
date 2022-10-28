@@ -89,6 +89,7 @@
     <string name="you_are_registered">you are registered</string>
     <string name="you_signed_out">You Signed Out</string>
     <string name="already_signed_out">You are already signed out</string>
+    <string name="support">Support</string>
 
     <string-array name="CryptoCurrencies">
         <item>BTC</item>

@@ -10,9 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.view.drawToBitmap
-import androidx.drawerlayout.widget.DrawerLayout
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -20,11 +18,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentRegistrationBinding
+import com.example.cryptoappfinalproject.domain.FirebaseUser
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 
 @AndroidEntryPoint
 class RegistrationFragment : Fragment() {
@@ -36,6 +35,8 @@ class RegistrationFragment : Fragment() {
     companion object {
         val IMAGE_REQUEST_CODE = 100
     }
+
+    private val db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,8 +53,6 @@ class RegistrationFragment : Fragment() {
         goBack()
 
     }
-
-
 
 
     private fun chooseProfilePicture() {
@@ -98,7 +97,6 @@ class RegistrationFragment : Fragment() {
                 )
 
 
-
                 if (name.isNotEmpty() && surname.isNotEmpty() &&
                     email.isNotEmpty() && password.isNotEmpty() && repeatPassword.isNotEmpty()
                 ) {
@@ -114,6 +112,14 @@ class RegistrationFragment : Fragment() {
                                 registrationViewModel.insertUserInfo(user)
                                 binding!!.pbRegister.visibility = View.GONE
 
+                                val userId = FirebaseAuth.getInstance().currentUser!!.uid
+                                db.collection("users").document(userId).set(FirebaseUser(name, email, userId))
+                                    .addOnSuccessListener {
+                                        Toast.makeText(requireContext(),"success!",Toast.LENGTH_LONG).show()
+                                    }.addOnFailureListener {
+                                        Toast.makeText(requireContext(),"loser!!!",Toast.LENGTH_LONG).show()
+
+                                    }
                                 findNavController()
                                     .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
                             } else {
@@ -139,7 +145,11 @@ class RegistrationFragment : Fragment() {
                     email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()
                 ) {
 
-                    Toast.makeText(requireContext(), getString(R.string.fill_every_field), Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.fill_every_field),
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
 
                 }
@@ -159,6 +169,9 @@ class RegistrationFragment : Fragment() {
         }
     }
 
+
+
+
     private fun goBack() {
         binding?.btnBack?.setOnClickListener {
             findNavController()
@@ -168,9 +181,17 @@ class RegistrationFragment : Fragment() {
 
     private fun checkLoggedInstance() {
         if (FirebaseAuth.getInstance().currentUser == null) {
-            Toast.makeText(requireContext(), getString(R.string.havent_registered), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.havent_registered),
+                Toast.LENGTH_SHORT
+            ).show()
         } else {
-            Toast.makeText(requireContext(), getString(R.string.you_are_registered), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.you_are_registered),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
