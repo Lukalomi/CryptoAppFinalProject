@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable-v24/ic_remove_button.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable-v24/message_box_background.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable-v24/shape_button.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/dm_backgroun.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/drawer_background.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_archives.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_arrow_up.xml" value="0.1635" />
@@ -13,14 +16,19 @@
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_favorite.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_heart_checked.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_heart_fav.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_send_dm.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_splash_logo.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/message_box_background.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/round_btn_favorites.xml" value="0.1635" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/sent_dm.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/spinner_border.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/activity_main.xml" value="0.25025641025641027" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/currency_dropdown_items.xml" value="0.11302083333333333" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/custom_exo_playback_control_view.xml" value="0.2" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/custom_spinner.xml" value="0.253125" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/custom_spinner_dropdown.xml" value="0.253125" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_chat.xml" value="0.25416666666666665" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_chat_activity.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_converter.xml" value="0.11302083333333333" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_educational.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/fragment_favorites.xml" value="0.25416666666666665" />
@@ -32,11 +40,14 @@
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/load_state_item.xml" value="0.253125" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/load_state_view.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/nav_header.xml" value="0.11302083333333333" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/received_dm.xml" value="0.253125" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/sent_dm.xml" value="0.253125" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_crypto.xml" value="0.11302083333333333" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_crypto_2.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_news_item.xml" value="0.11302083333333333" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_numeric_button.xml" value="0.11302083333333333" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_remove_button.xml" value="0.11302083333333333" />
+        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_user.xml" value="0.253125" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/single_video_item.xml" value="0.253125" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/user_profile_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/layout/video_dialog.xml" value="0.253125" />

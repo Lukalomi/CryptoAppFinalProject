@@ -3,12 +3,8 @@ package com.example.cryptoappfinalproject.presentation.ui.home
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.Toast
+import android.view.*
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -22,7 +18,8 @@ import androidx.navigation.ui.NavigationUI
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cryptoappfinalproject.R
+import com.bumptech.glide.Glide
+import com.example.cryptoappfinalproject.*
 import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.data.local.Exchanges
@@ -36,11 +33,11 @@ import com.example.cryptoappfinalproject.presentation.ui.adapters.ExchangesAdapt
 import com.example.cryptoappfinalproject.presentation.ui.adapters.MovieLoadStateAdapter
 import com.example.cryptoappfinalproject.presentation.ui.favorites.FavoritesViewModel
 import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
-import com.example.cryptoappfinalproject.ui.favorites.favCoinTitle
-import com.example.cryptoappfinalproject.ui.favorites.favExTitle
-import com.example.cryptoappfinalproject.ui.favorites.favExchanges
-import com.example.cryptoappfinalproject.ui.favorites.favList
+import com.example.cryptoappfinalproject.ui.adapters.*
+import com.example.cryptoappfinalproject.ui.favorites.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
@@ -76,7 +73,7 @@ class HomeFragment : Fragment() {
 
         searchCryptos()
         addCoinsToFavList()
-//        populateProfilePicture()
+        populateProfilePicture()
         openDrawer()
         recyclerScrollState()
 
@@ -572,36 +569,36 @@ class HomeFragment : Fragment() {
             activity!!.findViewById(R.id.bottomNavigation)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
-//
-//    private fun populateProfilePicture() {
-//
-//        lifecycleScope.launch {
-//            viewModelReg.readAllUserInfo().collect {
-//                val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
-//                val drawerProfileName = activity!!.findViewById<TextView>(R.id.tvUsernameHeader)
-//
-//                if (Firebase.auth.currentUser != null) {
-//                    it.forEach {
-//                        Glide.with(requireContext())
-//                            .load(it.image)
-//                            .error(R.drawable.ic_launcher_background)
-//                            .into(profilePicture)
-//                        drawerProfileName.text = it.name + " " + it.surname
-//
-//                    }
-//
-//                } else {
-//                    Glide.with(requireContext())
-//                        .load(R.drawable.ic_person)
-//                        .error(R.drawable.ic_launcher_background)
-//                        .into(profilePicture)
-//                    drawerProfileName.text = ""
-//
-//                }
-//
-//            }
-//        }
-//    }
+
+    private fun populateProfilePicture() {
+
+        lifecycleScope.launch {
+            viewModelReg.readAllUserInfo().collect {
+                val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
+                val drawerProfileName = activity!!.findViewById<TextView>(R.id.tvUsernameHeader)
+
+                if (Firebase.auth.currentUser != null) {
+                    it.forEach {
+                        Glide.with(requireContext())
+                            .load(it.image)
+                            .error(R.drawable.ic_launcher_background)
+                            .into(profilePicture)
+                        drawerProfileName.text = it.name + " " + it.surname
+
+                    }
+
+                } else {
+                    Glide.with(requireContext())
+                        .load(R.drawable.ic_person)
+                        .error(R.drawable.ic_launcher_background)
+                        .into(profilePicture)
+                    drawerProfileName.text = ""
+
+                }
+
+            }
+        }
+    }
 
 
     override fun onDestroyView() {
