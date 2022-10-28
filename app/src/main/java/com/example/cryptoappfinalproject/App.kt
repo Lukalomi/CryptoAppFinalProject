@@ -1,17 +1,14 @@
 package com.example.cryptoappfinalproject
 
-import android.app.Activity
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
-import com.example.cryptoappfinalproject.ui.favorites.favList
+import com.example.cryptoappfinalproject.presentation.MainActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.HiltAndroidApp
-import java.util.*
 
 
 @HiltAndroidApp

@@ -1,7 +1,6 @@
 package com.example.cryptoappfinalproject.data.local
 
 import android.graphics.Bitmap
-import android.net.Uri
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey

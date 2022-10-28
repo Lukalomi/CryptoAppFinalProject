@@ -4,7 +4,6 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.cryptoappfinalproject.common.Converters
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable
 
 
 @Database(entities = [Crypto::class,Exchanges::class, UserInfo::class], version = 13)

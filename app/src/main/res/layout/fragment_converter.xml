@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/home_screen_background"
-    tools:context=".ui.converter.ConverterFragment">
+    tools:context=".presentation.ui.converter.ConverterFragment">
 
 
     <com.google.android.material.textfield.TextInputLayout
