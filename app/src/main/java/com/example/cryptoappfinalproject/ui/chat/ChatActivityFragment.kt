@@ -51,7 +51,8 @@ class ChatActivityFragment : Fragment() {
 
     private fun addMessagesToList() {
         val db = FirebaseFirestore.getInstance()
-                db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid).collection("chats")
+        db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .collection("chats")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if (error != null) {
@@ -60,11 +61,12 @@ class ChatActivityFragment : Fragment() {
                     for (dc: DocumentChange in value!!.documentChanges) {
                         if (dc.type == DocumentChange.Type.ADDED) {
                             messageList.add(dc.document.toObject(MessageModel::class.java))
-                            Log.d("dms",messageList.toString())
+                            Log.d("dms", messageList.toString())
 
                         }
                         adapter = MessageAdapter()
-                        binding!!.rvChatActivity.layoutManager = LinearLayoutManager(requireContext())
+                        binding!!.rvChatActivity.layoutManager =
+                            LinearLayoutManager(requireContext())
                         binding!!.rvChatActivity.adapter = adapter
 
                         adapter.submitList(messageList)
@@ -77,52 +79,58 @@ class ChatActivityFragment : Fragment() {
 
     private fun goBack() {
         binding!!.ivBackChat.setOnClickListener {
-            findNavController().navigate(ChatActivityFragmentDirections.actionChatActivityFragmentToChatFragment())
+            if (FirebaseAuth.getInstance().currentUser!!.email == "llomi18@freeuni.edu.ge") {
+                findNavController().navigate(ChatActivityFragmentDirections.actionGlobal())
+            } else {
+                findNavController().navigate(ChatActivityFragmentDirections.actionChatActivityFragmentToChatFragment())
+            }
         }
+
 
     }
 
     private fun sendDM() {
         val senderUid = FirebaseAuth.getInstance().currentUser?.uid
-            binding!!.etMessage.onRightDrawableClicked {
-                val messageObject = MessageModel(it.text.toString(), senderUid)
-                if(it.text.toString() != "") {
-                    val db = FirebaseFirestore.getInstance()
+        binding!!.etMessage.onRightDrawableClicked {
+            val messageObject = MessageModel(it.text.toString(), senderUid)
+            if (it.text.toString() != "") {
+                val db = FirebaseFirestore.getInstance()
 
-                    db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid).collection("chats")
-                        .add(messageObject)
-                        .addOnSuccessListener { nothing ->
-                            try {
-                                adapter = MessageAdapter()
-                                binding!!.rvChatActivity.layoutManager =
-                                    LinearLayoutManager(requireContext())
-                                binding!!.rvChatActivity.adapter = adapter
+                db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
+                    .collection("chats")
+                    .add(messageObject)
+                    .addOnSuccessListener { nothing ->
+                        try {
+                            adapter = MessageAdapter()
+                            binding!!.rvChatActivity.layoutManager =
+                                LinearLayoutManager(requireContext())
+                            binding!!.rvChatActivity.adapter = adapter
 
-                                adapter.submitList(messageList)
-                                Toast.makeText(
-                                    requireContext(),
-                                    "message has been sent",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }catch (e:Exception) {
-                                Log.d("dbError",e.message.toString())
-                            }
-
-
-                        }.addOnFailureListener {
-                            try{
-                                Toast.makeText(
-                                    requireContext(),
-                                    "can't send a dm",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }catch (e:Exception) {
-                                Log.d("dbError",e.message.toString())
-                            }
+                            adapter.submitList(messageList)
+                            Toast.makeText(
+                                requireContext(),
+                                "message has been sent",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } catch (e: Exception) {
+                            Log.d("dbError", e.message.toString())
                         }
-                }
 
+
+                    }.addOnFailureListener {
+                        try {
+                            Toast.makeText(
+                                requireContext(),
+                                "can't send a dm",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } catch (e: Exception) {
+                            Log.d("dbError", e.message.toString())
+                        }
+                    }
             }
+
+        }
 
     }
 

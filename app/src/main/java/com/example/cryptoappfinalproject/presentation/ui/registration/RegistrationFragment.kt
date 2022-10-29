@@ -16,6 +16,7 @@ import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentRegistrationBinding
 import com.example.cryptoappfinalproject.domain.FirebaseUser
+import com.example.cryptoappfinalproject.presentation.ui.login.LoginFragmentDirections
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -106,7 +107,7 @@ class RegistrationFragment : Fragment() {
 
                             if (it.isSuccessful) {
                                 checkLoggedInstance()
-                                registrationViewModel.insertUserInfo(user)
+                                registrationViewModel.updateUserInfo(user)
                                 binding!!.pbRegister.visibility = View.GONE
 
                                 val userId = FirebaseAuth.getInstance().currentUser!!.uid
@@ -118,7 +119,7 @@ class RegistrationFragment : Fragment() {
 
                                     }
                                 findNavController()
-                                    .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
+                                    .navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
                             } else {
                                 binding!!.pbRegister.visibility = View.GONE
                                 Toast.makeText(

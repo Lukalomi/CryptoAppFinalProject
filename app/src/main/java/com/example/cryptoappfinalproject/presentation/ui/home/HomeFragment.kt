@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -581,6 +582,9 @@ class HomeFragment : Fragment() {
                             .error(R.drawable.ic_launcher_background)
                             .into(profilePicture)
                         drawerProfileName.text = it.name + " " + it.surname
+                        requireActivity().findViewById<ProgressBar>(R.id.pbProfilePic).visibility = View.GONE
+                        requireActivity().findViewById<CardView>(R.id.cvUserPhoto).visibility = View.VISIBLE
+
 
                     }
 
@@ -590,6 +594,9 @@ class HomeFragment : Fragment() {
                         .error(R.drawable.ic_launcher_background)
                         .into(profilePicture)
                     drawerProfileName.text = ""
+                    requireActivity().findViewById<ProgressBar>(R.id.pbProfilePic).visibility = View.GONE
+                    requireActivity().findViewById<CardView>(R.id.cvUserPhoto).visibility = View.VISIBLE
+
 
                 }
 

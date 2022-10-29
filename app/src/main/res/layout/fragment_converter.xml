@@ -5,9 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/home_screen_background"
     tools:context=".presentation.ui.converter.ConverterFragment">
 
+    <ImageView
+        android:id="@+id/ivBackConverter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tlChooseCrypto"
@@ -19,7 +28,7 @@
         android:hint="@string/from"
         android:minEms="7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/ivBackConverter">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/tvChooseCrypto"
@@ -27,7 +36,7 @@
             android:layout_height="wrap_content"
             android:inputType="none"
             android:dropDownHeight="200dp"
-            android:textColor="@color/grey"
+            android:textAppearance="@style/CustomTitleSettings"
             android:textSize="15sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -39,25 +48,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="72dp"
         android:layout_marginEnd="30dp"
         android:hint="@string/to"
         android:minEms="7"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toEndOf="@id/tlChooseCrypto"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@id/ivBackConverter">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/tvFiatCurrency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="none"
             android:dropDownHeight="200dp"
-            android:textColor="@color/grey"
+            android:inputType="none"
+            android:textAppearance="@style/CustomTitleSettings"
             android:textSize="15sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/etAmount"
@@ -72,8 +81,7 @@
         android:inputType="numberDecimal"
         android:paddingStart="17dp"
         android:paddingEnd="17dp"
-        android:textColor="@color/grey"
-        app:hintTextColor="@color/white"
+        android:textAppearance="@style/CustomTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tlChooseCrypto" />
@@ -92,7 +100,7 @@
         android:paddingVertical="13dp"
         android:text="@string/convert"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textAppearance="@style/CustomTitleSettings"
         android:textSize="18sp"
         android:textStyle="bold"
         app:cornerRadius="200dp"
@@ -110,28 +118,28 @@
         android:bufferType="editable"
         android:hint="@string/result"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textAppearance="@style/CustomTitleSettings"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnConvert" />
 
-
     <!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rvConverter"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.495"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tvResult"-->
-<!--        app:layout_constraintVertical_bias="1.0"-->
-<!--        app:spanCount="3"-->
-<!--        tools:itemCount="12"-->
-<!--        tools:listitem="@layout/single_numeric_button" />-->
+    <!--        android:id="@+id/rvConverter"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.495"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tvResult"-->
+    <!--        app:layout_constraintVertical_bias="1.0"-->
+    <!--        app:spanCount="3"-->
+    <!--        tools:itemCount="12"-->
+    <!--        tools:listitem="@layout/single_numeric_button" />-->
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
