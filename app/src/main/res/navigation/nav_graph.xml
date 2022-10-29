@@ -14,6 +14,10 @@
         android:id="@+id/action_reloadFavFragment"
         app:destination="@id/favoritesFragment"
          />
+    <action
+        android:id="@+id/action_toLogIn"
+        app:destination="@id/loginFragment"
+        />
 
     <action
         android:id="@+id/action_menuToChatFragment"
@@ -73,7 +77,11 @@
         android:id="@+id/converterFragment"
         android:name="com.example.cryptoappfinalproject.presentation.ui.converter.ConverterFragment"
         android:label="fragment_converter"
-        tools:layout="@layout/fragment_converter" />
+        tools:layout="@layout/fragment_converter" >
+        <action
+            android:id="@+id/action_converterFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.cryptoappfinalproject.presentation.ui.settings.SettingsFragment"
@@ -98,6 +106,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"

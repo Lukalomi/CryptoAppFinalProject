@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.FragmentLoginBinding
+import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -57,7 +59,7 @@ class LoginFragment : Fragment() {
                                 binding!!.pbLogin.visibility = View.GONE
                                 Toast.makeText(requireContext(), getString(R.string.you_are_logged_in), Toast.LENGTH_SHORT).show()
                                 findNavController()
-                                    .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                                    .navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
                             } else {
                                 binding!!.pbLogin.visibility = View.GONE
                                 Toast.makeText(
