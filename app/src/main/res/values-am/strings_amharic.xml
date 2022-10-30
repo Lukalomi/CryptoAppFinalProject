@@ -89,6 +89,14 @@
     <string name="you_signed_out">ዘግተህ ወጥተሃል</string>
     <string name="already_signed_out">አስቀድመው ዘግተው ወጥተዋል።</string>
 
+
+    <string name="support">ድጋፍ</string>
+    <string name="type_a_message">መልእክት ይተይቡ</string>
+    <string name="learn_about_crypto">ስለ Crypto ይማሩ</string>
+    <string name="message_sent">መልእክት ተልኳል።</string>
+    <string name="cant_sent_msg">dm መላክ አይቻልም</string>
+    <string name="go_to_web">ይህ እርምጃ ወደ ድር ይመራዎታል፣ መቀጠል ይፈልጋሉ?</string>
+
     <string-array name="CryptoCurrencies">
         <item>BTC</item>
         <item>ETH</item>
