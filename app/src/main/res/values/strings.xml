@@ -90,6 +90,11 @@
     <string name="you_signed_out">You Signed Out</string>
     <string name="already_signed_out">You are already signed out</string>
     <string name="support">Support</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="learn_about_crypto">Learn About Crypto</string>
+    <string name="message_sent">message has been sent</string>
+    <string name="cant_sent_msg">can\'t send a dm</string>
+    <string name="go_to_web">this action will redirect you to web, do you want to proceed?</string>
 
     <string-array name="CryptoCurrencies">
         <item>BTC</item>

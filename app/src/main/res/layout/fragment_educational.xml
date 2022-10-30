@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="54dp"
         android:layout_marginTop="16dp"
-        android:text="Learn About Crypto"
+        android:text="@string/learn_about_crypto"
         android:textAppearance="@style/CustomTitleSettings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.218"

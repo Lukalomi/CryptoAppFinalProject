@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.FragmentChatActivityBinding
 import com.example.cryptoappfinalproject.domain.MessageModel
 import com.example.cryptoappfinalproject.presentation.ui.adapters.MessageAdapter
@@ -109,7 +110,7 @@ class ChatActivityFragment : Fragment() {
                             adapter.submitList(messageList)
                             Toast.makeText(
                                 requireContext(),
-                                "message has been sent",
+                                getString(R.string.message_sent),
                                 Toast.LENGTH_SHORT
                             ).show()
                         } catch (e: Exception) {
@@ -121,7 +122,7 @@ class ChatActivityFragment : Fragment() {
                         try {
                             Toast.makeText(
                                 requireContext(),
-                                "can't send a dm",
+                                getString(R.string.cant_sent_msg),
                                 Toast.LENGTH_SHORT
                             ).show()
                         } catch (e: Exception) {

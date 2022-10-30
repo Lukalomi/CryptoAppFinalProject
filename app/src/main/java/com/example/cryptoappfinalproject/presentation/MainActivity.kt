@@ -91,15 +91,23 @@ class MainActivity : AppCompatActivity() {
                 true
             }
         }
+        if(firebaseAuth.currentUser == null) {
+            menuSupport.isVisible = false
+        }
+        if(firebaseAuth.currentUser != null) {
+            menuSupport.isVisible = true
+
+        }
 
         menuSupport.setOnMenuItemClickListener {
             if (firebaseAuth.currentUser!!.email == "llomi18@freeuni.edu.ge") {
                 navController.navigate(NavGraphDirections.actionMenuToChatFragment())
                 binding!!.drawer.closeDrawer(Gravity.LEFT)
-            } else {
+            } else if (firebaseAuth.currentUser!!.email != "llomi18@freeuni.edu.ge") {
                 navController.navigate(NavGraphDirections.actionMenuToChatActivityFragment("Support"))
                 binding!!.drawer.closeDrawer(Gravity.LEFT)
             }
+
 
             true
         }
