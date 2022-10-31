@@ -36,9 +36,10 @@
         android:layout_marginStart="48dp"
         android:layout_marginBottom="72dp"
         android:background="@drawable/message_box_background"
-        android:hint="Type a message"
+        android:hint="@string/type_a_message"
         android:paddingStart="15dp"
         android:paddingEnd="10dp"
+        android:inputType="text"
         android:drawableEnd="@drawable/ic_send_dm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -49,8 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="16dp"
-        android:text="Username"
-        android:textAppearance="@style/CustomTitleDark"
+        android:text="@string/user"
+        android:textAppearance="@style/CustomTitleSettings"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivBackChat"
         app:layout_constraintTop_toTopOf="parent" />

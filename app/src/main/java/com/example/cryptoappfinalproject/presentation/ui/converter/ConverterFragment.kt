@@ -11,6 +11,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.databinding.FragmentConverterBinding
@@ -40,6 +41,7 @@ class ConverterFragment : Fragment() {
         setUpConverter()
         convertCrypto()
         activateConvertButton()
+        backBtn()
 //        setupButtonsAdapter()
 //        onClickListeners()
 
@@ -52,6 +54,12 @@ class ConverterFragment : Fragment() {
         setDropDownItems()
 //        setAmountInput()
 
+    }
+
+    private fun backBtn() {
+        binding!!.ivBackConverter.setOnClickListener {
+            findNavController().navigate(ConverterFragmentDirections.actionConverterFragmentToHomeFragment())
+        }
     }
 
     private fun setDropDownItems(){

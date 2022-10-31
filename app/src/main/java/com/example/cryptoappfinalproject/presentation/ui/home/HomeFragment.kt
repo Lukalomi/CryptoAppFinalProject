@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -596,6 +597,8 @@ class HomeFragment : Fragment() {
 //        }
 //    }
 //
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

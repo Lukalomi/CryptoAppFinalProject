@@ -6,7 +6,8 @@ import androidx.room.TypeConverters
 import com.example.cryptoappfinalproject.common.BitmapConverter
 
 
-@Database(entities = [Crypto::class,Exchanges::class, UserInfo::class], version = 13)
+
+@Database(entities = [Crypto::class,Exchanges::class, UserInfo::class], version = 14)
 @TypeConverters(BitmapConverter::class)
 abstract class CryptoLocalDatabase: RoomDatabase() {
     abstract fun CryptoDao():CryptoDao

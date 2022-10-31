@@ -22,6 +22,7 @@
         app:repeat_toggle_modes="none"
         app:resize_mode="fixed_width"
         app:surface_type="surface_view"
+        app:show_buffering="always"
         app:use_controller="true" />
 
 

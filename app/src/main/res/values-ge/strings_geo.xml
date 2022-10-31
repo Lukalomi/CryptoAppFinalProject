@@ -80,4 +80,14 @@
     <string name="video_sevem">საუკეთესო ბირჟები 2022 წელს</string>
     <string name="video_eight">როგორ გავაკეთოთ ინვესტიცია კრიპტოში?</string>
 
+
+
+
+    <string name="support">ჩათი</string>
+    <string name="type_a_message">აკრიფეთ შეტყობინება…</string>
+    <string name="learn_about_crypto">კრიპტოსამყაროს შესახებ</string>
+    <string name="message_sent">მესიჯი გაიგზავნა</string>
+    <string name="cant_sent_msg">მესიჯი ვერ გაიგზავნა</string>
+    <string name="go_to_web">ნამდვილად გსურთ ბრაუზერში გადასვლა?</string>
+
 </resources>

@@ -70,13 +70,13 @@ class NewsFragment : Fragment() {
         binding!!.rvNews.adapter = adapter
         adapter.onClickListener = {
             val builder = AlertDialog.Builder(requireContext())
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
                 val uri:Uri = Uri.parse(it.newsUrl)
                 startActivity(Intent(Intent.ACTION_VIEW,uri))
             }
 
-            builder.setNegativeButton("No") { _, _ -> }
-            builder.setMessage("this action will redirect you to web, do you want to proceed?")
+            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
+            builder.setMessage(getString(R.string.go_to_web))
             builder.create().show()
 
 

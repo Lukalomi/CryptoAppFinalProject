@@ -8,6 +8,7 @@ import android.view.Gravity
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.findNavController
 
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -77,15 +78,38 @@ class MainActivity : AppCompatActivity() {
 
         val menuSignOut = navigationView.menu.getItem(4)
         val menuSupport = navigationView.menu.getItem(3)
+        val menuLogIn = navigationView.menu.getItem(0)
+
+        if(firebaseAuth.currentUser != null) {
+            menuLogIn.isVisible = false
+
+        }
+
+        if(firebaseAuth.currentUser == null ) {
+            menuLogIn.isVisible = true
+            menuLogIn.setOnMenuItemClickListener {
+                navController.navigate(NavGraphDirections.actionToLogIn())
+                binding!!.drawer.closeDrawer(Gravity.LEFT)
+                true
+            }
+        }
+        if(firebaseAuth.currentUser == null) {
+            menuSupport.isVisible = false
+        }
+        if(firebaseAuth.currentUser != null) {
+            menuSupport.isVisible = true
+
+        }
 
         menuSupport.setOnMenuItemClickListener {
             if (firebaseAuth.currentUser!!.email == "llomi18@freeuni.edu.ge") {
                 navController.navigate(NavGraphDirections.actionMenuToChatFragment())
                 binding!!.drawer.closeDrawer(Gravity.LEFT)
-            } else {
+            } else if (firebaseAuth.currentUser!!.email != "llomi18@freeuni.edu.ge") {
                 navController.navigate(NavGraphDirections.actionMenuToChatActivityFragment("Support"))
                 binding!!.drawer.closeDrawer(Gravity.LEFT)
             }
+
 
             true
         }

@@ -27,7 +27,7 @@
         android:text="Sent Message"
         android:background ="@drawable/dm_backgroun"
         android:textSize="18sp"
-        android:textAppearance="@style/CustomTitle"
+        android:textAppearance="@style/CustomTitleSettings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

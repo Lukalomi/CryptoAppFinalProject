@@ -28,6 +28,8 @@ import com.example.cryptoappfinalproject.presentation.ui.registration.Registrati
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -193,7 +195,8 @@ class SettingsFragment() : Fragment() {
 
     private fun populateUserInfo() {
         viewLifecycleOwner.lifecycleScope.launch {
-            settingsViewModel.readAllUserInfo().collect {
+            settingsViewModel.readAllUserInfo().onStart {
+            }.collect {
                 it.forEach {
                     binding!!.apply {
                         if (Firebase.auth.currentUser != null) {
@@ -207,6 +210,8 @@ class SettingsFragment() : Fragment() {
                                 .load(it.image)
                                 .error(R.drawable.ic_launcher_background)
                                 .into(ivUserSettings)
+                            binding!!.pbSettings.visibility = View.GONE
+
                         }
                     }
 

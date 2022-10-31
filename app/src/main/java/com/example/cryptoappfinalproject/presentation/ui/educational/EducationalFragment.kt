@@ -117,6 +117,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         val dialog = Dialog(requireContext())
         player = SimpleExoPlayer.Builder(requireContext()).build()
         dialogBinding.findViewById<PlayerView>(R.id.playerViewDialog).player = player
+        
         dialog.setContentView(dialogBinding)
         dialog.setCancelable(true)
         dialog.setOnDismissListener {
