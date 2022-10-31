@@ -1,6 +1,6 @@
 package com.example.cryptoappfinalproject.data.remote.repositoryImpl
 
-import com.example.cryptoappfinalproject.data.remote.FetchedNews
+import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchedNews
 import com.example.cryptoappfinalproject.data.remote.dto.toCryptoNewsModel
 import com.example.cryptoappfinalproject.domain.model.CryptoNewsModel
 import com.example.cryptoappfinalproject.domain.repository.CryptoNewsRepository

@@ -1,6 +1,6 @@
 package com.example.cryptoappfinalproject.data.remote.repositoryImpl
 
-import com.example.cryptoappfinalproject.data.remote.FetchVideoTitles
+import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchVideoTitles
 import com.example.cryptoappfinalproject.data.remote.dto.toVideoTitleModel
 import com.example.cryptoappfinalproject.domain.model.VideoTitleModel
 import com.example.cryptoappfinalproject.domain.repository.VideoTitleRepository

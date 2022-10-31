@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoappfinalproject.databinding.ReceivedDmBinding
 import com.example.cryptoappfinalproject.databinding.SentDmBinding
-import com.example.cryptoappfinalproject.domain.MessageModel
+import com.example.cryptoappfinalproject.domain.model.MessageModel
 import com.google.firebase.auth.FirebaseAuth
 
 

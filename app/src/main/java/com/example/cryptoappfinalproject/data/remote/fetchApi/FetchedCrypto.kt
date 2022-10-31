@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject.data.remote
+package com.example.cryptoappfinalproject.data.remote.fetchApi
 
 import com.example.cryptoappfinalproject.common.ApiEndPoints
 import com.example.cryptoappfinalproject.data.remote.dto.CryptoCoinsModelDto
@@ -16,7 +16,7 @@ interface FetchedCrypto {
     suspend fun searchExchanges(): Response<MutableList<CryptoExchangesModelDto.CryptoExchangesModelItem>>
 
     @GET(ApiEndPoints.searchCoins)
-    suspend fun searchCoins(@Query("query") query: String):Response<MutableList<CryptoSearchModelDto.Coin>>
+    suspend fun searchCoins(@Query("query") query: String): CryptoSearchModelDto
 
 
 

@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentRegistrationBinding
-import com.example.cryptoappfinalproject.domain.FirebaseUser
+import com.example.cryptoappfinalproject.domain.model.FirebaseUserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -93,11 +93,9 @@ class RegistrationFragment : Fragment() {
                     password = password
                 )
 
-
                 if (name.isNotEmpty() && surname.isNotEmpty() &&
                     email.isNotEmpty() && password.isNotEmpty() && repeatPassword.isNotEmpty()
                 ) {
-
                     try {
                         binding!!.pbRegister.visibility = View.VISIBLE
                         FirebaseAuth.getInstance().createUserWithEmailAndPassword(
@@ -110,12 +108,20 @@ class RegistrationFragment : Fragment() {
                                 binding!!.pbRegister.visibility = View.GONE
 
                                 val userId = FirebaseAuth.getInstance().currentUser!!.uid
-                                db.collection("users").document(userId).set(FirebaseUser(name, email, userId))
+                                db.collection("users").document(userId)
+                                    .set(FirebaseUserModel(name, email, userId))
                                     .addOnSuccessListener {
-                                        Toast.makeText(requireContext(),"success!",Toast.LENGTH_LONG).show()
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "success!",
+                                            Toast.LENGTH_LONG
+                                        ).show()
                                     }.addOnFailureListener {
-                                        Toast.makeText(requireContext(),"loser!!!",Toast.LENGTH_LONG).show()
-
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "loser!!!",
+                                            Toast.LENGTH_LONG
+                                        ).show()
                                     }
                                 findNavController()
                                     .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
@@ -126,29 +132,22 @@ class RegistrationFragment : Fragment() {
                                     it.exception.toString(),
                                     Toast.LENGTH_LONG
                                 ).show()
-
                             }
                         }
-
                     } catch (e: Exception) {
                         Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
-
                     }
-
-
                 }
 
                 if (name.isEmpty() || surname.isEmpty() ||
                     email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()
                 ) {
-
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.fill_every_field),
                         Toast.LENGTH_SHORT
                     )
                         .show()
-
                 }
 
                 if (password != repeatPassword) {
@@ -159,14 +158,10 @@ class RegistrationFragment : Fragment() {
                     ).show()
                     return@setOnClickListener
                 }
-
             }
-
-
         }
+
     }
-
-
 
 
     private fun goBack() {

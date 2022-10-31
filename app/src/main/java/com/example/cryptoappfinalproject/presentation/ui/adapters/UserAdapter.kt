@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoappfinalproject.databinding.SingleUserBinding
-import com.example.cryptoappfinalproject.domain.FirebaseUser
+import com.example.cryptoappfinalproject.domain.model.FirebaseUserModel
 
 class UserAdapter(
     private val context: Context,
-    var onClickListener: ((FirebaseUser) -> Unit)? = null
+    var onClickListener: ((FirebaseUserModel) -> Unit)? = null
 ) : RecyclerView.Adapter<UserAdapter.ItemViewHolder>() {
 
-    var list: MutableList<FirebaseUser> = mutableListOf()
-    fun submitList(newList: MutableList<FirebaseUser>) {
+    var list: MutableList<FirebaseUserModel> = mutableListOf()
+    fun submitList(newList: MutableList<FirebaseUserModel>) {
         list = newList
     }
 

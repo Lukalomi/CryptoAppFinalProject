@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject.domain
+package com.example.cryptoappfinalproject.domain.model
 
 data class MessageModel(
     var message: String? = null,

@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject.ui.chat
+package com.example.cryptoappfinalproject.presentation.ui.chat
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptoappfinalproject.databinding.FragmentChatBinding
-import com.example.cryptoappfinalproject.domain.FirebaseUser
+import com.example.cryptoappfinalproject.domain.model.FirebaseUserModel
 import com.example.cryptoappfinalproject.presentation.ui.adapters.UserAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
@@ -21,7 +21,7 @@ class ChatFragment : Fragment() {
     private lateinit var viewModel: ChatViewModel
     private lateinit var adapter: UserAdapter
     private lateinit var auth: FirebaseAuth
-val userList:MutableList<FirebaseUser> = mutableListOf()
+val userList:MutableList<FirebaseUserModel> = mutableListOf()
 
 
     override fun onCreateView(
@@ -50,7 +50,7 @@ val userList:MutableList<FirebaseUser> = mutableListOf()
                for(dc:DocumentChange in value!!.documentChanges) {
                    if(dc.type == DocumentChange.Type.ADDED && !dc.document.toString().contains(auth.currentUser!!.uid)) {
 
-                       userList.add(dc.document.toObject(FirebaseUser::class.java))
+                       userList.add(dc.document.toObject(FirebaseUserModel::class.java))
                    }
                }
 

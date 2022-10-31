@@ -1,7 +1,9 @@
 package com.example.cryptoappfinalproject.domain.model
 
 
-data class CryptoNewsModel(val data: List<Data>?) {
+data class CryptoNewsModel(
+    val data: List<Data>?
+    ) {
     data class Data(
         val newsUrl: String?,
         val imageUrl: String?,

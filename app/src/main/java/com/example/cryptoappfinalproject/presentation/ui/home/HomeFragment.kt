@@ -18,7 +18,6 @@ import androidx.navigation.ui.NavigationUI
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.*
 import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.data.local.Crypto
@@ -34,8 +33,6 @@ import com.example.cryptoappfinalproject.presentation.ui.adapters.MovieLoadState
 import com.example.cryptoappfinalproject.presentation.ui.favorites.*
 import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
@@ -70,7 +67,7 @@ class HomeFragment : Fragment() {
 
         searchCryptos()
         addCoinsToFavList()
-        populateProfilePicture()
+//        populateProfilePicture()
         openDrawer()
         recyclerScrollState()
 
@@ -182,8 +179,10 @@ class HomeFragment : Fragment() {
 
 
     private fun getAllExchanges() {
+        viewModel.getExchanges()
+
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getExchanges().collect {
+            viewModel.exchangesState.collect {
                 when (it) {
                     is Resource.Success -> {
                         setExchangesAdapter()
@@ -463,7 +462,7 @@ class HomeFragment : Fragment() {
         var displayList: MutableList<CryptoSearchModel.Coin> = mutableListOf()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.newState.collect {
+                viewModel.searchState.collect {
                     when (it) {
                         is Resource.Success -> {
                             binding!!.svHome.setOnQueryTextListener(object :
@@ -513,7 +512,7 @@ class HomeFragment : Fragment() {
             mutableListOf()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.getExchanges().collect {
+                viewModel.exchangesState.collect {
                     when (it) {
                         is Resource.Success -> {
                             binding!!.svHome.setOnQueryTextListener(object :
@@ -567,36 +566,36 @@ class HomeFragment : Fragment() {
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
 
-    private fun populateProfilePicture() {
-
-        lifecycleScope.launch {
-            viewModelReg.readAllUserInfo().collect {
-                val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
-                val drawerProfileName = activity!!.findViewById<TextView>(R.id.tvUsernameHeader)
-
-                if (Firebase.auth.currentUser != null) {
-                    it.forEach {
-                        Glide.with(requireContext())
-                            .load(it.image)
-                            .error(R.drawable.ic_launcher_background)
-                            .into(profilePicture)
-                        drawerProfileName.text = it.name + " " + it.surname
-
-                    }
-
-                } else {
-                    Glide.with(requireContext())
-                        .load(R.drawable.ic_person)
-                        .error(R.drawable.ic_launcher_background)
-                        .into(profilePicture)
-                    drawerProfileName.text = ""
-
-                }
-
-            }
-        }
-    }
-
+//    private fun populateProfilePicture() {
+//
+//        lifecycleScope.launch {
+//            viewModelReg.readAllUserInfo().collect {
+//                val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
+//                val drawerProfileName = activity!!.findViewById<TextView>(R.id.tvUsernameHeader)
+//
+//                if (Firebase.auth.currentUser != null) {
+//                    it.forEach {
+//                        Glide.with(requireContext())
+//                            .load(it.image)
+//                            .error(R.drawable.ic_launcher_background)
+//                            .into(profilePicture)
+//                        drawerProfileName.text = it.name + " " + it.surname
+//
+//                    }
+//
+//                } else {
+//                    Glide.with(requireContext())
+//                        .load(R.drawable.ic_person)
+//                        .error(R.drawable.ic_launcher_background)
+//                        .into(profilePicture)
+//                    drawerProfileName.text = ""
+//
+//                }
+//
+//            }
+//        }
+//    }
+//
 
     override fun onDestroyView() {
         super.onDestroyView()

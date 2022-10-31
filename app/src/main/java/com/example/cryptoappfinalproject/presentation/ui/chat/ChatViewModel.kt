@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject.ui.chat
+package com.example.cryptoappfinalproject.presentation.ui.chat
 
 import androidx.lifecycle.ViewModel
 

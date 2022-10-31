@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject.data.remote
+package com.example.cryptoappfinalproject.data.remote.fetchApi
 
 import com.example.cryptoappfinalproject.common.ConversionEndPoint
 import com.example.cryptoappfinalproject.data.remote.dto.CryptoConverterModelDto
@@ -6,7 +6,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface FetchedConversion {
+interface FetchedConvert {
 
     @GET(ConversionEndPoint.convertCoins)
     suspend fun convertCoins(
