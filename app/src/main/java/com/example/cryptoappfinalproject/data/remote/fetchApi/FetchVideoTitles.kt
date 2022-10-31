@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject.data.remote
+package com.example.cryptoappfinalproject.data.remote.fetchApi
 
 import com.example.cryptoappfinalproject.common.ApiEndPoints
 import com.example.cryptoappfinalproject.data.remote.dto.VideoTitleModelDto

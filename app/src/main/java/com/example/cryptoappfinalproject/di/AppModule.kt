@@ -5,10 +5,10 @@ import androidx.room.Room
 import com.example.cryptoappfinalproject.common.ApiEndPoints
 import com.example.cryptoappfinalproject.common.ConversionEndPoint
 import com.example.cryptoappfinalproject.data.local.CryptoLocalDatabase
-import com.example.cryptoappfinalproject.data.remote.FetchVideoTitles
-import com.example.cryptoappfinalproject.data.remote.FetchedConversion
-import com.example.cryptoappfinalproject.data.remote.FetchedCrypto
-import com.example.cryptoappfinalproject.data.remote.FetchedNews
+import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchVideoTitles
+import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchedConvert
+import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchedCrypto
+import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchedNews
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -74,10 +74,10 @@ object AppModule {
 
         @Singleton
         @Provides
-        fun convertCrypto(): FetchedConversion =
+        fun convertCrypto(): FetchedConvert =
             Retrofit.Builder().baseUrl(ConversionEndPoint.BASE_URL).client(providesOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create()).build()
-                .create(FetchedConversion::class.java)
+                .create(FetchedConvert::class.java)
 
     }
 }

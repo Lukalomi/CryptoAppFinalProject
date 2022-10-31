@@ -3,12 +3,12 @@ package com.example.cryptoappfinalproject.data.remote.dto
 import com.example.cryptoappfinalproject.domain.model.CryptoSearchModel
 import com.google.gson.annotations.SerializedName
 
-class CryptoSearchModelDto(
+data class CryptoSearchModelDto(
     val coins: MutableList<Coin>?,
     val exchanges: MutableList<Exchange?>?,
     val icos: List<Any?>?,
     val categories: List<Category?>?,
-    val nfts: List<Nft?>?
+    val nft: List<Nft?>?
 ) {
     data class Coin(
         val id: String?,

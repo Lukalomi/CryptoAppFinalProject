@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentRegistrationBinding
-import com.example.cryptoappfinalproject.domain.FirebaseUser
+import com.example.cryptoappfinalproject.domain.model.FirebaseUserModel
 import com.example.cryptoappfinalproject.presentation.ui.login.LoginFragmentDirections
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -94,7 +94,6 @@ class RegistrationFragment : Fragment() {
                     password = password
                 )
 
-
                 if (name.isNotEmpty() && surname.isNotEmpty() &&
                     email.isNotEmpty() && password.isNotEmpty() && repeatPassword.isNotEmpty()
                 ) {
@@ -111,7 +110,7 @@ class RegistrationFragment : Fragment() {
 
                                 val userId = FirebaseAuth.getInstance().currentUser!!.uid
                                 db.collection("users").document(userId)
-                                    .set(FirebaseUser(name, email, userId))
+                                    .set(FirebaseUserModel(name, email, userId))
                                     .addOnSuccessListener {
                                         Toast.makeText(
                                             requireContext(),
@@ -124,7 +123,6 @@ class RegistrationFragment : Fragment() {
                                             "loser!!!",
                                             Toast.LENGTH_LONG
                                         ).show()
-
                                     }
                                 findNavController()
                                     .navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
@@ -135,76 +133,65 @@ class RegistrationFragment : Fragment() {
                                     it.exception.toString(),
                                     Toast.LENGTH_LONG
                                 ).show()
-
                             }
                         }
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
                     }
-                        catch(e: Exception) {
-                            Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
-
-                        }
-
-
-                    }
-
-                    if (name.isEmpty() || surname.isEmpty() ||
-                        email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()
-                    ) {
-
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.fill_every_field),
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-
-                    }
-
-                    if (password != repeatPassword) {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.pass_dont_match),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        return@setOnClickListener
-                    }
-
                 }
 
+                if (name.isEmpty() || surname.isEmpty() ||
+                    email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()
+                ) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.fill_every_field),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
 
+                if (password != repeatPassword) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.pass_dont_match),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
             }
-        }
-
-
-
-
-        private fun goBack() {
-            binding?.btnBack?.setOnClickListener {
-                findNavController()
-                    .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
-            }
-        }
-
-        private fun checkLoggedInstance() {
-            if (FirebaseAuth.getInstance().currentUser == null) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.havent_registered),
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.you_are_registered),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            binding = null
         }
 
     }
+
+
+    private fun goBack() {
+        binding?.btnBack?.setOnClickListener {
+            findNavController()
+                .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
+        }
+    }
+
+    private fun checkLoggedInstance() {
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.havent_registered),
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.you_are_registered),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
+}

@@ -9,7 +9,7 @@ data class Crypto(
     @PrimaryKey(autoGenerate = true)
     val uid: Int,
     @ColumnInfo(name = "image")
-    val image: String,
+    val image: String?,
     @ColumnInfo(name = "original_title")
     val originalTitle: String,
     @ColumnInfo(name = "marketcap_Rank")

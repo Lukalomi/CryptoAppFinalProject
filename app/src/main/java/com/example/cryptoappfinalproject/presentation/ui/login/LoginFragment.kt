@@ -35,6 +35,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loginListeners()
+        registerListener()
+        backListener()
 
     }
 
@@ -98,16 +100,20 @@ class LoginFragment : Fragment() {
             }
         }
 
-        binding?.btnBack?.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
-        }
+    }
 
+
+    private fun registerListener() {
         binding?.btnRegister?.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegistrationFragment())
         }
-
     }
 
+    private fun backListener() {
+        binding?.btnBack?.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+        }
+    }
 
 
 

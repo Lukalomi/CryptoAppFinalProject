@@ -1,4 +1,4 @@
-package com.example.cryptoappfinalproject.ui.chat
+package com.example.cryptoappfinalproject.presentation.ui.chat
 
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +14,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.FragmentChatActivityBinding
-import com.example.cryptoappfinalproject.domain.MessageModel
+import com.example.cryptoappfinalproject.domain.model.MessageModel
 import com.example.cryptoappfinalproject.presentation.ui.adapters.MessageAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*

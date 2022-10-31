@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -80,25 +81,25 @@ class ConverterFragment : Fragment() {
     }
 
     private fun convertCrypto() {
-
         binding?.btnConvert?.setOnClickListener {
             val amount = binding?.etAmount?.text.toString()
             val fromCrypto = binding?.tvChooseCrypto?.text.toString()
             val toCurrency = binding?.tvFiatCurrency?.text.toString()
 
+            viewModel.convertCrypto(fromCrypto, toCurrency, amount)
 
             viewLifecycleOwner.lifecycleScope.launch {
-                viewModel.convertCrypto(from = fromCrypto, to = toCurrency, amount = amount).collect {
+                viewModel.state.collect {
                     when (it) {
-                        is Resource.Error -> Log.d("error", "${it.errorMsg}")
+                        is Resource.Error -> Log.d("error", it.errorMsg)
 
                         is Resource.Loader -> Log.d("loader", "loading")
 
                         is Resource.Success -> {
 
-                            binding?.tvResult?.text = it.data.result.toString().dropLast(2)
+                            binding?.tvResult?.text = it.data.result.toString().dropLast(4)
 
-                            Log.d("convert",  "${it.data.result.toString()}")
+                            Log.d("convert", it.data.toString())
 
                         }
                     }
