@@ -93,7 +93,7 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
                             if (it.isSuccessful) {
                                 checkLoggedInstance()
 
-                                registrationViewModel.insertUserInfo(user)
+                                viewModel.insertUserInfo(user)
                                 binding!!.pbRegister.visibility = View.GONE
 
                                 val userId = FirebaseAuth.getInstance().currentUser!!.uid
