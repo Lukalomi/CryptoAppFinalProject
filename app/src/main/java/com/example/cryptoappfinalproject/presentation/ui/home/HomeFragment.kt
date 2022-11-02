@@ -1,8 +1,16 @@
 package com.example.cryptoappfinalproject.presentation.ui.home
 
 import android.app.AlertDialog
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import android.widget.*
+import androidx.appcompat.widget.AppCompatImageButton
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.cardview.widget.CardView
 import android.view.Gravity
 import android.view.View
 import android.widget.SearchView
@@ -19,6 +27,8 @@ import androidx.navigation.ui.NavigationUI
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.cryptoappfinalproject.*
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.common.BaseFragment
 import com.example.cryptoappfinalproject.common.Resource
@@ -35,6 +45,8 @@ import com.example.cryptoappfinalproject.presentation.ui.adapters.MovieLoadState
 import com.example.cryptoappfinalproject.presentation.ui.favorites.*
 import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
@@ -62,12 +74,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
         searchCryptos()
         addCoinsToFavList()
-//        populateProfilePicture()
+        populateProfilePicture()
         openDrawer()
         recyclerScrollState()
 
 
-    }
 
 
 
@@ -88,6 +99,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 requireContext(),
                 R.color.grey
             )
+            binding!!.svHome.setQuery("", true)
+            binding!!.svHome.clearFocus()
         )
 
         binding.tvCryptoAssets.setTextColor(
@@ -225,15 +238,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         binding.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(activity)
         binding.rvHomeCryptoAssets.adapter = homeAdapter
 
-        binding.rvHomeCryptoAssets.adapter = homeAdapter.withLoadStateFooter(
-            footer= MovieLoadStateAdapter{homeAdapter.retry()}
+
+        binding!!.rvHomeCryptoAssets.adapter = homeAdapter.withLoadStateFooter(
+            footer = MovieLoadStateAdapter { homeAdapter.retry() }
+
         )
         homeAdapter.onFavListener = {
             favoritesListener(it)
         }
 
-
     }
+
+
 
 
     private fun setSearchAdapter() {
@@ -243,6 +259,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         searchAdapter.onClickListener = {
             favoritesSearchListener(it)
         }
+
     }
 
 
@@ -252,6 +269,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         binding.rvHomeCryptoAssets.adapter = adapterExchanges
         adapterExchanges.onClickListener = {
             favoritesExchangesListener(it)
+
         }
     }
 
@@ -273,7 +291,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
 
                 viewLifecycleOwner.lifecycleScope.launch {
-
                     viewModelFav.insertCrypto(crypto)
                     favList.add(crypto)
 
@@ -282,15 +299,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                         "${crypto.originalTitle}  ${resources.getString(R.string.been_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
-
-
                 }
-
             }
-            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
-            builder.setTitle("${resources.getString(R.string.add)}  ${crypto.originalTitle}?")
-            builder.setMessage("${resources.getString(R.string.sure_to_add)} ${crypto.originalTitle}  ${resources.getString(R.string.to_cryptos)}?")
-            builder.create().show()
         }
         if (favList.toString().contains(crypto.originalTitle)) {
 
@@ -299,16 +309,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 "${crypto.originalTitle}  ${resources.getString(R.string.already_added)}",
                 Toast.LENGTH_SHORT
             ).show()
-//            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
-//                viewLifecycleOwner.lifecycleScope.launch {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "${crypto.originalTitle}  ${resources.getString(R.string.already_added)}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//
-//                }
-//            }
+
         }
         if (!favList.toString().contains(crypto.originalTitle)) {
 
@@ -327,11 +328,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             }
             builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
             builder.setTitle("${resources.getString(R.string.add)}  ${crypto.originalTitle}?")
-            builder.setMessage("${resources.getString(R.string.sure_to_add)} ${crypto.originalTitle}  ${resources.getString(R.string.to_cryptos)}?")
+            builder.setMessage(
+                "${resources.getString(R.string.sure_to_add)} ${crypto.originalTitle}  ${
+                    resources.getString(
+                        R.string.to_cryptos
+                    )
+                }?"
+            )
             builder.create().show()
+
         }
-
-
 
 
     }
@@ -356,7 +362,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                     favExchanges.add(exchange)
                     Toast.makeText(
                         requireContext(),
-                         "${exchange.title}  ${resources.getString(R.string.been_added)}",
+                        "${exchange.title}  ${resources.getString(R.string.been_added)}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -394,7 +400,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
         builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
         builder.setTitle("${resources.getString(R.string.add)}  ${exchange.title}?")
-        builder.setMessage("${resources.getString(R.string.sure_to_add)} ${exchange.title} ${resources.getString(R.string.to_cryptos)}?")
+        builder.setMessage(
+            "${resources.getString(R.string.sure_to_add)} ${exchange.title} ${
+                resources.getString(
+                    R.string.to_cryptos
+                )
+            }?"
+        )
         builder.create().show()
 
 
@@ -460,7 +472,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
         builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
         builder.setTitle("${resources.getString(R.string.add)} ${crypto.originalTitle}?")
-        builder.setMessage("${resources.getString(R.string.sure_to_add)} ${crypto.originalTitle} ${resources.getString(R.string.to_cryptos)}?")
+        builder.setMessage(
+            "${resources.getString(R.string.sure_to_add)} ${crypto.originalTitle} ${
+                resources.getString(
+                    R.string.to_cryptos
+                )
+            }?"
+        )
         builder.create().show()
 
     }
@@ -564,6 +582,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        binding!!.svHome.setQuery("", true)
+
+    }
+
     private fun setUpBottomNavigation() {
         val navHostFragment =
             activity!!.supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -573,37 +597,55 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
 
-//    private fun populateProfilePicture() {
-//
-//        lifecycleScope.launch {
-//            viewModelReg.readAllUserInfo().collect {
-//                val profilePicture = activity!!.findViewById<ImageView>(R.id.ivUserPhoto)
-//                val drawerProfileName = activity!!.findViewById<TextView>(R.id.tvUsernameHeader)
-//
-//                if (Firebase.auth.currentUser != null) {
-//                    it.forEach {
-//                        Glide.with(requireContext())
-//                            .load(it.image)
-//                            .error(R.drawable.ic_launcher_background)
-//                            .into(profilePicture)
-//                        drawerProfileName.text = it.name + " " + it.surname
-//
-//                    }
-//
-//                } else {
-//                    Glide.with(requireContext())
-//                        .load(R.drawable.ic_person)
-//                        .error(R.drawable.ic_launcher_background)
-//                        .into(profilePicture)
-//                    drawerProfileName.text = ""
-//
-//                }
-//
-//            }
-//        }
-//    }
-//
+    private fun populateProfilePicture() {
 
+        lifecycleScope.launch {
+            viewModelReg.readAllUserInfo().collect {
+                val profilePicture = activity?.findViewById<ImageView>(R.id.ivUserPhoto)
+                val drawerProfileName = activity?.findViewById<TextView>(R.id.tvUsernameHeader)
+
+                if (Firebase.auth.currentUser != null) {
+                    it.forEach {
+                        if (profilePicture != null) {
+                            Glide.with(requireContext())
+                                .load(it.image)
+                                .error(R.drawable.ic_launcher_background)
+                                .into(profilePicture)
+                            requireActivity().findViewById<ProgressBar>(R.id.pbProfilePic).visibility =
+                                View.GONE
+                            requireActivity().findViewById<CardView>(R.id.cvUserPhoto).visibility =
+                                View.VISIBLE
+                        }
+                        if (drawerProfileName != null) {
+                            drawerProfileName.text = it.name + " " + it.surname
+                            requireActivity().findViewById<ProgressBar>(R.id.pbProfilePic).visibility =
+                                View.GONE
+                            requireActivity().findViewById<CardView>(R.id.cvUserPhoto).visibility =
+                                View.VISIBLE
+                        }
+
+                    }
+
+                } else {
+                    if (profilePicture != null) {
+                        Glide.with(requireContext())
+                            .load(R.drawable.ic_person)
+                            .error(R.drawable.ic_launcher_background)
+                            .into(profilePicture)
+                    }
+                    if (drawerProfileName != null) {
+                        drawerProfileName.text = ""
+                        requireActivity().findViewById<ProgressBar>(R.id.pbProfilePic).visibility =
+                            View.GONE
+                        requireActivity().findViewById<CardView>(R.id.cvUserPhoto).visibility =
+                            View.VISIBLE
+                    }
+
+                }
+
+            }
+        }
+    }
 
 
     override fun onDestroyView() {

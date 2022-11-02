@@ -1,80 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/constraintLayout"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".presentation.ui.home.HomeFragment">
+
+
+    <SearchView
+        android:id="@+id/svHome"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="104dp"
+        android:background="@drawable/searchview_background"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="@string/search"
+        android:searchIcon="@drawable/search_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnAuth"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnAuth"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_profile_svg"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        tools:context=".presentation.ui.home.HomeFragment">
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svHome">
 
-
-        <SearchView
-            android:id="@+id/svHome"
-            android:layout_width="230dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="104dp"
-            android:background="@drawable/searchview_background"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@android:color/transparent"
-            android:queryHint="@string/search"
-            android:searchIcon="@drawable/search_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnAuth"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnAuth"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_profile_svg"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tvCryptoAssets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:background="@null"
             android:foreground="?android:attr/selectableItemBackground"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:text="@string/cryptoassets"
+            android:textAppearance="@style/CustomTitle" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/svHome">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tvExchanges"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:text="@string/exchanges"
+            android:textAppearance="@style/CustomTitleDark" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/tvCryptoAssets"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:background="@null"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                android:text="@string/cryptoassets"
-                android:textAppearance="@style/CustomTitle"
-                 />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/tvExchanges"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                android:text="@string/exchanges"
-                android:textAppearance="@style/CustomTitleDark"
-                />
-
-        </LinearLayout>
-
+    </LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -90,15 +87,15 @@
         tools:listitem="@layout/single_crypto" />
 
 
-        <ProgressBar
-            android:id="@+id/pbHome"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:indeterminateTint="#F3E90B"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/rvHomeCryptoAssets" />
+    <ProgressBar
+        android:id="@+id/pbHome"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:indeterminateTint="#F3E90B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rvHomeCryptoAssets" />
 
 
 
@@ -109,10 +106,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="500dp"
         android:src="@drawable/ic_arrow_up"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.79"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@+id/rvHomeCryptoAssets" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

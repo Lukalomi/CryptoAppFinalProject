@@ -1,8 +1,14 @@
 package com.example.cryptoappfinalproject
 
 import android.app.Application
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
 import com.example.cryptoappfinalproject.presentation.MainActivity
@@ -33,6 +39,7 @@ class App : MultiDexApplication() {
         val intent = Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent)
 
+        isOnline(appContext)
     }
 
 
@@ -53,6 +60,55 @@ class App : MultiDexApplication() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
+
+
+    private fun isOnline(context: Context,): Boolean {
+
+
+
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val capabilities =
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+
+
+        connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                val intent = Intent(context, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent)
+                Toast.makeText(context, "Connection Restored", Toast.LENGTH_LONG).show()
+
+            }
+
+            override fun onLost(network: Network) {
+                Toast.makeText(context, "No Internet Connection", Toast.LENGTH_LONG).show()
+            }
+        })
+
+        if (connectivityManager != null) {
+
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    return true
+                }
+            }
+
+        }
+        if (capabilities == null) {
+            Log.i("Internet", "no int")
+            Toast.makeText(context, "No Internet Connection", Toast.LENGTH_LONG).show()
+        }
+
+        return false
+    }
+
 
 
 

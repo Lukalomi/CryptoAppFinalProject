@@ -50,7 +50,7 @@ class SettingsFragment() : BaseFragment<FragmentSettingsBinding, SettingsViewMod
         context.getSharedPreferences("languagePref", 0)
     val langEdit: SharedPreferences.Editor = languagePref.edit()
 
-    private val customList = mutableListOf(
+      private val customList = mutableListOf(
         "Choose", "En", "Geo", "Amh"
     )
 
@@ -66,10 +66,23 @@ class SettingsFragment() : BaseFragment<FragmentSettingsBinding, SettingsViewMod
         setDayMode()
         setSpinner()
 
+
+        val state = requireActivity().getSharedPreferences("languagePref", 0).getString("Language", "en")
+        if(state =="en")
+            customList[0] = "En"
+
+        if(state == "ge") {
+            customList[0] = "Geo"
+        }
+
+        if(state == "amharic") {
+            customList[0] = "Amh"
+        }
     }
 
 
     private fun setSpinner() {
+        val state = requireActivity().getSharedPreferences("languagePref", 0).getString("Language", "en")
 
         val spinnerAdapter = ArrayAdapter(
             requireContext(),
@@ -87,53 +100,88 @@ class SettingsFragment() : BaseFragment<FragmentSettingsBinding, SettingsViewMod
                     position: Int,
                     id: Long
                 ) {
+                    customList[0] = "Choose"
+
                     when (position) {
                         0 -> {
 
                         }
                         1 -> {
-                            langEdit.putString("Language", "en")
-                            langEdit.apply()
-                            changeLanguage("en")
-                            val i: Intent? = context.packageManager
-                                .getLaunchIntentForPackage(context.packageName)
-                            if (i != null) {
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+                            if(state != "en") {
+                                langEdit.putString("Language", "en")
+                                langEdit.apply()
+                                changeLanguage("en")
+                                val i: Intent? = context.getPackageManager()
+                                    .getLaunchIntentForPackage(context.getPackageName())
+                                if (i != null) {
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                }
+                                activity?.finish()
+                                startActivity(i)
                             }
-                            activity?.finish()
-                            startActivity(i)
+                            else{
+                                Toast.makeText(requireContext(),getString(R.string.lang_already_set),Toast.LENGTH_SHORT).show()
+
+
+                            }
+
+
                         }
 
                         2 -> {
-                            langEdit.putString("Language", "ge")
-                            langEdit.apply()
-                            changeLanguage("ge")
-                            val i: Intent? = context.packageManager
-                                .getLaunchIntentForPackage(context.packageName)
-                            if (i != null) {
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+                            if(state != "ge") {
+                                langEdit.putString("Language", "ge")
+                                langEdit.apply()
+                                changeLanguage("ge")
+
+                                val i: Intent? = context.getPackageManager()
+                                    .getLaunchIntentForPackage(context.getPackageName())
+                                if (i != null) {
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                }
+                                activity?.finish()
+                                startActivity(i)
+
                             }
-                            activity?.finish()
-                            startActivity(i)
+                            else{
+                                Toast.makeText(requireContext(),getString(R.string.lang_already_set),Toast.LENGTH_SHORT).show()
+
+                            }
+
+
                         }
                         3 -> {
-                            langEdit.putString("Language", "amharic")
-                            langEdit.apply()
-                            changeLanguage("am")
-                            val i: Intent? = context.packageManager
-                                .getLaunchIntentForPackage(context.packageName)
-                            if (i != null) {
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+
+                            if(state != "amharic") {
+                                langEdit.putString("Language", "amharic")
+                                langEdit.apply()
+                                changeLanguage("am")
+
+                                val i: Intent? = context.getPackageManager()
+                                    .getLaunchIntentForPackage(context.getPackageName())
+                                if (i != null) {
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                }
+                                activity?.finish()
+                                startActivity(i)
                             }
-                            activity?.finish()
-                            startActivity(i)
+                            else {
+                                Toast.makeText(requireContext(),getString(R.string.lang_already_set),Toast.LENGTH_SHORT).show()
+
+                            }
+
                         }
                     }
 
 
                 }
 
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {
+
 
                 }
 

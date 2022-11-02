@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
                                 binding!!.pbLogin.visibility = View.GONE
                                 Toast.makeText(
                                     requireContext(),
-                                    it.exception.toString(),
+                                    getString(R.string.invalid_password_auth),
                                     Toast.LENGTH_LONG
                                 ).show()
                             }

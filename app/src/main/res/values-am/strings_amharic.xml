@@ -18,10 +18,10 @@
     <string name="log_out">ውጣ</string>
 
     <string-array name="spinner_items">
-        <item>Home</item>
-        <item>News</item>
-        <item>Favorites</item>
-        <item>Learn</item>
+        <item>ቤት</item>
+        <item>ዜና</item>
+        <item>ተወዳጆች</item>
+        <item>ተማር</item>
     </string-array>
 
     <string name="home">ቤት</string>

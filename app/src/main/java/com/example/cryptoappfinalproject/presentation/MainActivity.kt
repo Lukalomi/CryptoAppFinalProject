@@ -8,6 +8,7 @@ import android.view.Gravity
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.get
 import androidx.navigation.findNavController
 
 import androidx.navigation.fragment.NavHostFragment
@@ -51,9 +52,12 @@ class MainActivity : AppCompatActivity() {
         }
         if (state == "ge") {
             changeLanguage("ge")
+
+
         }
         if (state == "amharic") {
             changeLanguage("am")
+
         }
 
     }
@@ -114,8 +118,14 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        if(firebaseAuth.currentUser != null) {
+            menuSignOut.isVisible = true
+        }
+        if(firebaseAuth.currentUser == null) {
+            menuSignOut.isVisible = false
+        }
+
         menuSignOut.setOnMenuItemClickListener {
-            if (firebaseAuth.currentUser != null) {
                 firebaseAuth.signOut()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
@@ -124,14 +134,6 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.you_signed_out),
                     Toast.LENGTH_LONG
                 ).show()
-            } else {
-                Toast.makeText(
-                    this@MainActivity,
-                    getString(R.string.already_signed_out),
-                    Toast.LENGTH_LONG
-                )
-                    .show()
-            }
             true
 
         }

@@ -33,9 +33,9 @@
     <string name="cancel">გაუქმება</string>
     <string name="email">იმეილი</string>
     <string name="home">სახლი</string>
-    <string name="news">News</string>
-    <string name="favorites">Favorites</string>
-    <string name="learn">Learn</string>
+    <string name="news">ნიუსები</string>
+    <string name="favorites">ფავორიტები</string>
+    <string name="learn">ვიდეოები</string>
     <string name="convert">გადაყვანა</string>
     <string name="result">შედეგი</string>
     <string name="amount">რაოდენობა</string>
