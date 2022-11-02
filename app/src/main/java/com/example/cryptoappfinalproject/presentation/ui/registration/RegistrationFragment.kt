@@ -105,7 +105,7 @@ class RegistrationFragment : Fragment() {
 
                             if (it.isSuccessful) {
                                 checkLoggedInstance()
-                                registrationViewModel.updateUserInfo(user)
+                                registrationViewModel.insertUserInfo(user)
                                 binding!!.pbRegister.visibility = View.GONE
 
                                 val userId = FirebaseAuth.getInstance().currentUser!!.uid
@@ -125,7 +125,7 @@ class RegistrationFragment : Fragment() {
                                         ).show()
                                     }
                                 findNavController()
-                                    .navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
+                                    .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToMainActivity())
                             } else {
                                 binding!!.pbRegister.visibility = View.GONE
                                 Toast.makeText(

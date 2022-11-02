@@ -3,19 +3,19 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Home"
+    <item android:title="@string/home"
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home" />
 
-    <item android:title="News"
+    <item android:title="@string/news"
         android:id="@+id/newsFragment"
         android:icon="@drawable/ic_news" />
 
-    <item android:title="Favorites"
+    <item android:title="@string/favorites"
         android:id="@+id/favoritesFragment"
         android:icon="@drawable/ic_favorite" />
 
-    <item android:title="Learn Crypto"
+    <item android:title="@string/learn"
         android:id="@+id/educationalFragment"
         android:icon="@drawable/ic_video" />
 

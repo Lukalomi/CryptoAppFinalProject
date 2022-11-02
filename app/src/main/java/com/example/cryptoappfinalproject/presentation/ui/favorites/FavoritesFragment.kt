@@ -128,7 +128,8 @@ class FavoritesFragment : Fragment() {
                     R.color.grey
                 )
             );
-
+            binding!!.svFavorites.setQuery("", true)
+            binding!!.svFavorites.clearFocus()
 
         }
     }
@@ -147,7 +148,8 @@ class FavoritesFragment : Fragment() {
                     R.color.white
                 )
             );
-
+            binding!!.svFavorites.setQuery("", true)
+            binding!!.svFavorites.clearFocus()
         }
     }
 
@@ -423,6 +425,10 @@ class FavoritesFragment : Fragment() {
 
             }
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        binding!!.svFavorites.setQuery("", true)
     }
 
     private fun navigateToAuth(){

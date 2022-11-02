@@ -95,6 +95,8 @@
     <string name="message_sent">message has been sent</string>
     <string name="cant_sent_msg">can\'t send a dm</string>
     <string name="go_to_web">this action will redirect you to web, do you want to proceed?</string>
+    <string name="invalid_password_auth">Invalid Credentials</string>
+    <string name="lang_already_set">\"That language is already set \"</string>
 
     <string-array name="CryptoCurrencies">
         <item>BTC</item>

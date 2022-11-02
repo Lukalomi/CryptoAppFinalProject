@@ -16,6 +16,7 @@ import com.example.cryptoappfinalproject.databinding.SingleCrypto2Binding
 import com.example.cryptoappfinalproject.databinding.SingleCryptoBinding
 import com.example.cryptoappfinalproject.domain.model.CryptoCoinsModel
 import com.example.cryptoappfinalproject.presentation.ui.favorites.favCoinTitle
+import com.google.firebase.auth.FirebaseAuth
 
 class CoinsHomeAdapter(
     private val context: Context,
@@ -115,8 +116,12 @@ class CoinsHomeAdapter(
                     cvItem.startAnimation(AnimationUtils.loadAnimation(context,
                         androidx.appcompat.R.anim.abc_shrink_fade_out_from_bottom))
                 }
-                ibCryptoFav.setImageResource(R.drawable.ic_heart_checked)
-
+                if(FirebaseAuth.getInstance().currentUser != null ) {
+                    ibCryptoFav.setImageResource(R.drawable.ic_heart_checked)
+                }
+                else{
+                    ibCryptoFav.setImageResource(R.drawable.ic_heart_fav)
+                }
 
             }
 
