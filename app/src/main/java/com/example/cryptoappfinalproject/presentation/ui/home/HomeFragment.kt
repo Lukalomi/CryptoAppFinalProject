@@ -79,7 +79,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         recyclerScrollState()
 
 
-
+    }
 
 
     private fun cryptoAssetsListener(){
@@ -99,10 +99,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 requireContext(),
                 R.color.grey
             )
-            binding!!.svHome.setQuery("", true)
-            binding!!.svHome.clearFocus()
-        )
 
+        )
+        binding!!.svHome.setQuery("", true)
+        binding!!.svHome.clearFocus()
         binding.tvCryptoAssets.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
@@ -655,8 +655,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         favCoinTitle.clear()
         favExTitle.clear()
     }
-
 }
+
+
 
 
 
