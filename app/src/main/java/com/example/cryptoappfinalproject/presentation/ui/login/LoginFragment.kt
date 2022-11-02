@@ -1,17 +1,15 @@
 package com.example.cryptoappfinalproject.presentation.ui.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.FragmentLoginBinding
-import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -69,19 +67,14 @@ class LoginFragment : Fragment() {
                                     it.exception.toString(),
                                     Toast.LENGTH_LONG
                                 ).show()
-
                             }
                         }
-
-
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {
                             Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
                         }
-
                     }
                 }
-
             }
 
             if(FirebaseAuth.getInstance().currentUser != null) {

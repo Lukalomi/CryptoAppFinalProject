@@ -20,7 +20,7 @@ class ChatFragment : Fragment() {
     private var binding: FragmentChatBinding? = null
     private lateinit var adapter: UserAdapter
     private lateinit var auth: FirebaseAuth
-val userList:MutableList<FirebaseUserModel> = mutableListOf()
+    val userList:MutableList<FirebaseUserModel> = mutableListOf()
 
 
     override fun onCreateView(
