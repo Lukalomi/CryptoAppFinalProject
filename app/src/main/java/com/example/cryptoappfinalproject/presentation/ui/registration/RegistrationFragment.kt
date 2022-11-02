@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.common.BaseFragment
@@ -93,7 +95,7 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
                             if (it.isSuccessful) {
                                 checkLoggedInstance()
 
-                                registrationViewModel.insertUserInfo(user)
+                                viewModel.insertUserInfo(user)
                                 binding!!.pbRegister.visibility = View.GONE
 
                                 val userId = FirebaseAuth.getInstance().currentUser!!.uid
