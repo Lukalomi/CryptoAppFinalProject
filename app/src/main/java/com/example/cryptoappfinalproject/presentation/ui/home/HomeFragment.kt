@@ -11,9 +11,12 @@ import android.widget.*
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
+import android.view.Gravity
+import android.view.View
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -26,6 +29,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.*
+import com.example.cryptoappfinalproject.R
+import com.example.cryptoappfinalproject.common.BaseFragment
 import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.data.local.Exchanges
@@ -47,31 +52,24 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
-
-    private var binding: FragmentHomeBinding? = null
-
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
+    FragmentHomeBinding::inflate,
+    HomeViewModel::class.java
+) {
 
     private lateinit var homeAdapter: CoinsHomeAdapter
     private lateinit var searchAdapter: CoinsSearchAdapter
     private lateinit var adapterExchanges: ExchangesAdapter
+
     private val viewModelReg: RegistrationViewModel by viewModels()
-    private val viewModel: HomeViewModel by viewModels()
     private val viewModelFav: FavoritesViewModel by activityViewModels()
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        return binding!!.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpBottomNavigation()
+        cryptoAssetsListener()
+        exchangesListener()
+
         getAllCoinsPager()
 
         searchCryptos()
@@ -80,51 +78,62 @@ class HomeFragment : Fragment() {
         openDrawer()
         recyclerScrollState()
 
-        binding!!.tvExchanges.setOnClickListener {
+
+
+
+
+    private fun cryptoAssetsListener(){
+        binding.tvCryptoAssets.setOnClickListener {
+            favExchanges.clear()
+            getAllCoinsPager()
+            searchCryptos()
+            addCoinsToFavList()
+            setTextColors()
+        }
+    }
+
+
+    private fun setTextColors(){
+        binding.tvExchanges.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.grey
+            )
+            binding!!.svHome.setQuery("", true)
+            binding!!.svHome.clearFocus()
+        )
+
+        binding.tvCryptoAssets.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.white
+            )
+        )
+    }
+
+
+    private fun exchangesListener() {
+        binding.tvExchanges.setOnClickListener {
             favList.clear()
             getAllExchanges()
             searchExchanges()
             addExchangesToFavList()
-            binding!!.svHome.setQuery("", true)
-            binding!!.svHome.clearFocus()
-
-        }
-        binding!!.tvCryptoAssets.setOnClickListener {
-            favExchanges.clear()
-
-            getAllCoinsPager()
-            searchCryptos()
-            addCoinsToFavList()
-            binding!!.tvExchanges.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.grey
-                )
-            )
-            binding!!.tvCryptoAssets.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.white
-                )
-            )
-            binding!!.svHome.setQuery("", true)
-            binding!!.svHome.clearFocus()
-
         }
     }
 
+
     private fun recyclerScrollState() {
-        binding!!.rvHomeCryptoAssets.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.rvHomeCryptoAssets.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy > 0) {
-                    binding!!.rvScrollUp.apply {
+                    binding.rvScrollUp.apply {
                         visibility = View.VISIBLE
                         setOnClickListener {
-                            binding!!.rvHomeCryptoAssets.smoothScrollToPosition(0)
+                            binding.rvHomeCryptoAssets.smoothScrollToPosition(0)
                         }
                     }
                 } else {
-                    binding!!.rvScrollUp.visibility = View.GONE
+                    binding.rvScrollUp.visibility = View.GONE
 
                 }
             }
@@ -135,7 +144,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun openDrawer() {
-        binding!!.btnAuth.setOnClickListener {
+        binding.btnAuth.setOnClickListener {
             val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer)
             drawer.openDrawer(Gravity.LEFT)
         }
@@ -171,10 +180,10 @@ class HomeFragment : Fragment() {
                 homeAdapter.addLoadStateListener {
                     when (it.source.refresh) {
                         is LoadState.NotLoading -> {
-                            binding!!.pbHome.visibility = View.GONE
+                            binding.pbHome.visibility = View.GONE
                         }
                         else -> {
-                            binding!!.pbHome.visibility = View.VISIBLE
+                            binding.pbHome.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -198,13 +207,13 @@ class HomeFragment : Fragment() {
                     is Resource.Success -> {
                         setExchangesAdapter()
                         adapterExchanges.submitList(it)
-                        binding!!.tvExchanges.setTextColor(
+                        binding.tvExchanges.setTextColor(
                             ContextCompat.getColor(
                                 requireContext(),
                                 R.color.white
                             )
                         )
-                        binding!!.tvCryptoAssets.setTextColor(
+                        binding.tvCryptoAssets.setTextColor(
                             ContextCompat.getColor(
                                 requireContext(),
                                 R.color.grey
@@ -226,11 +235,13 @@ class HomeFragment : Fragment() {
 
     private fun setAllCoinsAdapter() {
         homeAdapter = CoinsHomeAdapter(requireContext())
-        binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(activity)
-        binding!!.rvHomeCryptoAssets.adapter = homeAdapter
+        binding.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(activity)
+        binding.rvHomeCryptoAssets.adapter = homeAdapter
+
 
         binding!!.rvHomeCryptoAssets.adapter = homeAdapter.withLoadStateFooter(
             footer = MovieLoadStateAdapter { homeAdapter.retry() }
+
         )
         homeAdapter.onFavListener = {
             favoritesListener(it)
@@ -243,8 +254,8 @@ class HomeFragment : Fragment() {
 
     private fun setSearchAdapter() {
         searchAdapter = CoinsSearchAdapter(requireContext())
-        binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
-        binding!!.rvHomeCryptoAssets.adapter = searchAdapter
+        binding.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvHomeCryptoAssets.adapter = searchAdapter
         searchAdapter.onClickListener = {
             favoritesSearchListener(it)
         }
@@ -254,8 +265,8 @@ class HomeFragment : Fragment() {
 
     private fun setExchangesAdapter() {
         adapterExchanges = ExchangesAdapter(requireContext())
-        binding!!.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
-        binding!!.rvHomeCryptoAssets.adapter = adapterExchanges
+        binding.rvHomeCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvHomeCryptoAssets.adapter = adapterExchanges
         adapterExchanges.onClickListener = {
             favoritesExchangesListener(it)
 
@@ -479,7 +490,7 @@ class HomeFragment : Fragment() {
                 viewModel.searchState.collect {
                     when (it) {
                         is Resource.Success -> {
-                            binding!!.svHome.setOnQueryTextListener(object :
+                            binding.svHome.setOnQueryTextListener(object :
                                 SearchView.OnQueryTextListener {
                                 override fun onQueryTextSubmit(query: String?): Boolean {
                                     return true
@@ -529,7 +540,7 @@ class HomeFragment : Fragment() {
                 viewModel.exchangesState.collect {
                     when (it) {
                         is Resource.Success -> {
-                            binding!!.svHome.setOnQueryTextListener(object :
+                            binding.svHome.setOnQueryTextListener(object :
                                 SearchView.OnQueryTextListener {
                                 override fun onQueryTextSubmit(query: String?): Boolean {
                                     return true
@@ -643,8 +654,6 @@ class HomeFragment : Fragment() {
         favExchanges.clear()
         favCoinTitle.clear()
         favExTitle.clear()
-        binding = null
-
     }
 
 }

@@ -3,20 +3,17 @@ package com.example.cryptoappfinalproject.presentation.ui.favorites
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Gravity
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptoappfinalproject.R
+import com.example.cryptoappfinalproject.common.BaseFragment
 import com.example.cryptoappfinalproject.data.local.Crypto
 import com.example.cryptoappfinalproject.data.local.Exchanges
 import com.example.cryptoappfinalproject.databinding.FragmentFavoritesBinding
@@ -29,26 +26,17 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 @AndroidEntryPoint
-class FavoritesFragment : Fragment() {
+class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewModel>(
+    FragmentFavoritesBinding::inflate,
+    FavoritesViewModel::class.java
+) {
 
-
-    private var binding: FragmentFavoritesBinding? = null
     private lateinit var adapter: FavoritesAdapter
     private lateinit var adapterExchanges: FavoritesExchangesAdapter
 
-    private val viewModelFav: FavoritesViewModel by activityViewModels()
     private var count = 0
-
     private var isCoin: Boolean = true
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-
-        return binding!!.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,7 +53,7 @@ class FavoritesFragment : Fragment() {
             setOnCoinsListener()
             btnSortListener()
 
-            binding!!.apply {
+            binding.apply {
                 linearNotAvailable.visibility = View.GONE
                 svFavorites.visibility = View.VISIBLE
                 tvCoins.visibility = View.VISIBLE
@@ -74,7 +62,7 @@ class FavoritesFragment : Fragment() {
             }
         }
         else {
-            binding!!.apply {
+            binding.apply {
                 linearNotAvailable.visibility = View.VISIBLE
                 svFavorites.visibility = View.GONE
                 tvExchanges.visibility = View.GONE
@@ -87,42 +75,42 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun btnSortListener() {
-        binding!!.btnSort.setOnClickListener {
+        binding.btnSort.setOnClickListener {
             if (count == 0 && isCoin) {
                 sortCoinsByDesc()
                 val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.arrow_up)
-                binding!!.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
+                binding.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
                 count ++
             } else if(count != 0 && isCoin) {
                 sortCoinsByAsc()
                 val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.arrow_down)
-                binding!!.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
+                binding.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
                 count --
             }
             else if(count == 0 && !isCoin) {
                 sortExByAsc()
                 val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.arrow_up)
-                binding!!.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
+                binding.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
                 count ++
             }
             else if(count != 0 && !isCoin) {
                 sortExByDesc()
                 val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.arrow_down)
-                binding!!.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
+                binding.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
                 count --
             }
         }
     }
 
     private fun setOnCoinsListener() {
-        binding!!.tvCoins.setOnClickListener {
+        binding.tvCoins.setOnClickListener {
             val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.arrow_down)
-            binding!!.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
+            binding.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
             isCoin = true
             getAllFavCoins()
             searchCryptos()
-            binding!!.tvCoins.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-            binding!!.tvExchanges.setTextColor(
+            binding.tvCoins.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+            binding.tvExchanges.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
                     R.color.grey
@@ -135,14 +123,14 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun setOnExchangesListener() {
-        binding!!.tvExchanges.setOnClickListener {
+        binding.tvExchanges.setOnClickListener {
             val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.arrow_up)
-            binding!!.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
+            binding.btnSort.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
             isCoin = false
             getAllExchanges()
             searchExchanges()
-            binding!!.tvCoins.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey));
-            binding!!.tvExchanges.setTextColor(
+            binding.tvCoins.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey));
+            binding.tvExchanges.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
                     R.color.white
@@ -155,7 +143,7 @@ class FavoritesFragment : Fragment() {
 
     private fun getAllFavCoins() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModelFav.readAllData().collect {
+            viewModel.readAllData().collect {
                 setFavAdapter()
                 adapter.submitList(it)
             }
@@ -163,7 +151,7 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun openDrawer() {
-        binding!!.btnAuth.setOnClickListener {
+        binding.btnAuth.setOnClickListener {
             val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer)
             drawer.openDrawer(Gravity.LEFT)
 
@@ -173,7 +161,7 @@ class FavoritesFragment : Fragment() {
 
     private fun getAllExchanges() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModelFav.readAllExchanges().collect {
+            viewModel.readAllExchanges().collect {
                 setFavExchangeAdapter()
                 adapterExchanges.submitList(it)
             }
@@ -182,7 +170,7 @@ class FavoritesFragment : Fragment() {
 
     private fun sortCoinsByDesc() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModelFav.readAllData().collect {
+            viewModel.readAllData().collect {
                 it.sortByDescending {
                     it.marketCapRank
                 }
@@ -195,7 +183,7 @@ class FavoritesFragment : Fragment() {
 
     private fun sortCoinsByAsc() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModelFav.readAllData().collect {
+            viewModel.readAllData().collect {
                 it.sortedBy {
                     it.marketCapRank
                 }
@@ -208,7 +196,7 @@ class FavoritesFragment : Fragment() {
 
     private fun sortExByDesc() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModelFav.readAllExchanges().collect {
+            viewModel.readAllExchanges().collect {
                 it.sortByDescending {
                     it.rank
                 }
@@ -220,7 +208,7 @@ class FavoritesFragment : Fragment() {
 
     private fun sortExByAsc() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModelFav.readAllExchanges().collect {
+            viewModel.readAllExchanges().collect {
                 it.sortedBy {
                     it.rank
                 }
@@ -233,12 +221,12 @@ class FavoritesFragment : Fragment() {
 
     private fun setSortedDescCoinsFavAdapter() {
         adapter = FavoritesAdapter(requireContext())
-        binding!!.rvFavCryptoAssets.layoutManager = LinearLayoutManager(activity)
-        binding!!.rvFavCryptoAssets.adapter = adapter
+        binding.rvFavCryptoAssets.layoutManager = LinearLayoutManager(activity)
+        binding.rvFavCryptoAssets.adapter = adapter
         adapter.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
             builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
-                viewModelFav.deleteCrypto(it)
+                viewModel.deleteCrypto(it)
                 findNavController().navigate(FavoritesFragmentDirections.actionReloadFavFragment())
 
 
@@ -253,12 +241,12 @@ class FavoritesFragment : Fragment() {
 
     private fun setSortedAscCoinsFavAdapter() {
         adapter = FavoritesAdapter(requireContext())
-        binding!!.rvFavCryptoAssets.layoutManager = LinearLayoutManager(activity)
-        binding!!.rvFavCryptoAssets.adapter = adapter
+        binding.rvFavCryptoAssets.layoutManager = LinearLayoutManager(activity)
+        binding.rvFavCryptoAssets.adapter = adapter
         adapter.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
             builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
-                viewModelFav.deleteCrypto(it)
+                viewModel.deleteCrypto(it)
                 findNavController().navigate(FavoritesFragmentDirections.actionReloadFavFragment())
             }
             builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
@@ -271,12 +259,12 @@ class FavoritesFragment : Fragment() {
 
     private fun setFavAdapter() {
         adapter = FavoritesAdapter(requireContext())
-        binding!!.rvFavCryptoAssets.layoutManager = LinearLayoutManager(activity)
-        binding!!.rvFavCryptoAssets.adapter = adapter
+        binding.rvFavCryptoAssets.layoutManager = LinearLayoutManager(activity)
+        binding.rvFavCryptoAssets.adapter = adapter
         adapter.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
             builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
-                viewModelFav.deleteCrypto(it)
+                viewModel.deleteCrypto(it)
                 findNavController().navigate(FavoritesFragmentDirections.actionReloadFavFragment())
 
             }
@@ -289,12 +277,12 @@ class FavoritesFragment : Fragment() {
 
     private fun setFavExAscAdapter() {
         adapterExchanges = FavoritesExchangesAdapter(requireContext())
-        binding!!.rvFavCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
-        binding!!.rvFavCryptoAssets.adapter = adapterExchanges
+        binding.rvFavCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvFavCryptoAssets.adapter = adapterExchanges
         adapterExchanges.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
             builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
-                viewModelFav.deleteExchange(it)
+                viewModel.deleteExchange(it)
                 sortExByAsc()
             }
             builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
@@ -306,12 +294,12 @@ class FavoritesFragment : Fragment() {
 
     private fun setFavExDescAdapter() {
         adapterExchanges = FavoritesExchangesAdapter(requireContext())
-        binding!!.rvFavCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
-        binding!!.rvFavCryptoAssets.adapter = adapterExchanges
+        binding.rvFavCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvFavCryptoAssets.adapter = adapterExchanges
         adapterExchanges.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
             builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
-                viewModelFav.deleteExchange(it)
+                viewModel.deleteExchange(it)
                 sortExByDesc()
             }
             builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
@@ -323,12 +311,12 @@ class FavoritesFragment : Fragment() {
 
     private fun setFavExchangeAdapter() {
         adapterExchanges = FavoritesExchangesAdapter(requireContext())
-        binding!!.rvFavCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
-        binding!!.rvFavCryptoAssets.adapter = adapterExchanges
+        binding.rvFavCryptoAssets.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvFavCryptoAssets.adapter = adapterExchanges
         adapterExchanges.onClickListener = {
             val builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
             builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
-                viewModelFav.deleteExchange(it)
+                viewModel.deleteExchange(it)
                 getAllExchanges()
             }
             builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
@@ -344,9 +332,9 @@ class FavoritesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
 
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModelFav.readAllData().collect {
+                viewModel.readAllData().collect {
 
-                    binding!!.svFavorites.setOnQueryTextListener(object :
+                    binding.svFavorites.setOnQueryTextListener(object :
                         SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String?): Boolean {
 
@@ -388,9 +376,9 @@ class FavoritesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
 
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModelFav.readAllExchanges().collect {
+                viewModel.readAllExchanges().collect {
 
-                    binding!!.svFavorites.setOnQueryTextListener(object :
+                    binding.svFavorites.setOnQueryTextListener(object :
                         SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String?): Boolean {
 
@@ -432,18 +420,13 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun navigateToAuth(){
-        binding!!.btnRegisterFav.setOnClickListener{
+        binding.btnRegisterFav.setOnClickListener{
             findNavController().navigate(FavoritesFragmentDirections.actionFavoritesFragmentToRegistrationFragment())
         }
-        binding!!.btnLoginFav.setOnClickListener{
+        binding.btnLoginFav.setOnClickListener{
             findNavController().navigate(FavoritesFragmentDirections.actionFavoritesFragmentToLoginFragment())
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-        count = 0
-    }
 
 }

@@ -7,7 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface FetchedNews {
-
     @GET(ApiEndPoints.getCryptoNews)
     suspend fun getNews(@Query("page")page:Int) : Response<MutableList<CryptoNewsModelDto.Data>>
 

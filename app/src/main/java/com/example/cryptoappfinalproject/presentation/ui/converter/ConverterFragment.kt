@@ -2,38 +2,25 @@ package com.example.cryptoappfinalproject.presentation.ui.converter
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.cryptoappfinalproject.R
+import com.example.cryptoappfinalproject.common.BaseFragment
 import com.example.cryptoappfinalproject.common.Resource
 import com.example.cryptoappfinalproject.databinding.FragmentConverterBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ConverterFragment : Fragment() {
-
-    private var binding: FragmentConverterBinding? = null
+class ConverterFragment : BaseFragment<FragmentConverterBinding, ConverterViewModel> (
+    FragmentConverterBinding::inflate,
+    ConverterViewModel::class.java
+) {
 
 //    private val converterAdapter = ConverterAdapter()
-
-    private val viewModel: ConverterViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentConverterBinding.inflate(inflater, container, false)
-        return binding!!.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,7 +44,7 @@ class ConverterFragment : Fragment() {
     }
 
     private fun backBtn() {
-        binding!!.ivBackConverter.setOnClickListener {
+        binding.ivBackConverter.setOnClickListener {
             findNavController().navigate(ConverterFragmentDirections.actionConverterFragmentToHomeFragment())
         }
     }
@@ -65,26 +52,26 @@ class ConverterFragment : Fragment() {
     private fun setDropDownItems(){
         val cryptoCurrencies = resources.getStringArray(R.array.CryptoCurrencies)
         val cryptoAdapter = ArrayAdapter(requireContext(), R.layout.currency_dropdown_items, cryptoCurrencies)
-        binding?.tvChooseCrypto?.setAdapter(cryptoAdapter)
+        binding.tvChooseCrypto.setAdapter(cryptoAdapter)
 
         val fiatCurrencies = resources.getStringArray(R.array.FiatCurrencies)
         val fiatAdapter = ArrayAdapter(requireContext(), R.layout.currency_dropdown_items, fiatCurrencies)
-        binding?.tvFiatCurrency?.setAdapter(fiatAdapter)
+        binding.tvFiatCurrency.setAdapter(fiatAdapter)
     }
 
     private fun activateConvertButton() {
-        binding?.etAmount?.doAfterTextChanged { text ->
+        binding.etAmount.doAfterTextChanged { text ->
             if (text != null) {
-                binding?.btnConvert?.isEnabled = text.isNotEmpty()
+                binding.btnConvert.isEnabled = text.isNotEmpty()
             }
         }
     }
 
     private fun convertCrypto() {
-        binding?.btnConvert?.setOnClickListener {
-            val amount = binding?.etAmount?.text.toString()
-            val fromCrypto = binding?.tvChooseCrypto?.text.toString()
-            val toCurrency = binding?.tvFiatCurrency?.text.toString()
+        binding.btnConvert.setOnClickListener {
+            val amount = binding.etAmount.text.toString()
+            val fromCrypto = binding.tvChooseCrypto.text.toString()
+            val toCurrency = binding.tvFiatCurrency.text.toString()
 
             viewModel.convertCrypto(fromCrypto, toCurrency, amount)
 
@@ -97,7 +84,7 @@ class ConverterFragment : Fragment() {
 
                         is Resource.Success -> {
 
-                            binding?.tvResult?.text = it.data.result.toString().dropLast(4)
+                            binding.tvResult?.text = it.data.result.toString().dropLast(4)
 
                             Log.d("convert", it.data.toString())
 

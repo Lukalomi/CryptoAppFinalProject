@@ -7,14 +7,13 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatButton
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -22,22 +21,22 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.App
 import com.example.cryptoappfinalproject.R
+import com.example.cryptoappfinalproject.common.BaseFragment
 import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentSettingsBinding
 import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import java.util.*
 
 @AndroidEntryPoint
-class SettingsFragment() : Fragment() {
-
-    private val settingsViewModel: SettingsViewModel by viewModels()
-    private var binding: FragmentSettingsBinding? = null
+class SettingsFragment() : BaseFragment<FragmentSettingsBinding, SettingsViewModel>(
+    FragmentSettingsBinding::inflate,
+    SettingsViewModel::class.java
+) {
 
     private var count = 0
     val context = App.appContext
@@ -55,13 +54,6 @@ class SettingsFragment() : Fragment() {
         "Choose", "En", "Geo", "Amh"
     )
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        return binding!!.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -97,10 +89,10 @@ class SettingsFragment() : Fragment() {
             androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
             customList
         )
-        binding!!.spinnerSettings.adapter = spinnerAdapter
+        binding.spinnerSettings.adapter = spinnerAdapter
 
 
-        binding!!.spinnerSettings.onItemSelectedListener =
+        binding.spinnerSettings.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     adapterView: AdapterView<*>?,
@@ -115,6 +107,7 @@ class SettingsFragment() : Fragment() {
 
                         }
                         1 -> {
+
                             if(state != "en") {
                                 langEdit.putString("Language", "en")
                                 langEdit.apply()
@@ -130,12 +123,14 @@ class SettingsFragment() : Fragment() {
                             else{
                                 Toast.makeText(requireContext(),getString(R.string.lang_already_set),Toast.LENGTH_SHORT).show()
 
+
                             }
 
 
                         }
 
                         2 -> {
+
                             if(state != "ge") {
                                 langEdit.putString("Language", "ge")
                                 langEdit.apply()
@@ -148,6 +143,7 @@ class SettingsFragment() : Fragment() {
                                 }
                                 activity?.finish()
                                 startActivity(i)
+
                             }
                             else{
                                 Toast.makeText(requireContext(),getString(R.string.lang_already_set),Toast.LENGTH_SHORT).show()
@@ -157,6 +153,7 @@ class SettingsFragment() : Fragment() {
 
                         }
                         3 -> {
+
 
                             if(state != "amharic") {
                                 langEdit.putString("Language", "amharic")
@@ -173,6 +170,7 @@ class SettingsFragment() : Fragment() {
                             }
                             else {
                                 Toast.makeText(requireContext(),getString(R.string.lang_already_set),Toast.LENGTH_SHORT).show()
+
                             }
 
                         }
@@ -205,13 +203,13 @@ class SettingsFragment() : Fragment() {
 
     private fun handlingNightAndDayModes() {
         if (isDayMode) {
-            binding!!.switchNightMode.isChecked = true
+            binding.switchNightMode.isChecked = true
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             requireActivity().setTheme(R.style.Theme_CryptoAppFinalProject)
 
             //when dark mode is enabled, we use the dark theme
         } else {
-            binding!!.switchNightMode.isChecked = false
+            binding.switchNightMode.isChecked = false
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             requireActivity().setTheme(R.style.Theme_CryptoAppFinalProject)  //default app theme
         }
@@ -220,8 +218,8 @@ class SettingsFragment() : Fragment() {
 
     private fun setDayMode() {
 
-        binding!!.switchNightMode.setOnClickListener {
-            if (binding!!.switchNightMode.isChecked) {
+        binding.switchNightMode.setOnClickListener {
+            if (binding.switchNightMode.isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 sharedPrefEdit.putBoolean("DayMode", true)
                 sharedPrefEdit.apply()
@@ -237,22 +235,22 @@ class SettingsFragment() : Fragment() {
 
     private fun populateUserInfo() {
         viewLifecycleOwner.lifecycleScope.launch {
-            settingsViewModel.readAllUserInfo().onStart {
+            viewModel.readAllUserInfo().onStart {
             }.collect {
                 it.forEach {
-                    binding!!.apply {
+                    binding.apply {
                         if (Firebase.auth.currentUser != null) {
                             tvUserName.text = it.name
                             tvUserSurname.text = it.surname
                             tvUserPass.text = "******"
                             tvUserEmail.text = it.email
-                            binding!!.showPass.visibility = View.VISIBLE
+                            binding.showPass.visibility = View.VISIBLE
 
                             Glide.with(requireContext())
                                 .load(it.image)
                                 .error(R.drawable.ic_launcher_background)
                                 .into(ivUserSettings)
-                            binding!!.pbSettings.visibility = View.GONE
+                            binding.pbSettings.visibility = View.GONE
 
                         }
                     }
@@ -268,11 +266,11 @@ class SettingsFragment() : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         viewLifecycleOwner.lifecycleScope.launch {
             if (requestCode == RegistrationFragment.IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-                binding?.ivUserSettings?.setImageURI(data?.data)
+                binding.ivUserSettings?.setImageURI(data?.data)
 
                 val profileBitMap =
                     MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data?.data)
-                settingsViewModel.readAllUserInfo().collect {
+                viewModel.readAllUserInfo().collect {
                     it.forEach {
                         val name = it.name
                         val surname = it.surname
@@ -287,7 +285,7 @@ class SettingsFragment() : Fragment() {
                             image = profileBitMap
                         )
 
-                        settingsViewModel.updateUserInfo(updatedUser)
+                        viewModel.updateUserInfo(updatedUser)
                         Toast.makeText(
                             requireContext(),
                             "${resources.getString(R.string.pass_updated)} + $name",
@@ -305,7 +303,7 @@ class SettingsFragment() : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
 
-                settingsViewModel.readAllUserInfo().collect {
+                viewModel.readAllUserInfo().collect {
                     it.forEach {
                         var name = it.name
                         var surname = it.surname
@@ -320,7 +318,7 @@ class SettingsFragment() : Fragment() {
                             image = it.image
                         )
 
-                        binding!!.tvUserEmail.setOnLongClickListener {
+                        binding.tvUserEmail.setOnLongClickListener {
                             val dialogBinding =
                                 layoutInflater.inflate(R.layout.user_profile_dialog, null)
                             val dialog = Dialog(requireContext())
@@ -348,8 +346,8 @@ class SettingsFragment() : Fragment() {
                                             if (it.isSuccessful) {
                                                 Firebase.auth.currentUser!!.updateEmail(newEmail.text.toString())
                                                 updatedUser.email = newEmail.text.toString()
-                                                binding!!.tvUserEmail.text = updatedUser.email
-                                                settingsViewModel.updateUserInfo(updatedUser)
+                                                binding.tvUserEmail.text = updatedUser.email
+                                                viewModel.updateUserInfo(updatedUser)
                                                 Toast.makeText(
                                                     requireContext(),
                                                     "${resources.getString(R.string.email_update)} + $name!",
@@ -394,7 +392,7 @@ class SettingsFragment() : Fragment() {
 
     private fun updatePass() {
         viewLifecycleOwner.lifecycleScope.launch {
-            settingsViewModel.readAllUserInfo().collect {
+            viewModel.readAllUserInfo().collect {
                 it.forEach {
                     var name = it.name
                     var surname = it.surname
@@ -408,18 +406,18 @@ class SettingsFragment() : Fragment() {
                         uid = it.uid,
                         image = it.image
                     )
-                    binding!!.showPass.setOnClickListener {
+                    binding.showPass.setOnClickListener {
                         if (count == 0) {
-                            binding!!.tvUserPass.text = password
+                            binding.tvUserPass.text = password
                             count++
                         } else {
-                            binding!!.tvUserPass.text = "******"
+                            binding.tvUserPass.text = "******"
                             count--
 
                         }
                     }
 
-                    binding!!.tvUserPass.setOnLongClickListener {
+                    binding.tvUserPass.setOnLongClickListener {
                         val dialogBinding =
                             layoutInflater.inflate(R.layout.user_profile_dialog, null)
                         val dialog = Dialog(requireContext())
@@ -454,8 +452,8 @@ class SettingsFragment() : Fragment() {
                                         }
                                     }
                                 updatedUser.password = newPass.text.toString()
-                                settingsViewModel.updateUserInfo(updatedUser)
-                                binding!!.tvUserPass.text = updatedUser.password
+                                viewModel.updateUserInfo(updatedUser)
+                                binding.tvUserPass.text = updatedUser.password
                                 dialog.dismiss()
                             } else {
                                 Toast.makeText(
@@ -482,7 +480,7 @@ class SettingsFragment() : Fragment() {
 
     private fun chooseProfilePicture() {
         if (Firebase.auth.currentUser != null) {
-            binding?.ivUserSettings?.setOnLongClickListener {
+            binding.ivUserSettings?.setOnLongClickListener {
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
                 startActivityForResult(intent, RegistrationFragment.IMAGE_REQUEST_CODE)
@@ -495,15 +493,9 @@ class SettingsFragment() : Fragment() {
 
 
     private fun goBack() {
-        binding!!.ivBackSettings.setOnClickListener {
+        binding.ivBackSettings.setOnClickListener {
             findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToHomeFragment())
         }
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-
-    }
 }

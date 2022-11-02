@@ -4,15 +4,11 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cryptoappfinalproject.R
+import com.example.cryptoappfinalproject.common.BaseFragment
 import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentRegistrationBinding
 import com.example.cryptoappfinalproject.domain.model.FirebaseUserModel
@@ -24,11 +20,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class RegistrationFragment : Fragment() {
-
-    private var binding: FragmentRegistrationBinding? = null
-
-    private val registrationViewModel: RegistrationViewModel by viewModels()
+class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, RegistrationViewModel>(
+    FragmentRegistrationBinding::inflate,
+    RegistrationViewModel::class.java
+) {
 
     companion object {
         val IMAGE_REQUEST_CODE = 100
@@ -36,14 +31,6 @@ class RegistrationFragment : Fragment() {
 
     private val db = Firebase.firestore
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentRegistrationBinding.inflate(inflater, container, false)
-        return binding!!.root
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,7 +41,7 @@ class RegistrationFragment : Fragment() {
 
 
     private fun chooseProfilePicture() {
-        binding?.btnProfilePhoto?.setOnClickListener {
+        binding.btnProfilePhoto.setOnClickListener {
             pickPhoto()
         }
     }
@@ -68,22 +55,22 @@ class RegistrationFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
-            binding?.ivProfilePhoto?.setImageURI(data?.data)
+            binding.ivProfilePhoto.setImageURI(data?.data)
 
             val profileBitMap =
                 MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data?.data)
 
-            binding?.btnRegister?.setOnClickListener {
+            binding.btnRegister.setOnClickListener {
                 if (data?.data == null) {
                     Toast.makeText(requireContext(), "Please upload a picture", Toast.LENGTH_SHORT)
                         .show()
                 }
 
-                val name = binding?.etName?.text.toString()
-                val surname = binding?.etSurname?.text.toString()
-                val email = binding?.etEmail?.text.toString()
-                val password = binding?.etPassword?.text.toString()
-                val repeatPassword = binding?.etRepeatPassword?.text.toString()
+                val name = binding.etName.text.toString()
+                val surname = binding.etSurname.text.toString()
+                val email = binding.etEmail.text.toString()
+                val password = binding.etPassword.text.toString()
+                val repeatPassword = binding.etRepeatPassword.text.toString()
 
                 val user = UserInfo(
                     uid = 0,
@@ -98,13 +85,14 @@ class RegistrationFragment : Fragment() {
                     email.isNotEmpty() && password.isNotEmpty() && repeatPassword.isNotEmpty()
                 ) {
                     try {
-                        binding!!.pbRegister.visibility = View.VISIBLE
+                        binding.pbRegister.visibility = View.VISIBLE
                         FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                             email, password
                         ).addOnCompleteListener {
 
                             if (it.isSuccessful) {
                                 checkLoggedInstance()
+
                                 registrationViewModel.insertUserInfo(user)
                                 binding!!.pbRegister.visibility = View.GONE
 
@@ -127,7 +115,7 @@ class RegistrationFragment : Fragment() {
                                 findNavController()
                                     .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToMainActivity())
                             } else {
-                                binding!!.pbRegister.visibility = View.GONE
+                                binding.pbRegister.visibility = View.GONE
                                 Toast.makeText(
                                     requireContext(),
                                     it.exception.toString(),
@@ -166,7 +154,7 @@ class RegistrationFragment : Fragment() {
 
 
     private fun goBack() {
-        binding?.btnBack?.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             findNavController()
                 .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
         }
@@ -186,12 +174,6 @@ class RegistrationFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         }
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
     }
 
 }
