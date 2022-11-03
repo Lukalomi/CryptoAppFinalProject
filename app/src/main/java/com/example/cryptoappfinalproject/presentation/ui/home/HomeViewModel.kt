@@ -39,6 +39,9 @@ class HomeViewModel @Inject constructor(
     val searchState = _searchState.asStateFlow()
 
     fun getSearchedCryptos(query: String) {
+
+        _searchState.value = Resource.Success(mutableListOf())
+
         searchUseCase(query).onEach { result ->
             when (result) {
                 is Resource.Success -> {
