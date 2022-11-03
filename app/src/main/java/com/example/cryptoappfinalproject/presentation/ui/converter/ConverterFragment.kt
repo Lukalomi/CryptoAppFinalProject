@@ -84,7 +84,7 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding, ConverterViewMo
 
                         is Resource.Success -> {
 
-                            binding.tvResult?.text = it.data.result.toString().dropLast(4)
+                            binding.tvResult.text = it.data.result.toString().dropLast(4)
 
                             Log.d("convert", it.data.toString())
 
