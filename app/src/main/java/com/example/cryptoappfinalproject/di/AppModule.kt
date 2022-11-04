@@ -9,6 +9,7 @@ import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchVideoTitles
 import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchedConvert
 import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchedCrypto
 import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchedNews
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -80,4 +81,12 @@ object AppModule {
                 .create(FetchedConvert::class.java)
 
     }
+//
+//
+//    @Singleton
+//    @Provides
+//    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+//
+
+
 }

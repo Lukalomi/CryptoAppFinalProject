@@ -16,6 +16,8 @@
     <string name="choose_a_photo">ፎቶ ይምረጡ</string>
     <string name="enter_your_email_address">የኢሜይል አድራሻዎን ያስገቡ</string>
     <string name="log_out">ውጣ</string>
+    <string name="invalid_email">እባክዎ ትክክለኛ ኢሜይል ያስገቡ</string>
+
 
     <string-array name="spinner_items">
         <item>ቤት</item>
@@ -96,6 +98,8 @@
     <string name="message_sent">መልእክት ተልኳል።</string>
     <string name="cant_sent_msg">dm መላክ አይቻልም</string>
     <string name="go_to_web">ይህ እርምጃ ወደ ድር ይመራዎታል፣ መቀጠል ይፈልጋሉ?</string>
+    <string name="invalid_password_auth">ልክ ያልሆኑ ምስክርነቶች</string>
+    <string name="lang_already_set">\"ያ ቋንቋ አስቀድሞ ተቀናብሯል። \"</string>
 
     <string-array name="CryptoCurrencies">
         <item>BTC</item>
