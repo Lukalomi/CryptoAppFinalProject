@@ -8,9 +8,10 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoappfinalproject.databinding.LoadStateViewBinding
 
-class MovieLoadStateAdapter(
+
+class CoinLoadStateAdapter(
     private val retry: () -> Unit
-) : LoadStateAdapter<MovieLoadStateAdapter.LoadStateViewHolder>() {
+) : LoadStateAdapter<CoinLoadStateAdapter.LoadStateViewHolder>() {
 
 
     class LoadStateViewHolder( val binding: LoadStateViewBinding) : RecyclerView.ViewHolder(binding.root)

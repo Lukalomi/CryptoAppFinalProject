@@ -12,7 +12,6 @@
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_arrow_up.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_baseline_skip_next_24.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_baseline_skip_previous_24.xml" value="0.1635" />
-        <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_calculator.xml" value="0.2015" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_delete_fav.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_favorite.xml" value="0.1635" />
         <entry key="..\:/TBC-BOOTCAMP/CryptoAppFinalProject/app/src/main/res/drawable/ic_heart_checked.xml" value="0.1635" />
@@ -96,16 +95,20 @@
         <entry key="..\:/TBC-BOOTCAMP/FinalProject/app/src/main/res/menu/side_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/arrow_down.xml" value="0.117" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/arrow_up.xml" value="0.117" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/dm_backgroun.xml" value="0.107" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/home_screen_background.xml" value="0.117" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_arrow_back.xml" value="0.117" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/drawable/ic_delete_fav.xml" value="0.117" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_converter.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_converter.xml" value="0.22" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_login.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_registration.xml" value="0.22" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_settings.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_user_info.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/load_state_view.xml" value="0.11458333333333333" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/nav_header.xml" value="0.11458333333333333" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/single_crypto_2.xml" value="0.11458333333333333" />
       </map>
     </option>
   </component>

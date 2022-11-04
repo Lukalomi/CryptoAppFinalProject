@@ -1,17 +1,17 @@
 package com.example.cryptoappfinalproject.presentation.ui.home
 
 import android.app.AlertDialog
+
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
+
+
 import android.os.Bundle
 import android.util.Log
-import android.view.*
 import android.widget.*
-import androidx.appcompat.widget.AppCompatImageButton
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
 import android.view.Gravity
 import android.view.View
@@ -31,7 +31,6 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.cryptoappfinalproject.*
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.common.BaseFragment
 import com.example.cryptoappfinalproject.common.Resource
@@ -41,11 +40,15 @@ import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
 import com.example.cryptoappfinalproject.domain.model.CryptoCoinsModel
 import com.example.cryptoappfinalproject.domain.model.CryptoExchangesModel
 import com.example.cryptoappfinalproject.domain.model.CryptoSearchModel
+
 import com.example.cryptoappfinalproject.presentation.MainActivity
 import com.example.cryptoappfinalproject.presentation.ui.adapters.CoinsHomeAdapter
 import com.example.cryptoappfinalproject.presentation.ui.adapters.CoinsSearchAdapter
 import com.example.cryptoappfinalproject.presentation.ui.adapters.ExchangesAdapter
 import com.example.cryptoappfinalproject.presentation.ui.adapters.MovieLoadStateAdapter
+
+import com.example.cryptoappfinalproject.presentation.ui.adapters.*
+
 import com.example.cryptoappfinalproject.presentation.ui.favorites.*
 import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -245,8 +248,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         binding.rvHomeCryptoAssets.adapter = homeAdapter
 
 
-        binding!!.rvHomeCryptoAssets.adapter = homeAdapter.withLoadStateFooter(
-            footer = MovieLoadStateAdapter { homeAdapter.retry() }
+        binding.rvHomeCryptoAssets.adapter = homeAdapter.withLoadStateFooter(
+            footer = CoinLoadStateAdapter { homeAdapter.retry() }
 
         )
         homeAdapter.onFavListener = {

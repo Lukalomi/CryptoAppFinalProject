@@ -42,15 +42,13 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
 
     private fun chooseProfilePicture() {
         binding.btnProfilePhoto.setOnClickListener {
-            pickPhoto()
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, IMAGE_REQUEST_CODE)
         }
     }
 
-    private fun pickPhoto() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_REQUEST_CODE)
-    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -59,20 +57,14 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
 
             val profileBitMap =
                 MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data?.data)
+            val name = binding.etName.text.toString()
+            val surname = binding.etSurname.text.toString()
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            val repeatPassword = binding.etRepeatPassword.text.toString()
 
             binding.btnRegister.setOnClickListener {
-                if (data?.data == null) {
-                    Toast.makeText(requireContext(), "Please upload a picture", Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                val name = binding.etName.text.toString()
-                val surname = binding.etSurname.text.toString()
-                val email = binding.etEmail.text.toString()
-                val password = binding.etPassword.text.toString()
-                val repeatPassword = binding.etRepeatPassword.text.toString()
-
-                val user = UserInfo(
+                    val user = UserInfo(
                     uid = 0,
                     image = profileBitMap,
                     name = name,
@@ -81,77 +73,82 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
                     password = password
                 )
 
-                if (name.isNotEmpty() && surname.isNotEmpty() &&
-                    email.isNotEmpty() && password.isNotEmpty() && repeatPassword.isNotEmpty()
-                ) {
-                    try {
-                        binding.pbRegister.visibility = View.VISIBLE
-                        FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-                            email, password
-                        ).addOnCompleteListener {
+                when {
+                    data?.data == null -> {
+                        Toast.makeText(requireContext(), "Please upload a picture", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    !isNotEmptyField() -> {
+                        Toast.makeText(requireContext(), getString(R.string.fill_every_field), Toast.LENGTH_SHORT).show()
+                    }
+                    !isValidEmail() -> {
+                        Toast.makeText(requireContext(), getString(R.string.invalid_email), Toast.LENGTH_SHORT).show()
+                    }
+                    !passwordsMatch() -> {
+                        Toast.makeText(requireContext(), getString(R.string.pass_dont_match), Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+                    else -> {
+                        if ( isNotEmptyField() ) {
+                            try {
+                                binding.pbRegister.visibility = View.VISIBLE
+                                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+                                    email, password
+                                ).addOnCompleteListener {
 
-                            if (it.isSuccessful) {
-                                checkLoggedInstance()
+                                    if (it.isSuccessful) {
+                                        checkLoggedInstance()
 
-                                viewModel.insertUserInfo(user)
-                                binding!!.pbRegister.visibility = View.GONE
+                                        viewModel.insertUserInfo(user)
+                                        binding.pbRegister.visibility = View.GONE
 
-                                val userId = FirebaseAuth.getInstance().currentUser!!.uid
-                                db.collection("users").document(userId)
-                                    .set(FirebaseUserModel(name, email, userId))
-                                    .addOnSuccessListener {
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "success!",
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                    }.addOnFailureListener {
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "loser!!!",
-                                            Toast.LENGTH_LONG
-                                        ).show()
+                                        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+                                        db.collection("users").document(userId)
+                                            .set(FirebaseUserModel(name, email, userId))
+                                            .addOnSuccessListener {
+                                                Toast.makeText(requireContext(), "success!", Toast.LENGTH_LONG).show()
+                                            }.addOnFailureListener {
+                                                Toast.makeText(requireContext(), "error", Toast.LENGTH_LONG).show()
+                                            }
+                                        findNavController()
+                                            .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToMainActivity())
+                                    } else {
+                                        binding.pbRegister.visibility = View.GONE
+                                        Toast.makeText(requireContext(), it.exception.toString(), Toast.LENGTH_LONG).show()
                                     }
-                                findNavController()
-                                    .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToMainActivity())
-                            } else {
-                                binding.pbRegister.visibility = View.GONE
-                                Toast.makeText(
-                                    requireContext(),
-                                    it.exception.toString(),
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                }
+                            } catch (e: Exception) {
+                                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
                             }
                         }
-                    } catch (e: Exception) {
-                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
                     }
-                }
-
-                if (name.isEmpty() || surname.isEmpty() ||
-                    email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()
-                ) {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.fill_every_field),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
-
-                if (password != repeatPassword) {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.pass_dont_match),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
                 }
             }
         }
-
     }
 
+    private fun isNotEmptyField(): Boolean = with(binding) {
+        return@with binding.etEmail.text.toString().isNotEmpty() ||
+                    binding.etPassword.text.toString().isNotEmpty() ||
+                    binding.etName.text.toString().isNotEmpty() ||
+                    binding.etSurname.text.toString().isNotEmpty() ||
+                    binding.etRepeatPassword.text.toString().isNotEmpty()
+    }
+
+    private fun isValidEmail(): Boolean =
+        android.util.Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.text.toString()).matches()
+
+    private fun passwordsMatch(): Boolean = with(binding) {
+        return@with binding.etPassword.text.toString() == binding.etRepeatPassword.text.toString()
+    }
+
+    private fun checkLoggedInstance() {
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            Toast.makeText(requireContext(), getString(R.string.havent_registered), Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.you_are_registered), Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun goBack() {
         binding.btnBack.setOnClickListener {
@@ -159,21 +156,4 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
                 .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
         }
     }
-
-    private fun checkLoggedInstance() {
-        if (FirebaseAuth.getInstance().currentUser == null) {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.havent_registered),
-                Toast.LENGTH_SHORT
-            ).show()
-        } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.you_are_registered),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
-
 }
