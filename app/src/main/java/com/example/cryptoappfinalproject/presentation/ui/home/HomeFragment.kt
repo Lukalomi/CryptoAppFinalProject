@@ -2,7 +2,9 @@ package com.example.cryptoappfinalproject.presentation.ui.home
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
+import android.net.Network
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +25,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +41,7 @@ import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
 import com.example.cryptoappfinalproject.domain.model.CryptoCoinsModel
 import com.example.cryptoappfinalproject.domain.model.CryptoExchangesModel
 import com.example.cryptoappfinalproject.domain.model.CryptoSearchModel
+import com.example.cryptoappfinalproject.presentation.MainActivity
 import com.example.cryptoappfinalproject.presentation.ui.adapters.CoinsHomeAdapter
 import com.example.cryptoappfinalproject.presentation.ui.adapters.CoinsSearchAdapter
 import com.example.cryptoappfinalproject.presentation.ui.adapters.ExchangesAdapter
@@ -48,6 +52,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -585,9 +590,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
     override fun onResume() {
         super.onResume()
-        binding!!.svHome.setQuery("", true)
+        binding.svHome.setQuery("", true)
+
 
     }
+
 
     private fun setUpBottomNavigation() {
         val navHostFragment =
@@ -647,6 +654,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             }
         }
     }
+
+
 
 
     override fun onDestroyView() {
