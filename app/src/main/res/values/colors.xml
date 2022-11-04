@@ -15,5 +15,6 @@
     <color name ="blue">#BF1253AA</color>
     <color name="status_bar">#1F2729</color>
     <color name="borderLine">#202020</color>
+    <color name="boxColor">#362F2F</color>
     
 </resources>

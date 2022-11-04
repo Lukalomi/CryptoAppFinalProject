@@ -1,11 +1,7 @@
 package com.example.cryptoappfinalproject.di
 
-import com.example.cryptoappfinalproject.domain.repository.CryptoConverterRepository
-import com.example.cryptoappfinalproject.data.remote.repositoryImpl.CryptoConverterRepositoryImpl
-import com.example.cryptoappfinalproject.data.remote.repositoryImpl.CryptoExchangesRepositoryImpl
-import com.example.cryptoappfinalproject.data.remote.repositoryImpl.CryptoSearchRepositoryImpl
-import com.example.cryptoappfinalproject.domain.repository.CryptoExchangesRepository
-import com.example.cryptoappfinalproject.domain.repository.CryptoSearchRepository
+import com.example.cryptoappfinalproject.data.remote.repositoryImpl.*
+import com.example.cryptoappfinalproject.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -19,20 +15,34 @@ abstract class RepoModule {
 
     @Binds
     @Singleton
-    abstract fun bindCryptoConverterRepository(cryptoConverterRepositoryImpl: CryptoConverterRepositoryImpl)
-    : CryptoConverterRepository
+    abstract fun bindCryptoConverterRepository(
+        cryptoConverterRepositoryImpl: CryptoConverterRepositoryImpl
+    ) : CryptoConverterRepository
 
 
     @Binds
     @Singleton
-    abstract fun bindCryptoExchangeRepository(cryptoExchangesRepositoryImpl: CryptoExchangesRepositoryImpl)
-            : CryptoExchangesRepository
+    abstract fun bindCryptoExchangeRepository(
+        cryptoExchangesRepositoryImpl: CryptoExchangesRepositoryImpl
+    ): CryptoExchangesRepository
 
 
     @Binds
     @Singleton
-    abstract fun searchCryptoRepository(searchRepositoryImpl: CryptoSearchRepositoryImpl)
-    : CryptoSearchRepository
+    abstract fun searchCryptoRepository(
+        searchRepositoryImpl: CryptoSearchRepositoryImpl
+    ): CryptoSearchRepository
 
+//    @Binds
+//    @Singleton
+//    abstract fun provideLoginRepository(
+//        loginRepositoryImpl: LoginRepositoryImpl
+//    ): LoginRepository
+//
+//    @Binds
+//    @Singleton
+//    abstract fun provideRegisterRepository(
+//        registerRepositoryImpl: RegisterRepositoryImpl
+//    ): RegisterRepository
 
 }

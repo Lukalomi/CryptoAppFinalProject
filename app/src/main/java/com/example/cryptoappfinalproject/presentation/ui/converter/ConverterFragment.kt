@@ -86,6 +86,8 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding, ConverterViewMo
 
                             binding.tvResult.text = it.data.result.toString().dropLast(4)
 
+                            currencySignListener()
+
                             Log.d("convert", it.data.toString())
 
                         }
@@ -93,10 +95,26 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding, ConverterViewMo
                 }
             }
         }
-
-
     }
 
+
+    private fun currencySignListener(){
+        val toCurrency = binding.tvFiatCurrency.text.toString()
+        when (toCurrency) {
+            "USD" -> {
+                binding.tvCurrencySign.text = "$"
+            }
+            "EUR" -> {
+                binding.tvCurrencySign.text = "€"
+            }
+            "GEL" -> {
+                binding.tvCurrencySign.text = "₾"
+            }
+            else -> {
+                binding.tvCurrencySign.text = "£"
+            }
+        }
+    }
 
     //    private fun setAmountInput(){
 //        binding?.etAmount?.addTextChangedListener(object : TextWatcher {

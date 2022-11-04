@@ -76,13 +76,14 @@
     <string name="add">Add</string>
     <string name="remove">Remove</string>
     <string name="old_pass_incorrect">Old Password is Incorrect</string>
-<string name="pass_updated">Congrats,Password Has Been Updated</string>
+    <string name="pass_updated">Congrats,Password Has Been Updated</string>
     <string name="old_email_incorrect">Old Email is Incorrect</string>
     <string name="email_update">Congrats,Email Has Been Updated</string>
     <string name="enter_old_email">Enter Your Old Email</string>
     <string name="picture_change_success">Your Profile Picture Has Been Changed Successfully</string>
     <string name="you_are_logged_in">you are logged in</string>
     <string name="already_logged_in">You Are Already Logged In</string>
+    <string name="invalid_email">Please enter the valid email</string>
     <string name="fill_every_field">Fill out all fields</string>
     <string name="pass_dont_match">Passwords do not match</string>
     <string name="havent_registered">you haven\'t registered</string>
