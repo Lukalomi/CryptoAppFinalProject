@@ -12,7 +12,7 @@ class CryptoExchangesRepositoryImpl @Inject constructor(
 
     override suspend fun searchExchanges(): MutableList<CryptoExchangesModel.CryptoExchangesModelItem> {
 
-        val response = fetchedCrypto.searchExchanges()
+        val response = fetchedCrypto.getExchanges()
 
         if (response.isSuccessful){
             return response.body()!!.map { it.toCryptoExchangeModel() }.toMutableList()
