@@ -2,14 +2,12 @@ package com.example.cryptoappfinalproject.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.cryptoappfinalproject.common.ApiEndPoints
+import com.example.cryptoappfinalproject.common.CryptoEndPoints
 import com.example.cryptoappfinalproject.common.ConversionEndPoint
+import com.example.cryptoappfinalproject.common.NewsEndPoint
+import com.example.cryptoappfinalproject.common.VideosEndPoint
 import com.example.cryptoappfinalproject.data.local.CryptoLocalDatabase
-import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchVideoTitles
-import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchedConvert
-import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchedCrypto
-import com.example.cryptoappfinalproject.data.remote.fetchApi.FetchedNews
-import com.google.firebase.auth.FirebaseAuth
+import com.example.cryptoappfinalproject.data.remote.fetchApi.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -52,14 +50,14 @@ object AppModule {
         @Singleton
         @Provides
         fun apiService(): FetchedCrypto =
-            Retrofit.Builder().baseUrl(ApiEndPoints.BASE_URL).client(providesOkHttpClient())
+            Retrofit.Builder().baseUrl(CryptoEndPoints.BASE_URL).client(providesOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create()).build()
                 .create(FetchedCrypto::class.java)
 
         @Singleton
         @Provides
         fun cryptoNews(): FetchedNews =
-            Retrofit.Builder().baseUrl(ApiEndPoints.BASE_URL_NEWS).client(providesOkHttpClient())
+            Retrofit.Builder().baseUrl(NewsEndPoint.BASE_URL_NEWS).client(providesOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create()).build()
                 .create(FetchedNews::class.java)
 
@@ -67,7 +65,7 @@ object AppModule {
         @Singleton
         @Provides
         fun videoTitleData(): FetchVideoTitles =
-            Retrofit.Builder().baseUrl(ApiEndPoints.BASE_URL_YTVIDEO).client(providesOkHttpClient())
+            Retrofit.Builder().baseUrl(VideosEndPoint.BASE_URL_YTVIDEO).client(providesOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create()).build()
                 .create(FetchVideoTitles::class.java)
 
@@ -80,7 +78,21 @@ object AppModule {
                 .addConverterFactory(GsonConverterFactory.create()).build()
                 .create(FetchedConvert::class.java)
 
+
+        @Singleton
+        @Provides
+        fun searchCrypto(): FetchedSearch =
+            Retrofit.Builder().baseUrl(CryptoEndPoints.BASE_URL).client(providesOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create()).build()
+                .create(FetchedSearch::class.java)
+
+
+
+
     }
+
+
+
 //
 //
 //    @Singleton

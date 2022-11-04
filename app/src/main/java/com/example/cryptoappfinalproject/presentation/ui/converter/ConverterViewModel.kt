@@ -1,14 +1,15 @@
 package com.example.cryptoappfinalproject.presentation.ui.converter
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptoappfinalproject.common.Resource
-import com.example.cryptoappfinalproject.data.remote.repositoryImpl.CryptoConverterRepositoryImpl
 import com.example.cryptoappfinalproject.domain.model.CryptoConverterModel
 import com.example.cryptoappfinalproject.domain.useCase.ConvertCryptoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
