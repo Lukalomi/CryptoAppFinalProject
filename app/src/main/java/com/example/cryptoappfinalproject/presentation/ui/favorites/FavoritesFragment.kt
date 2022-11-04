@@ -45,6 +45,9 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
     }
 
 
+
+
+
     private fun isUserAvailable() {
         if(Firebase.auth.currentUser != null) {
             getAllFavCoins()

@@ -96,13 +96,13 @@
         android:id="@+id/linearNotAvailable"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="80dp"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -119,23 +119,22 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="@string/login_to_track_your_favourite_coins_exchanges"
-            android:textAppearance="@style/CustomTitle"/>
+            android:textAppearance="@style/CustomTitle" />
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRegisterFav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:layout_marginTop="80dp"
             android:text="@string/register"
             android:textAllCaps="false"
             android:textAppearance="@style/CustomTitleDark"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:shapeAppearanceOverlay="@style/leaf"
-            />
+            app:shapeAppearanceOverlay="@style/leaf" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLoginFav"
@@ -146,15 +145,17 @@
             android:text="@string/log_in"
             android:textAllCaps="false"
             android:textAppearance="@style/CustomTitleDark"
-            android:textStyle="bold"
-            app:shapeAppearanceOverlay="@style/leaf"
-            android:theme="@style/leaf"
             android:textSize="16sp"
+            android:textStyle="bold"
+            android:theme="@style/leaf"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:shapeAppearanceOverlay="@style/leaf" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

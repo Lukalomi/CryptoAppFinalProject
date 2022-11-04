@@ -72,19 +72,6 @@ class App : MultiDexApplication() {
             connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
 
 
-        connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                val intent = Intent(context, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent)
-                Toast.makeText(context, "Connection Restored", Toast.LENGTH_LONG).show()
-
-            }
-
-            override fun onLost(network: Network) {
-                Toast.makeText(context, "No Internet Connection", Toast.LENGTH_LONG).show()
-            }
-        })
-
         if (connectivityManager != null) {
 
             if (capabilities != null) {
@@ -94,7 +81,9 @@ class App : MultiDexApplication() {
                 } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
                     Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
                     return true
-                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+
+                }
+                else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
                     Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
                     return true
                 }

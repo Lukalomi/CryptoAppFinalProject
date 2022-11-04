@@ -2,12 +2,15 @@ package com.example.cryptoappfinalproject.presentation.ui.chat
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.FragmentChatBinding
 import com.example.cryptoappfinalproject.domain.model.FirebaseUserModel
 import com.example.cryptoappfinalproject.presentation.ui.adapters.UserAdapter
@@ -35,6 +38,8 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
+        goBack()
+        openDrawer()
         val db = FirebaseFirestore.getInstance()
 
         db.collection("users")
@@ -67,7 +72,17 @@ class ChatFragment : Fragment() {
 
 
     }
-
+    private fun goBack() {
+        binding!!.ivBackSettings.setOnClickListener{
+            findNavController().navigate(ChatFragmentDirections.actionChatFragmentToHomeFragment())
+        }
+    }
+    private fun openDrawer() {
+        binding!!.btnAuth.setOnClickListener {
+            val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer)
+            drawer.openDrawer(Gravity.LEFT)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

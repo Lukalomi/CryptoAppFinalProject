@@ -81,9 +81,9 @@ class ChatActivityFragment : Fragment() {
     private fun goBack() {
         binding!!.ivBackChat.setOnClickListener {
             if (FirebaseAuth.getInstance().currentUser!!.email == "llomi18@freeuni.edu.ge") {
-                findNavController().navigate(ChatActivityFragmentDirections.actionGlobal())
-            } else {
                 findNavController().navigate(ChatActivityFragmentDirections.actionChatActivityFragmentToChatFragment())
+            } else {
+                findNavController().navigate(ChatActivityFragmentDirections.actionChatActivityFragmentToHomeFragment())
             }
         }
 
@@ -108,11 +108,6 @@ class ChatActivityFragment : Fragment() {
                             binding!!.rvChatActivity.adapter = adapter
 
                             adapter.submitList(messageList)
-                            Toast.makeText(
-                                requireContext(),
-                                getString(R.string.message_sent),
-                                Toast.LENGTH_SHORT
-                            ).show()
                         } catch (e: Exception) {
                             Log.d("dbError", e.message.toString())
                         }
@@ -130,8 +125,12 @@ class ChatActivityFragment : Fragment() {
                         }
                     }
             }
+            it.text.clear()
+            it.clearFocus()
 
         }
+
+
 
     }
 
