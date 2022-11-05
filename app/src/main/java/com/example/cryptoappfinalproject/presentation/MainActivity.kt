@@ -3,7 +3,11 @@ package com.example.cryptoappfinalproject.presentation
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.database.AbstractWindowedCursor
+import android.database.Cursor
 import android.database.CursorWindow
+import android.database.sqlite.SQLiteBlobTooBigException
+import android.database.sqlite.SQLiteDatabase
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
@@ -13,21 +17,16 @@ import android.view.Gravity
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.get
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
-
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.cryptoappfinalproject.NavGraphDirections
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.common.LangSettings
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
-import com.example.cryptoappfinalproject.presentation.ui.home.HomeFragmentDirections
-
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.util.Assert.fail
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -118,10 +117,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         menuSupport.setOnMenuItemClickListener {
-            if (firebaseAuth.currentUser!!.email != "llomi18@freeuni.edu.ge") {
+            if (firebaseAuth.currentUser!!.email == "llomi18@freeuni.edu.ge") {
                 navController.navigate(NavGraphDirections.actionMenuToChatFragment())
                 binding!!.drawer.closeDrawer(Gravity.LEFT)
-            } else if (firebaseAuth.currentUser!!.email == "llomi18@freeuni.edu.ge") {
+            } else  {
                 navController.navigate(NavGraphDirections.actionMenuToChatActivityFragment("Support"))
                 binding!!.drawer.closeDrawer(Gravity.LEFT)
             }
