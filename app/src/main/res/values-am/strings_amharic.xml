@@ -17,7 +17,8 @@
     <string name="enter_your_email_address">የኢሜይል አድራሻዎን ያስገቡ</string>
     <string name="log_out">ውጣ</string>
     <string name="invalid_email">እባክዎ ትክክለኛ ኢሜይል ያስገቡ</string>
-
+    <string name="connection_restored">ግንኙነት ወደነበረበት ተመልሷል</string>
+    <string name="no_internet">የበይነመረብ ግንኙነት የለም።</string>
 
     <string-array name="spinner_items">
         <item>ቤት</item>

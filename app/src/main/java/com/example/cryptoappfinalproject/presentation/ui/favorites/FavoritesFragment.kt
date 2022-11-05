@@ -119,8 +119,8 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
                     R.color.grey
                 )
             );
-            binding!!.svFavorites.setQuery("", true)
-            binding!!.svFavorites.clearFocus()
+            binding.svFavorites.setQuery("", true)
+            binding.svFavorites.clearFocus()
 
         }
     }
@@ -139,8 +139,8 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
                     R.color.white
                 )
             );
-            binding!!.svFavorites.setQuery("", true)
-            binding!!.svFavorites.clearFocus()
+            binding.svFavorites.setQuery("", true)
+            binding.svFavorites.clearFocus()
         }
     }
 

@@ -40,6 +40,7 @@ import com.example.cryptoappfinalproject.databinding.FragmentHomeBinding
 import com.example.cryptoappfinalproject.domain.model.CryptoCoinsModel
 import com.example.cryptoappfinalproject.domain.model.CryptoExchangesModel
 import com.example.cryptoappfinalproject.domain.model.CryptoSearchModel
+import com.example.cryptoappfinalproject.domain.model.VideoTitleModel
 
 import com.example.cryptoappfinalproject.presentation.MainActivity
 import com.example.cryptoappfinalproject.presentation.ui.adapters.CoinsHomeAdapter
@@ -109,8 +110,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             )
 
         )
-        binding!!.svHome.setQuery("", true)
-        binding!!.svHome.clearFocus()
+        binding.svHome.setQuery("", true)
+        binding.svHome.clearFocus()
 
         binding.tvCryptoAssets.setTextColor(
             ContextCompat.getColor(

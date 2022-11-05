@@ -22,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.cryptoappfinalproject.NavGraphDirections
 import com.example.cryptoappfinalproject.R
+import com.example.cryptoappfinalproject.common.LangSettings
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
 import com.example.cryptoappfinalproject.presentation.ui.home.HomeFragmentDirections
 
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
     private lateinit var firebaseAuth: FirebaseAuth
 
-var internet:Boolean = false
+    var internet: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,17 +58,17 @@ var internet:Boolean = false
         setUpSideNavigation()
         isOnline(this)
 
-        val state = getSharedPreferences("languagePref", 0).getString("Language", "en")
-        if (state == "en") {
-            changeLanguage("en")
+        val state = getSharedPreferences(LangSettings.LANG_PREF, 0).getString(LangSettings.LANG_KEY, LangSettings.ENG)
+        if (state == LangSettings.ENG) {
+            changeLanguage(LangSettings.ENG)
         }
-        if (state == "ge") {
-            changeLanguage("ge")
+        if (state == LangSettings.GEO) {
+            changeLanguage(LangSettings.GEO)
 
 
         }
-        if (state == "amharic") {
-            changeLanguage("am")
+        if (state == LangSettings.AMHARIC) {
+            changeLanguage(LangSettings.AMHARIC)
 
         }
 
@@ -95,12 +96,12 @@ var internet:Boolean = false
         val menuSupport = navigationView.menu.getItem(3)
         val menuLogIn = navigationView.menu.getItem(0)
 
-        if(firebaseAuth.currentUser != null) {
+        if (firebaseAuth.currentUser != null) {
             menuLogIn.isVisible = false
 
         }
 
-        if(firebaseAuth.currentUser == null ) {
+        if (firebaseAuth.currentUser == null) {
             menuLogIn.isVisible = true
             menuLogIn.setOnMenuItemClickListener {
                 navController.navigate(NavGraphDirections.actionToLogIn())
@@ -108,10 +109,10 @@ var internet:Boolean = false
                 true
             }
         }
-        if(firebaseAuth.currentUser == null) {
+        if (firebaseAuth.currentUser == null) {
             menuSupport.isVisible = false
         }
-        if(firebaseAuth.currentUser != null) {
+        if (firebaseAuth.currentUser != null) {
             menuSupport.isVisible = true
 
         }
@@ -129,22 +130,22 @@ var internet:Boolean = false
             true
         }
 
-        if(firebaseAuth.currentUser != null) {
+        if (firebaseAuth.currentUser != null) {
             menuSignOut.isVisible = true
         }
-        if(firebaseAuth.currentUser == null) {
+        if (firebaseAuth.currentUser == null) {
             menuSignOut.isVisible = false
         }
 
         menuSignOut.setOnMenuItemClickListener {
-                firebaseAuth.signOut()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                Toast.makeText(
-                    this@MainActivity,
-                    getString(R.string.you_signed_out),
-                    Toast.LENGTH_LONG
-                ).show()
+            firebaseAuth.signOut()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(
+                this@MainActivity,
+                getString(R.string.you_signed_out),
+                Toast.LENGTH_LONG
+            ).show()
             true
 
         }
@@ -152,8 +153,7 @@ var internet:Boolean = false
     }
 
 
-
-    private fun isOnline(context: Context): Boolean{
+    private fun isOnline(context: Context): Boolean {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
@@ -161,12 +161,17 @@ var internet:Boolean = false
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val capabilities =
             connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+        connectivityManager.registerDefaultNetworkCallback(object :
+            ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 lifecycleScope.launch(Dispatchers.Main) {
-                    if(internet) {
+                    if (internet) {
                         navController.navigate(MainActivityDirections.actionGlobal())
-                        Toast.makeText(context, "Connection Restored", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            context,
+                            getString(R.string.connection_restored),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
 
                 }
@@ -176,7 +181,7 @@ var internet:Boolean = false
 
 
             override fun onLost(network: Network) {
-                Toast.makeText(context, "No Internet Connection", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.no_internet), Toast.LENGTH_LONG).show()
                 internet = true
             }
 
@@ -193,8 +198,7 @@ var internet:Boolean = false
                     Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
                     return true
 
-                }
-                else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
                     Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
                     return true
                 }
