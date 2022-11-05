@@ -3,18 +3,14 @@ package com.example.cryptoappfinalproject.presentation
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.database.AbstractWindowedCursor
-import android.database.Cursor
 import android.database.CursorWindow
-import android.database.sqlite.SQLiteBlobTooBigException
-import android.database.sqlite.SQLiteDatabase
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
@@ -26,7 +22,6 @@ import com.example.cryptoappfinalproject.common.LangSettings
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.util.Assert.fail
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,11 +1,9 @@
 package com.example.cryptoappfinalproject.domain.useCase
 
 import com.example.cryptoappfinalproject.common.Resource
-import com.example.cryptoappfinalproject.data.remote.dto.toCryptoConverterModel
 import com.example.cryptoappfinalproject.domain.model.CryptoSearchModel
 import com.example.cryptoappfinalproject.domain.repository.CryptoSearchRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException

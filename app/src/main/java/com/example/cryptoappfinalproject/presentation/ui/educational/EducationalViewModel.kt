@@ -1,15 +1,10 @@
 package com.example.cryptoappfinalproject.presentation.ui.educational
 
-import android.content.res.loader.ResourcesProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptoappfinalproject.R
-import com.example.cryptoappfinalproject.common.Resource
-import com.example.cryptoappfinalproject.domain.model.CryptoSearchModel
 import com.example.cryptoappfinalproject.domain.model.VideoTitleModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

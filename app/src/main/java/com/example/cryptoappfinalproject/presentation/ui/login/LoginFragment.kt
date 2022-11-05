@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.cryptoappfinalproject.R
-import com.example.cryptoappfinalproject.common.BaseFragment
-import com.example.cryptoappfinalproject.databinding.FragmentChatActivityBinding
 import com.example.cryptoappfinalproject.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
