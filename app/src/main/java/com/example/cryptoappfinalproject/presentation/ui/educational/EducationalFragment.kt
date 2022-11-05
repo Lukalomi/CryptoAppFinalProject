@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
@@ -17,6 +19,7 @@ import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.FragmentEducationalBinding
 import com.example.cryptoappfinalproject.domain.model.VideoTitleModel
 import com.example.cryptoappfinalproject.presentation.ui.adapters.EducationVideosAdapter
+import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -26,6 +29,7 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -33,6 +37,7 @@ class EducationalFragment : Fragment(), Player.Listener {
 
 
     private var binding: FragmentEducationalBinding? = null
+    private val viewModel: EducationalViewModel by viewModels()
 
 
     private lateinit var learnAdapter: EducationVideosAdapter
@@ -40,7 +45,6 @@ class EducationalFragment : Fragment(), Player.Listener {
     private var playWhenReady = true
     private var currentWindow = 0
     private var playbackPosition: Long = 0
-    private var videosList: MutableList<VideoTitleModel> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,7 +61,6 @@ class EducationalFragment : Fragment(), Player.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        submitVideos()
         openDrawer()
         setAdapter()
 
@@ -65,46 +68,50 @@ class EducationalFragment : Fragment(), Player.Listener {
 
 
     private fun setAdapter() {
-        learnAdapter = EducationVideosAdapter(requireContext())
-        binding!!.rvEducation.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding!!.rvEducation.adapter = learnAdapter
-        learnAdapter.submitList(videosList)
-        learnAdapter.onClickListener = { adapterItem ->
+        lifecycleScope.launch {
+            learnAdapter = EducationVideosAdapter(requireContext())
+            binding!!.rvEducation.layoutManager = GridLayoutManager(requireContext(), 2)
+            binding!!.rvEducation.adapter = learnAdapter
+            viewModel.getVideos()
+            learnAdapter.submitList(viewModel.getVideos())
+            learnAdapter.onClickListener = { adapterItem ->
 
-            when (adapterItem.id) {
-                1 -> {
-                    setVideoDialog()
-                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
-                }
-                2 -> {
-                    setVideoDialog()
-                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
-                }
-                3 -> {
-                    setVideoDialog()
-                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
-                }
-                4 -> {
-                    setVideoDialog()
-                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
-                }
-                5 -> {
-                    setVideoDialog()
-                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
-                }
-                6 -> {
-                    setVideoDialog()
-                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
-                }
-                7 -> {
-                    setVideoDialog()
-                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
-                }
-                8 -> {
-                    setVideoDialog()
-                    extractYoutubeVid(player!!, adapterItem.videoUrl!!)
-                }
+                when (adapterItem.id) {
+                    1 -> {
+                        setVideoDialog()
+                        extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                    }
+                    2 -> {
+                        setVideoDialog()
+                        extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                    }
+                    3 -> {
+                        setVideoDialog()
+                        extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                    }
+                    4 -> {
+                        setVideoDialog()
+                        extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                    }
+                    5 -> {
+                        setVideoDialog()
+                        extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                    }
+                    6 -> {
+                        setVideoDialog()
+                        extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                    }
+                    7 -> {
+                        setVideoDialog()
+                        extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                    }
+                    8 -> {
+                        setVideoDialog()
+                        extractYoutubeVid(player!!, adapterItem.videoUrl!!)
+                    }
 
+
+                }
 
             }
 
@@ -117,7 +124,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         val dialog = Dialog(requireContext())
         player = SimpleExoPlayer.Builder(requireContext()).build()
         dialogBinding.findViewById<PlayerView>(R.id.playerViewDialog).player = player
-        
+
         dialog.setContentView(dialogBinding)
         dialog.setCancelable(true)
         dialog.setOnDismissListener {
@@ -183,72 +190,6 @@ class EducationalFragment : Fragment(), Player.Listener {
         }
     }
 
-    private fun submitVideos() {
-        videosList.add(
-            VideoTitleModel(
-                id = 1,
-                title = getString(R.string.video_one),
-                "https://i.ytimg.com/vi/SSo_EIwHSd4/hqdefault.jpg",
-                "https://www.youtube.com/watch?v=SSo_EIwHSd4&t=1s&ab_channel=SimplyExplained"
-            )
-        )
-        videosList.add(
-            VideoTitleModel(
-                id = 2,
-                title = getString(R.string.video_two),
-                "https://i.ytimg.com/vi/ZE2HxTmxfrI/hqdefault.jpg",
-                "https://www.youtube.com/watch?v=ZE2HxTmxfrI&ab_channel=SimplyExplained"
-            )
-        )
-        videosList.add(
-            VideoTitleModel(
-                id = 3,
-                title = getString(R.string.video_three),
-                "https://i.ytimg.com/vi/M3EFi_POhps/hqdefault.jpg",
-                "https://www.youtube.com/watch?v=M3EFi_POhps&ab_channel=SimplyExplained"
-            )
-        )
-        videosList.add(
-            VideoTitleModel(
-                id = 4,
-                title = getString(R.string.video_four),
-                "https://i.ytimg.com/vi/Pl8OlkkwRpc/hqdefault.jpg",
-                "https://www.youtube.com/watch?v=Pl8OlkkwRpc&t=3s&ab_channel=TED"
-            )
-        )
-        videosList.add(
-            VideoTitleModel(
-                id = 5,
-                title = getString(R.string.video_five),
-                "https://i.ytimg.com/vi/RplnSVTzvnU/hqdefault.jpg",
-                "https://www.youtube.com/watch?v=RplnSVTzvnU&ab_channel=TED"
-            )
-        )
-        videosList.add(
-            VideoTitleModel(
-                id = 6,
-                title = getString(R.string.video_six),
-                "https://i.ytimg.com/vi/97ufCT6lQcY/hqdefault.jpg",
-                "https://www.youtube.com/watch?v=97ufCT6lQcY&ab_channel=TEDxTalks"
-            )
-        )
-        videosList.add(
-            VideoTitleModel(
-                id = 7,
-                title = getString(R.string.video_sevem),
-                "https://i.ytimg.com/vi/PXSjbdOXgUE/hqdefault.jpg",
-                "https://www.youtube.com/watch?v=PXSjbdOXgUE&ab_channel=99Bitcoins"
-            )
-        )
-        videosList.add(
-            VideoTitleModel(
-                id = 8,
-                title = getString(R.string.video_eight),
-                "https://i.ytimg.com/vi/3ZplgUKlDgI/hqdefault.jpg",
-                "https://www.youtube.com/watch?v=3ZplgUKlDgI&ab_channel=MoneyZG"
-            )
-        )
-    }
 
 
     override fun onDestroyView() {

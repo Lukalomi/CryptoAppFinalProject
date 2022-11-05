@@ -71,7 +71,8 @@
     <string name="you_are_registered">დარეგისტრირებული ხართ</string>
     <string name="you_signed_out">ექაუნთიდან გამოსული ხართ</string>
     <string name="already_signed_out">უკვე გამოსული ხართ ექაუნთიდან</string>
-
+    <string name="connection_restored">კავშირი აღდგა</string>
+    <string name="no_internet">კავშირი დაიკარგა</string>
 
     <string name="video_one">როგორ მუშაობს ბლოკჩეინი?</string>
     <string name="video_two">ჭკვიანი ხელშეკრულებები</string>

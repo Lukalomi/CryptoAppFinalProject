@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
+import com.example.cryptoappfinalproject.common.DayNightModeSettings
 import com.example.cryptoappfinalproject.presentation.MainActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -49,7 +50,7 @@ class App : MultiDexApplication() {
     }
 
     private fun setScreenMode() {
-        val state = getSharedPreferences("AppSettingPrefs", 0).getBoolean("DayMode", true)
+        val state = getSharedPreferences(DayNightModeSettings.SCREEN_PREF, 0).getBoolean(DayNightModeSettings.SCREEN_KEY, DayNightModeSettings.IS_TRUE)
 
         if (state) {
 
