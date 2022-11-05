@@ -12,7 +12,6 @@ import com.example.cryptoappfinalproject.common.BaseFragment
 import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentRegistrationBinding
 import com.example.cryptoappfinalproject.domain.model.FirebaseUserModel
-import com.example.cryptoappfinalproject.presentation.ui.login.LoginFragmentDirections
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

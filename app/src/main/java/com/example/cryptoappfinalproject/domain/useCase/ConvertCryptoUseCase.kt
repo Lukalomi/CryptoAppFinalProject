@@ -1,7 +1,6 @@
 package com.example.cryptoappfinalproject.domain.useCase
 
 import com.example.cryptoappfinalproject.common.Resource
-import com.example.cryptoappfinalproject.data.remote.dto.CryptoConverterModelDto
 import com.example.cryptoappfinalproject.data.remote.dto.toCryptoConverterModel
 import com.example.cryptoappfinalproject.domain.model.CryptoConverterModel
 import com.example.cryptoappfinalproject.domain.repository.CryptoConverterRepository

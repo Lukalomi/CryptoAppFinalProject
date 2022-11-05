@@ -17,9 +17,7 @@ import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.databinding.FragmentEducationalBinding
-import com.example.cryptoappfinalproject.domain.model.VideoTitleModel
 import com.example.cryptoappfinalproject.presentation.ui.adapters.EducationVideosAdapter
-import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
