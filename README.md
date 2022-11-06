@@ -10,7 +10,7 @@ This app will help you to get information about various crypto currencies and st
 - change app languages from English to Georgian and Amharic
 - switch between night and day modes
 - update user's email and password
-- use firebase cloud messaging service to chat with support
+- use firebase in-app messaging service to chat with support
 
 # The App uses:
 - Firebase Authentication
