@@ -53,6 +53,7 @@ import com.example.cryptoappfinalproject.presentation.ui.adapters.*
 import com.example.cryptoappfinalproject.presentation.ui.favorites.*
 import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -629,7 +630,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                                 View.VISIBLE
                         }
                         if (drawerProfileName != null) {
-                            drawerProfileName.text = it.name + " " + it.surname
+                            drawerProfileName.text = FirebaseAuth.getInstance().currentUser!!.email
                             requireActivity().findViewById<ProgressBar>(R.id.pbProfilePic).visibility =
                                 View.GONE
                             requireActivity().findViewById<CardView>(R.id.cvUserPhoto).visibility =

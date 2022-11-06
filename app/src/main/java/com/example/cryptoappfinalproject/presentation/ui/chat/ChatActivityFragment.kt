@@ -42,17 +42,13 @@ class ChatActivityFragment : Fragment() {
         goBack()
         binding!!.tvUserChat.text = args.uid.toString()
 
-        adapter = MessageAdapter()
-        binding!!.rvChatActivity.layoutManager = LinearLayoutManager(requireContext())
-        binding!!.rvChatActivity.adapter = adapter
-        adapter.submitList(messageList.asReversed())
         addMessagesToList()
         sendDM()
     }
 
     private fun addMessagesToList() {
         val db = FirebaseFirestore.getInstance()
-        db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
+        db.collection("users").document("kQg65b6z20YZH1EzGBQX6p7PwEy2")
             .collection("chats")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -65,16 +61,19 @@ class ChatActivityFragment : Fragment() {
                             Log.d("dms", messageList.toString())
 
                         }
-                        adapter = MessageAdapter()
-                        binding!!.rvChatActivity.layoutManager =
-                            LinearLayoutManager(requireContext())
-                        binding!!.rvChatActivity.adapter = adapter
+                        if(binding?.rvChatActivity != null) {
+                            adapter = MessageAdapter()
+                            binding?.rvChatActivity?.layoutManager =
+                                LinearLayoutManager(requireContext())
+                            binding?.rvChatActivity?.adapter = adapter
 
-                        adapter.submitList(messageList)
+                            adapter.submitList(messageList)
+                        }
+
                     }
+
                 }
             })
-
     }
 
 
@@ -97,7 +96,7 @@ class ChatActivityFragment : Fragment() {
             if (it.text.toString() != "") {
                 val db = FirebaseFirestore.getInstance()
 
-                db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
+                db.collection("users").document("kQg65b6z20YZH1EzGBQX6p7PwEy2")
                     .collection("chats")
                     .add(messageObject)
                     .addOnSuccessListener { nothing ->
