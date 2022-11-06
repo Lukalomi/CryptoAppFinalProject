@@ -27,6 +27,7 @@ import com.example.cryptoappfinalproject.common.LanguageSettings
 import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentSettingsBinding
 import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationFragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -245,7 +246,7 @@ class SettingsFragment() : BaseFragment<FragmentSettingsBinding, SettingsViewMod
                             tvUserName.text = it.name
                             tvUserSurname.text = it.surname
                             tvUserPass.text = "******"
-                            tvUserEmail.text = it.email
+                            tvUserEmail.text = FirebaseAuth.getInstance().currentUser!!.email
                             binding.showPass.visibility = View.VISIBLE
 
                             Glide.with(requireContext())
