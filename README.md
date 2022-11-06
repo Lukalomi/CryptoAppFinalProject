@@ -40,6 +40,12 @@ On the home screen user can see:
 
 https://user-images.githubusercontent.com/99031977/200164813-fea03156-d150-490f-9bf8-c15036b94580.mp4=70x70
 
+## News Page
+On the news page user can see latest crypto news and clicking on the news will redirect to the news website
+
+<img src="https://user-images.githubusercontent.com/99031977/200187796-6c5024e5-6958-4ed4-a7e9-004303b77270.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/99031977/200187798-de4d91ca-2a7c-4157-9336-e5d16f5daf95.jpg" width="200">
+
+
 ## Favourites Page
 On the favourites page user can see favourite cryptos and exchanges, but to use it user needs to log in/register.
 
