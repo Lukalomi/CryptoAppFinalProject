@@ -2,7 +2,7 @@ package com.example.cryptoappfinalproject.domain.model
 
 
 data class CryptoNewsModel(
-    val data: List<Data>?
+    val data: MutableList<Data>?
     ) {
     data class Data(
         val newsUrl: String?,

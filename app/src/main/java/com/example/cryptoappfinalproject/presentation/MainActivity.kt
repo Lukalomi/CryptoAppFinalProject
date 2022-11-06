@@ -10,15 +10,18 @@ import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.bumptech.glide.Glide
 import com.example.cryptoappfinalproject.NavGraphDirections
 import com.example.cryptoappfinalproject.R
-import com.example.cryptoappfinalproject.common.LangSettings
+import com.example.cryptoappfinalproject.common.LanguageSettings
 import com.example.cryptoappfinalproject.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -52,17 +55,20 @@ class MainActivity : AppCompatActivity() {
         setUpSideNavigation()
         isOnline(this)
 
-        val state = getSharedPreferences(LangSettings.LANG_PREF, 0).getString(LangSettings.LANG_KEY, LangSettings.ENG)
-        if (state == LangSettings.ENG) {
-            changeLanguage(LangSettings.ENG)
+        val state = getSharedPreferences(LanguageSettings.LANG_PREF, 0).getString(
+            LanguageSettings.LANG_KEY,
+            LanguageSettings.ENG
+        )
+        if (state == LanguageSettings.ENG) {
+            changeLanguage(LanguageSettings.ENG)
         }
-        if (state == LangSettings.GEO) {
-            changeLanguage(LangSettings.GEO)
+        if (state == LanguageSettings.GEO) {
+            changeLanguage(LanguageSettings.GEO)
 
 
         }
-        if (state == LangSettings.AMHARIC) {
-            changeLanguage(LangSettings.AMHARIC)
+        if (state == LanguageSettings.AMHARIC) {
+            changeLanguage(LanguageSettings.AMHARIC)
 
         }
 
@@ -115,7 +121,7 @@ class MainActivity : AppCompatActivity() {
             if (firebaseAuth.currentUser!!.email == "llomi18@freeuni.edu.ge") {
                 navController.navigate(NavGraphDirections.actionMenuToChatFragment())
                 binding!!.drawer.closeDrawer(Gravity.LEFT)
-            } else  {
+            } else {
                 navController.navigate(NavGraphDirections.actionMenuToChatActivityFragment("Support"))
                 binding!!.drawer.closeDrawer(Gravity.LEFT)
             }
@@ -132,7 +138,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         menuSignOut.setOnMenuItemClickListener {
+            val profilePicture = findViewById<ImageView>(R.id.ivUserPhoto)
+            val drawerProfileName = findViewById<TextView>(R.id.tvUsernameHeader)
             firebaseAuth.signOut()
+
+            if (profilePicture != null) {
+                Glide.with(this)
+                    .load(R.drawable.ic_person)
+                    .error(R.drawable.ic_launcher_background)
+                    .into(profilePicture)
+            }
+            if (drawerProfileName != null) {
+                drawerProfileName.text = ""
+            }
+
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(
@@ -160,19 +179,14 @@ class MainActivity : AppCompatActivity() {
             override fun onAvailable(network: Network) {
                 lifecycleScope.launch(Dispatchers.Main) {
                     if (internet) {
-                        navController.navigate(MainActivityDirections.actionGlobal())
                         Toast.makeText(
                             context,
                             getString(R.string.connection_restored),
                             Toast.LENGTH_LONG
                         ).show()
                     }
-
                 }
-
-
             }
-
 
             override fun onLost(network: Network) {
                 Toast.makeText(context, getString(R.string.no_internet), Toast.LENGTH_LONG).show()

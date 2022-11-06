@@ -79,11 +79,7 @@ class MessageAdapter(
         }
         if (getItemViewType(position) == 1) {
             (holder as ReceiverViewHolder).bind()
-
-
         }
-
-
     }
 
 

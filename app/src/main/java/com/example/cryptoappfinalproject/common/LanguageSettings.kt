@@ -1,6 +1,6 @@
 package com.example.cryptoappfinalproject.common
 
-object LangSettings {
+object LanguageSettings {
     const val LANG_PREF = "languagePref"
     const val LANG_KEY = "Language"
     const val ENG = "en"
