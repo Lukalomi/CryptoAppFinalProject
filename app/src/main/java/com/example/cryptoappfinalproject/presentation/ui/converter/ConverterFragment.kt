@@ -29,11 +29,10 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding, ConverterViewMo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setDropDownItems()
-        activateConvertButton()
         backBtnListener()
         swipeBtnListener()
-        Log.d("swipe", bool.toString())
+        setDropDownItems()
+        activateConvertButton()
 
     }
 
@@ -43,6 +42,23 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding, ConverterViewMo
             findNavController().navigate(ConverterFragmentDirections.actionConverterFragmentToHomeFragment())
         }
     }
+
+
+    private fun swipeBtnListener() {
+        binding.btnSwipe.setOnClickListener {
+            if (bool) {
+                bool = false
+                swipeInputFields()
+                activateSwipedConvertButton()
+            } else {
+                bool = true
+                setDropDownItems()
+                activateConvertButton()
+                swipeBtnListener()
+            }
+        }
+    }
+
 
     private fun setDropDownItems() {
         val autoCompleteTvCrypto = binding.tvChooseCrypto
@@ -110,8 +126,6 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding, ConverterViewMo
 
                         currencySignListener()
 
-                        Log.d("convert", it.data.toString())
-
                     }
                 }
             }
@@ -137,26 +151,6 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding, ConverterViewMo
         }
     }
 
-
-    private fun swipeBtnListener() {
-        binding.btnSwipe.setOnClickListener {
-            if (bool) {
-                bool = false
-                swipeInputFields()
-                activateSwipedConvertButton()
-
-
-                Log.d("swipe", bool.toString())
-            } else {
-                bool = true
-                setDropDownItems()
-                activateConvertButton()
-                swipeBtnListener()
-                Log.d("swipe", bool.toString())
-
-            }
-        }
-    }
 
 
     private fun swipeInputFields() {
