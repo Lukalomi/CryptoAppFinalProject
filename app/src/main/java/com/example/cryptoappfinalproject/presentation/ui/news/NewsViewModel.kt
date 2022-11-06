@@ -12,7 +12,9 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class NewsViewModel @Inject constructor(private val fetchedNews: CryptoNewsRepositoryImpl) : ViewModel() {
+class NewsViewModel @Inject constructor(
+    private val fetchedNews: CryptoNewsRepositoryImpl
+    ) : ViewModel() {
 
 
     val newsPager =

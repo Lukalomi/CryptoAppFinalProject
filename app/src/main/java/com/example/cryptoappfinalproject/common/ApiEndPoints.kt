@@ -19,7 +19,7 @@ object ConversionEndPoint {
 object NewsEndPoint {
     const val BASE_URL_NEWS = "https://cryptonews-api.com/api/v1/"
 
-    const val getCryptoNews = "category?section=general&items=50&page=1&token=bbzwkoiuenp9x8d42ldtr7vmz0n3kc5d8drvbibb"
+    const val getCryptoNews = "category?section=general&items=3&page=1&token=aaeltrs4tbsptgb8i8kgxyqyuln2snrqrtue7wxr"
 }
 
 object VideosEndPoint {

@@ -18,8 +18,7 @@ class NewsDataSource @Inject constructor(private val fetchedNews: CryptoNewsRepo
         val nextPage = page + 1
         return try {
             val response = fetchedNews.getNews(page)
-                return LoadResult.Page(response, prevPage, nextPage)
-
+            return LoadResult.Page(response, prevPage, nextPage)
         } catch (e: Throwable) {
             LoadResult.Error(e)
         }
