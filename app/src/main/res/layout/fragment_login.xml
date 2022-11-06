@@ -108,7 +108,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/login"
         android:fontFamily="monospace"
         android:foreground="?attr/selectableItemBackground"
@@ -120,9 +120,9 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:cornerRadius="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNoAccount" />
 
     <ProgressBar
         android:id="@+id/pbLogin"

@@ -23,7 +23,7 @@ import com.example.cryptoappfinalproject.App
 import com.example.cryptoappfinalproject.R
 import com.example.cryptoappfinalproject.common.BaseFragment
 import com.example.cryptoappfinalproject.common.DayNightModeSettings
-import com.example.cryptoappfinalproject.common.LangSettings
+import com.example.cryptoappfinalproject.common.LanguageSettings
 import com.example.cryptoappfinalproject.data.local.UserInfo
 import com.example.cryptoappfinalproject.databinding.FragmentSettingsBinding
 import com.example.cryptoappfinalproject.presentation.ui.registration.RegistrationFragment
@@ -49,7 +49,7 @@ class SettingsFragment() : BaseFragment<FragmentSettingsBinding, SettingsViewMod
     private val isDayMode: Boolean = appSettingPrefs.getBoolean(DayNightModeSettings.SCREEN_KEY, DayNightModeSettings.IS_FALSE)
 
     private val languagePref: SharedPreferences =
-        context.getSharedPreferences(LangSettings.LANG_PREF, 0)
+        context.getSharedPreferences(LanguageSettings.LANG_PREF, 0)
     val langEdit: SharedPreferences.Editor = languagePref.edit()
 
       private val customList = mutableListOf(
@@ -69,22 +69,22 @@ class SettingsFragment() : BaseFragment<FragmentSettingsBinding, SettingsViewMod
         setSpinner()
 
 
-        val state = requireActivity().getSharedPreferences(LangSettings.LANG_PREF, 0).getString(LangSettings.LANG_KEY, LangSettings.ENG)
-        if(state ==LangSettings.ENG)
+        val state = requireActivity().getSharedPreferences(LanguageSettings.LANG_PREF, 0).getString(LanguageSettings.LANG_KEY, LanguageSettings.ENG)
+        if(state ==LanguageSettings.ENG)
             customList[0] = "En"
 
-        if(state == LangSettings.GEO) {
+        if(state == LanguageSettings.GEO) {
             customList[0] = "Geo"
         }
 
-        if(state == LangSettings.AMHARIC) {
+        if(state == LanguageSettings.AMHARIC) {
             customList[0] = "Amh"
         }
     }
 
 
     private fun setSpinner() {
-        val state = requireActivity().getSharedPreferences(LangSettings.LANG_PREF, 0).getString(LangSettings.LANG_KEY, LangSettings.ENG)
+        val state = requireActivity().getSharedPreferences(LanguageSettings.LANG_PREF, 0).getString(LanguageSettings.LANG_KEY, LanguageSettings.ENG)
 
         val spinnerAdapter = ArrayAdapter(
             requireContext(),
@@ -110,10 +110,10 @@ class SettingsFragment() : BaseFragment<FragmentSettingsBinding, SettingsViewMod
                         }
                         1 -> {
 
-                            if(state != LangSettings.ENG) {
-                                langEdit.putString(LangSettings.LANG_KEY, LangSettings.ENG)
+                            if(state != LanguageSettings.ENG) {
+                                langEdit.putString(LanguageSettings.LANG_KEY, LanguageSettings.ENG)
                                 langEdit.apply()
-                                changeLanguage(LangSettings.ENG)
+                                changeLanguage(LanguageSettings.ENG)
                                 val i: Intent? = context.getPackageManager()
                                     .getLaunchIntentForPackage(context.getPackageName())
                                 if (i != null) {
@@ -133,10 +133,10 @@ class SettingsFragment() : BaseFragment<FragmentSettingsBinding, SettingsViewMod
 
                         2 -> {
 
-                            if(state != LangSettings.GEO) {
-                                langEdit.putString(LangSettings.LANG_KEY, LangSettings.GEO)
+                            if(state != LanguageSettings.GEO) {
+                                langEdit.putString(LanguageSettings.LANG_KEY, LanguageSettings.GEO)
                                 langEdit.apply()
-                                changeLanguage(LangSettings.GEO)
+                                changeLanguage(LanguageSettings.GEO)
 
                                 val i: Intent? = context.getPackageManager()
                                     .getLaunchIntentForPackage(context.getPackageName())
@@ -157,10 +157,10 @@ class SettingsFragment() : BaseFragment<FragmentSettingsBinding, SettingsViewMod
                         3 -> {
 
 
-                            if(state != LangSettings.AMHARIC) {
-                                langEdit.putString(LangSettings.LANG_KEY, LangSettings.AMHARIC)
+                            if(state != LanguageSettings.AMHARIC) {
+                                langEdit.putString(LanguageSettings.LANG_KEY, LanguageSettings.AMHARIC)
                                 langEdit.apply()
-                                changeLanguage(LangSettings.AMHARIC)
+                                changeLanguage(LanguageSettings.AMHARIC)
 
                                 val i: Intent? = context.getPackageManager()
                                     .getLaunchIntentForPackage(context.getPackageName())

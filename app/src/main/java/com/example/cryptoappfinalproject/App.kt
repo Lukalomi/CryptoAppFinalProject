@@ -32,7 +32,7 @@ class App : MultiDexApplication() {
 
             // Get new FCM registration token
             val token = task.result
-            Log.d("FirebaseMessaging", "$token")
+            Log.d("FirebaseMessaging", token)
         })
 
         val intent = Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

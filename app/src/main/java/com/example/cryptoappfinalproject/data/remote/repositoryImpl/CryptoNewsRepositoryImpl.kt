@@ -10,13 +10,7 @@ class CryptoNewsRepositoryImpl @Inject constructor(
     private val fetchedNews: FetchedNews
 ): CryptoNewsRepository {
     override suspend fun getNews(page: Int): MutableList<CryptoNewsModel.Data> {
-        val response = fetchedNews.getNews(page)
-
-        if (response.isSuccessful){
-            return response.body()!!.map { it.toCryptoNewsModel() }.toMutableList()
-        } else {
-            return emptyList<CryptoNewsModel.Data>().toMutableList()
-        }
+        return fetchedNews.getNews(page).data!!.map { it.toCryptoNewsModel() }.toMutableList()
 
     }
 }

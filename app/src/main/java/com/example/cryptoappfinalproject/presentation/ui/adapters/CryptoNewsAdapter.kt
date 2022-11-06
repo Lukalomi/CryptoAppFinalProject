@@ -28,7 +28,6 @@ class CryptoNewsAdapter(
             binding.apply {
                 tvNewsTitle.text = model?.title
                 tvNewsText.text = model?.text
-                tvNewsDate.text = model?.date
 
                 Glide.with(context)
                     .load(model?.imageUrl)

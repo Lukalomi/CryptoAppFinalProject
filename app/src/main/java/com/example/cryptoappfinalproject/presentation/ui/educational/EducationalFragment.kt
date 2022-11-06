@@ -47,7 +47,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
-    ): View? {
+    ): View {
 
 
         binding = FragmentEducationalBinding.inflate(inflater, container, false)
@@ -63,6 +63,7 @@ class EducationalFragment : Fragment(), Player.Listener {
         setAdapter()
 
     }
+
 
 
     private fun setAdapter() {
@@ -171,6 +172,12 @@ class EducationalFragment : Fragment(), Player.Listener {
         }
     }
 
+
+    override fun onPause() {
+        super.onPause()
+        releasePlayer()
+    }
+
 //    private fun hideSystemUi() {
 //        binding!!.playerView.systemUiVisibility =
 //            (View.SYSTEM_UI_FLAG_LOW_PROFILE or
@@ -192,6 +199,7 @@ class EducationalFragment : Fragment(), Player.Listener {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        releasePlayer()
         binding = null
     }
 }

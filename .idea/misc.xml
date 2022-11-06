@@ -104,13 +104,16 @@
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_converter.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_home.xml" value="0.22" />
-        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_login.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_login.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_news.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_registration.xml" value="0.22" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_settings.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/fragment_user_info.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/load_state_view.xml" value="0.11458333333333333" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/nav_header.xml" value="0.22" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/push_notification.xml" value="0.11458333333333333" />
         <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/single_crypto_2.xml" value="0.11458333333333333" />
+        <entry key="..\:/Users/Davit/AndroidStudioProjects/CryptoAppFinalProject/app/src/main/res/layout/single_news_item.xml" value="0.3333333333333333" />
       </map>
     </option>
   </component>
