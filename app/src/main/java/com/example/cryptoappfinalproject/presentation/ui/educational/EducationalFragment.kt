@@ -71,7 +71,6 @@ class EducationalFragment : Fragment(), Player.Listener {
             learnAdapter = EducationVideosAdapter(requireContext())
             binding!!.rvEducation.layoutManager = GridLayoutManager(requireContext(), 2)
             binding!!.rvEducation.adapter = learnAdapter
-            viewModel.getVideos()
             learnAdapter.submitList(viewModel.getVideos())
             learnAdapter.onClickListener = { adapterItem ->
 
